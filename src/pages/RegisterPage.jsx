@@ -1,9 +1,10 @@
 import React from 'react'
+import SignupForm from '../features/signinsignup/components/Signup';
 
 const RegisterPage = () => {
   return (
-    <div>RegisterPage</div>
-  )
+    <SignupForm />
+  );
 }
 
 export default RegisterPage

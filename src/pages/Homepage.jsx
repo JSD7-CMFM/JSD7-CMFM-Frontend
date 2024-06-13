@@ -5,7 +5,7 @@ const Homepage = () => {
   return (
     <>
       <div>Homepage</div>
-      <div className=" mx-auto w-[1200px] min-h-56 flex flex-col gap-6 py-4 px-8 bg-gray-100">
+      <div className="md:mx-auto md:w-[1200px] md:min-h-56 md:flex md:flex-col md:gap-6 md:py-4 md:px-8 md:bg-gray-100">
         <VideoCarousel />
       </div>
     </>
@@ -13,3 +13,5 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+

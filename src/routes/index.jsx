@@ -8,8 +8,7 @@ import RegisterPage from "../pages/RegisterPage";
 import ProductInfoPage from "../pages/ProductInfoPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
-import ForgetPassword from "../features/signinsignup/components/ForgetPW";
-import AccountPageContainer from "../pages/AccountProfile";
+import DashboardPage from "../pages/Admin/DashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +34,10 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
+        path: "forget",
+        element: <ForgetPassword />,
+      },
+      {
         path: "productinfo",
         element: <ProductInfoPage />,
       },
@@ -47,14 +50,14 @@ const router = createBrowserRouter([
         element: <CheckoutPage />,
       },
       {
-        path: "forget",
-        element: <ForgetPassword />,
-      },
-      {
         path: "Account",
         element: <AccountPageContainer />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <DashboardPage />,
   },
 ]);
 

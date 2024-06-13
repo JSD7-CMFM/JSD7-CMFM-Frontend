@@ -11,6 +11,7 @@ const Products = () => {
     name: "",
     price: "",
     quantity: "",
+    productImage: "",
   });
   const [newProduct, setNewProduct] = useState({
     id: "",
@@ -29,6 +30,7 @@ const Products = () => {
       name: product.name,
       price: product.price,
       quantity: product.quantity,
+      productImage: product.productImage,
     });
   };
 
@@ -191,7 +193,6 @@ const Products = () => {
                       value={formData.category}
                       onChange={handleChange}
                       className="w-full border rounded px-2 py-1 text-white bg-gray-700"
-                      
                     />
                   ) : (
                     product.category
@@ -239,11 +240,21 @@ const Products = () => {
                   )}
                 </td>
                 <td className="py-2 px-4 border-b">
-                  <img
-                    src={product.productImage}
-                    alt={product.name}
-                    className="w-20 h-20 object-cover"
-                  />
+                  {editingProductId === product.id ? (
+                    <input
+                      type="text"
+                      name="productImage" // Set input name to productImage
+                      value={formData.productImage}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    <img
+                      src={product.productImage}
+                      alt={product.name}
+                      className="w-20 h-20 object-cover"
+                    />
+                  )}
                 </td>
                 <td className="py-2 px-4 border-b">
                   <div className="flex space-x-2">

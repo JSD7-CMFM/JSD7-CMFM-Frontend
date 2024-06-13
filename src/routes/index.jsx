@@ -34,6 +34,10 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
+        path: "forget",
+        element: <ForgetPassword />,
+      },
+      {
         path: "productinfo",
         element: <ProductInfoPage />,
       },
@@ -44,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path: "Account",
+        element: <AccountPageContainer />,
       },
     ],
   },

@@ -9,6 +9,8 @@ import ProductInfoPage from "../pages/ProductInfoPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import DashboardPage from "../pages/Admin/DashboardPage";
+import ForgetPassword from "../features/signinsignup/components/ForgetPW";
+import AccountPageContainer from "../pages/AccountProfile";
 
 const router = createBrowserRouter([
   {

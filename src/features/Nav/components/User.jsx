@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaUser } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const User = () => {
   return (
@@ -14,9 +15,9 @@ const User = () => {
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <a href="#" className="justify-between">
+          <Link to="/login" className="justify-between">
             Sign in / Register
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

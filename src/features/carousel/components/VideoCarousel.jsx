@@ -47,6 +47,7 @@ function VideoCustom(props) {
         ref.current.stopVideo();
       }
     }
+    console.log("test");
   }, [isSelected]);
 
   const videoOptions = {
@@ -58,7 +59,7 @@ function VideoCustom(props) {
       rel: 0,
       showinfo: 0,
       mute: 1,
-      loop: 1,  
+      loop: 1,
     },
   };
   return (

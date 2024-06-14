@@ -17,14 +17,9 @@ const Subscribe = () => {
             <h4 className="text-black font-extralight text-[12px] ">
               Sign up for 15% off and updates straight to your inbox.
             </h4>
-            <div className="bg-white w-3/4 flex p-1 border border-black rounded">
+            <div className="bg-white w-3/4 flex p-1">
               <div className="flex rounded w-3/4">
                 <EmailInput />
-              </div>
-              <div>
-                <div className="text-black text-[10px] justify-end">
-                  <a href="#"> SUBSCRIBE</a>
-                </div>
               </div>
             </div>
           </div>

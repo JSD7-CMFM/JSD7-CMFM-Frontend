@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFortAwesome } from "react-icons/fa6";
+import EmailInput from "./EmailValidation";
 
 const Subscribe = () => {
   return (
@@ -18,11 +19,7 @@ const Subscribe = () => {
             </h4>
             <div className="bg-white w-3/4 flex p-1 border border-black rounded">
               <div className="flex rounded w-3/4">
-                <input
-                  type="text"
-                  placeholder="enter email"
-                  className="bg-white text-[10px] text-center"
-                />
+                <EmailInput />
               </div>
               <div>
                 <div className="text-black text-[10px] justify-end">

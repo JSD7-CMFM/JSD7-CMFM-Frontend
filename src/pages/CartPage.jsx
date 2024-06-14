@@ -5,7 +5,7 @@ import TotalCart from "../features/cartpages/TotalCart";
 
 const CartPage = () => {
   return (
-    <div>
+    <div className="md:px-[100px]">
       <TopCart />
       <div className="flex flex-col sm:flex-col md:flex-row w-auto">
         <div className="w-full md:w-2/3">

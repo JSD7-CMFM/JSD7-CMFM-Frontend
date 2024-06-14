@@ -13,24 +13,45 @@ const EmailInput = () => {
     setIsValid(emailPattern.test(newEmail));
   };
 
+  const handleSubscribe = () => {
+    if (isValid) {
+      // Perform subscription logic here
+      alert(`Subscribing with email: ${email}`);
+    } else {
+      alert("Please enter a valid email address");
+    }
+  };
+
   return (
-    <div>
-      <input
-        type="email"
-        placeholder="Enter email"
-        className={`bg-white text-[14px] text-center px-16 py-2 ${
-          isValid ? "border-green-500" : "border-red-500"
-        }`}
-        value={email}
-        onChange={handleInputChange}
-        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-        title="Please enter a valid email address"
-      />
-      {!isValid && (
-        <p className="text-red-500 text-[10px]">
-          Please enter a valid email address
-        </p>
-      )}
+    <div className="border border-black space-x-10 flex p-2 rounded-md">
+      <div className="flex justify-between">
+        <div className="flex-col">
+          <input
+            type="email"
+            placeholder="Enter email"
+            className={`bg-white text-[16px] text-center px-16 py-2 ${
+              isValid ? "border-green-500" : "border-red-500"
+            }`}
+            value={email}
+            onChange={handleInputChange}
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+            title="Please enter a valid email address"
+          />
+          <div>
+            {!isValid && (
+              <h4 className="text-red-500 text-[12px] text-center">
+                Please enter a valid email address
+              </h4>
+            )}
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={handleSubscribe}
+        className=" bg-yellow-300 text-black px-3 py-1 rounded-md items-center text-[16px] font-bold"
+      >
+        Subscribe
+      </button>
     </div>
   );
 };

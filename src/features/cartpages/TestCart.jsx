@@ -1,43 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar, FaTrash } from "react-icons/fa";
 
-const CartProduct = [
-  {
-    id: 1,
-    name: "DIMOO",
-    price: 25,
-    description: "DIMOO By Your Side Series Figures",
-    imageUrl:
-      "https://prod-eurasian-res.popmart.com/default/20240612_102205_085361____4_____1200x1200.jpg",
-    imageUrl2:
-      "https://prod-eurasian-res.popmart.com/default/20240612_102205_584771____9_____1200x1200.jpg",
-  },
-  {
-    id: 2,
-    name: "SpongeBob",
-    price: 15,
-    description: "SpongeBob SquarePants Daily Quirks Series Figures",
-    imageUrl:
-      "https://prod-eurasian-res.popmart.com/default/20240612_102623_477916____2_____1200x1200.jpg",
-    imageUrl2:
-      "https://prod-eurasian-res.popmart.com/default/20240612_102623_236417____6_____1200x1200.jpg",
-  },
-  {
-    id: 3,
-    name: "DIMOO x Dumbo",
-    price: 35,
-    description: "DIMOO x Dumbo Action Figure",
-    imageUrl:
-      "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
-    imageUrl2:
-      "https://prod-eurasian-res.popmart.com/default/20240612_103708_563109____5_____1200x1200.jpg",
-  },
-];
-
 const CartList = () => {
+  const [cart, setCart] = useState([
+    {
+      id: 1,
+      name: "DIMOO",
+      price: 25,
+      quantity: 1,
+      description: "DIMOO By Your Side Series Figures",
+      imageUrl:
+        "https://prod-eurasian-res.popmart.com/default/20240612_102205_085361____4_____1200x1200.jpg",
+      imageUrl2:
+        "https://prod-eurasian-res.popmart.com/default/20240612_102205_584771____9_____1200x1200.jpg",
+    },
+    {
+      id: 2,
+      name: "SpongeBob",
+      price: 15,
+      quantity: 1,
+      description: "SpongeBob SquarePants Daily Quirks Series Figures",
+      imageUrl:
+        "https://prod-eurasian-res.popmart.com/default/20240612_102623_477916____2_____1200x1200.jpg",
+      imageUrl2:
+        "https://prod-eurasian-res.popmart.com/default/20240612_102623_236417____6_____1200x1200.jpg",
+    },
+    {
+      id: 3,
+      name: "DIMOO x Dumbo",
+      price: 35,
+      quantity: 1,
+      description: "DIMOO x Dumbo Action Figure",
+      imageUrl:
+        "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
+      imageUrl2:
+        "https://prod-eurasian-res.popmart.com/default/20240612_103708_563109____5_____1200x1200.jpg",
+    },
+  ]);
+
+  const handleQuantityChange = (productId, newQuantity) => {
+    if (newQuantity < 1) {
+      newQuantity = 1; // Ensure quantity doesn't go below 1
+    }
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
   return (
     <div>
-      {CartProduct.map((product) => (
+      {cart.map((product) => (
         <div key={product.id}>
           <div className="w-full border rounded-md m-3 border border-gray-600">
             <label className="label cursor-pointer">
@@ -86,9 +100,33 @@ const CartList = () => {
                       <h3 className="text-[10px] text-black font-mono p-1">
                         ADD
                       </h3>
-                      <h3 className="text-[10px] text-black font-mono p-1 ">
-                        ${product.price}
-                      </h3>
+                      <div className="flex items-center">
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(
+                              product.id,
+                              product.quantity - 1
+                            )
+                          }
+                          className="px-2 border rounded-l text-black border-black"
+                        >
+                          -
+                        </button>
+                        <h3 className="text-[10px] text-black font-mono p-1 ">
+                          {product.quantity}
+                        </h3>
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(
+                              product.id,
+                              product.quantity + 1
+                            )
+                          }
+                          className="px-2 border rounded-r text-black border-black"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                     <div className="w-1/5 justify-around space-l-5">
                       <FaTrash
@@ -97,6 +135,14 @@ const CartList = () => {
                       />
                     </div>
                   </div>
+                </div>
+                <div className="border-black border rounded-md m-4 p-1 flex justify-between w-4/5">
+                  <h3 className="text-[10px] text-black font-mono p-1">
+                    Total Price
+                  </h3>
+                  <h3 className="text-[10px] text-black font-mono p-1 ">
+                    ${product.price * product.quantity}
+                  </h3>
                 </div>
               </div>
             </div>

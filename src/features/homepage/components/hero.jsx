@@ -3,7 +3,7 @@ import MovingSection from "./movingText";
 
 const Hero = () => {
   return (
-    <section id="hero">
+    <section id="hero" className="bg-[#b5e3d8]">
       <div id="main-container" className="md:flex md:flex-row-reverse">
         <TextSection />
         <PictureSection />
@@ -17,8 +17,7 @@ const TextSection = () => {
   return (
     <div
       id="text-section"
-      className="px-4 py-12 flex flex-col items-center justify-center md:w-1/2 md:px-[98px] md:py-[120px] md:items-start"
-      style={{ backgroundColor: "#b5e3d8", color: "#252222" }}
+      className="px-4 py-12 flex flex-col items-center justify-center md:w-1/2 md:px-[98px] md:py-[120px] md:items-start bg-[#b5e3d8] text-[#252222]"
     >
       <h2 className="text-[36px]">Header</h2>
       <p className="text-center mt-4 md:text-left">
@@ -43,10 +42,14 @@ const PictureSection = () => {
       className="md:w-1/2 border-r border-black h-[55vh] md:h-auto"
     >
       <picture>
-        <source media="(min-width: 768px)" srcSet="images/hero_mock.png" />
         <img
-          src="images/hero_mock_mobile.png"
+          src="https://thehoneypot.co/cdn/shop/files/828Dmobile.png"
           className="block md:hidden object-cover object-top h-full w-full overflow-hidden"
+          alt="Hero"
+        />
+        <img
+          src="https://thehoneypot.co/cdn/shop/files/3A0C9E9A-C507-48CD-83D1-5F1582339396.png"
+          className="hidden md:block object-cover object-top h-full w-full overflow-hidden"
           alt="Hero"
         />
       </picture>

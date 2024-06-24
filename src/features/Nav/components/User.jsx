@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const User = () => {
   return (
     <div className="dropdown dropdown-end">
-      <div tabIndex="0" role="button" className="btn btn-ghost avatar btn-circle">
+      <div
+        tabIndex="0"
+        role="button"
+        className="btn btn-ghost avatar btn-circle"
+      >
         <div className="indicator">
-          <FaUser className='text-xl' />
+          <FaUser className="text-xl" />
         </div>
       </div>
       <ul
@@ -16,7 +20,7 @@ const User = () => {
       >
         <li>
           <Link to="/login" className="justify-center">
-            Sign in 
+            Sign in
           </Link>
         </li>
       </ul>

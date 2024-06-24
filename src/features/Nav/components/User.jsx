@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
 import { FaUser } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const User = () => {
   return (
     <div className="dropdown dropdown-end">
-      <div tabIndex="0" role="button" className="btn btn-ghost avatar btn-circle">
+      <div
+        tabIndex="0"
+        role="button"
+        className="btn btn-ghost avatar btn-circle"
+      >
         <div className="indicator">
-          <FaUser className='text-xl' />
+          <FaUser className="text-xl" />
         </div>
       </div>
       <ul
@@ -15,8 +19,8 @@ const User = () => {
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <Link to="/login" className="justify-between">
-            Sign in / Register
+          <Link to="/login" className="justify-center">
+            Sign in
           </Link>
         </li>
       </ul>

@@ -11,6 +11,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 import DashboardPage from "../pages/Admin/DashboardPage";
 import ForgetPassword from "../features/signinsignup/components/ForgetPW";
 import AccountPageContainer from "../pages/AccountProfile";
+import ProductListPage from "../pages/ProductListPage";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "productinfo",
         element: <ProductInfoPage />,
+      },
+      {
+        path: "productList",
+        element: <ProductListPage />,
       },
       {
         path: "cart",

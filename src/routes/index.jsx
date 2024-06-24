@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <ForgetPassword />,
       },
       {
-        path: "productinfo",
+        path: "productinfo/:id",
         element: <ProductInfoPage />,
       },
       {

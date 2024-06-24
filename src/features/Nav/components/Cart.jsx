@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
@@ -26,11 +27,11 @@ const Cart = () => {
         tabIndex="0"
         className="mt-5 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
       >
-        <div className="card-body">
+        <div className="card-body items-center">
           <span className="font-bold text-lg">8 Items</span>
           <span className="text-info">Subtotal: $999</span>
           <div className="card-actions">
-            <button className="btn btn-primary btn-block">View cart</button>
+          <Link to="/cart"><button  className="btn btn-primary btn-block">View cart</button></Link>
           </div>
         </div>
       </div>

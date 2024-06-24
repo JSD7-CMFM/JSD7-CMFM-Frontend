@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const NavLinks = () => {
   return (
     <ul className="hidden md:flex space-x-4">
-      <li><a href="#" className="btn btn-ghost text-xl">New & Featured</a></li>
-      <li><a href="#" className="btn btn-ghost text-xl">SERIES</a></li>
-      <li><a href="#" className="btn btn-ghost text-xl">MEGA</a></li>
-      <li><a href="#" className="btn btn-ghost text-xl">TYPES</a></li>
-      <li><a href="#" className="btn btn-ghost text-xl">ACCESSORIES</a></li>
-      <li><a href="#" className="btn btn-ghost text-xl">EVENT</a></li>
+      <li><Link to="/" className="btn btn-ghost text-xl">HOME</Link></li>
+      <li><Link to="productList" className="btn btn-ghost text-xl">PRODUCTLIST</Link></li>
+      <li><Link to="/register" className="btn btn-ghost text-xl">REGISTER</Link></li>
+      <li><Link to="Account" className="btn btn-ghost text-xl">ACCOUNT</Link></li>
+      <li><Link to="forget" className="btn btn-ghost text-xl">FORGETPASSWORD</Link></li>
+      <li><Link to="checkout" className="btn btn-ghost text-xl">CHECKOUT</Link></li>
     </ul>
   );
 };

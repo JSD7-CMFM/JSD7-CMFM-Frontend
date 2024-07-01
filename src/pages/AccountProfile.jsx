@@ -18,7 +18,7 @@ const AccountPageContainer = () => {
       >
         <div
           id="acc-nav"
-          className="md:pr-9 md:flex md:flex-col md:justify-between"
+          className="md:pr-9 md:flex md:flex-col md:justify-between md:pl-[10vw]"
         >
           <div>
             <h1 className="mb-8 text-2xl md:text-4xl whitespace-nowrap">

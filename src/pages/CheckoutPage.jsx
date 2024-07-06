@@ -3,7 +3,6 @@ import OrderSummary from '../features/checkout/components/OrderSummary';
 import Checkout from '../features/checkout/components/Checkout ';
 
 
-
 const CheckoutPage = () => {
   return (
     <div className="bg-gray-100 py-10">

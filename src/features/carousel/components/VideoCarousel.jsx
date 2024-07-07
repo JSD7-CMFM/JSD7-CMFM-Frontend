@@ -47,6 +47,7 @@ function VideoCustom(props) {
         ref.current.stopVideo();
       }
     }
+    console.log("test");
   }, [isSelected]);
 
   const videoOptions = {

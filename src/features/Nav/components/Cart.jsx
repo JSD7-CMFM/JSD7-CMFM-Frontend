@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -31,7 +31,9 @@ const Cart = () => {
           <span className="font-bold text-lg">8 Items</span>
           <span className="text-info">Subtotal: $999</span>
           <div className="card-actions">
-          <Link to="/cart"><button  className="btn btn-primary btn-block">View cart</button></Link>
+            <Link to="/cart">
+              <button className="btn btn-primary btn-block">View cart</button>
+            </Link>
           </div>
         </div>
       </div>

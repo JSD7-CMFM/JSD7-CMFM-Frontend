@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Logo from '../features/Nav/components/Logo';
-import NavLinks from '../features/Nav/components/NavLinks';
-import SearchBar from '../features/Nav/components/SearchBar';
-import Cart from '../features/Nav/components/Cart';
-import Wishlist from '../features/Nav/components/Wishlist';
-import User from '../features/Nav/components/User';
-import MenuDropdown from '../features/Nav/components/MenuDropdown';
+import React, { useState, useEffect } from "react";
+import Logo from "../features/Nav/components/Logo";
+import NavLinks from "../features/Nav/components/NavLinks";
+import SearchBar from "../features/Nav/components/SearchBar";
+import Cart from "../features/Nav/components/Cart";
+import Wishlist from "../features/Nav/components/Wishlist";
+import User from "../features/Nav/components/User";
+import MenuDropdown from "../features/Nav/components/MenuDropdown";
 
 const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,16 +23,30 @@ const Navbar = () => {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
 
+  const handleSearch = () => {
+    if (searchQuery) {
+      onSearchNote(searchQuery);
+    }
+  };
+  const onClearSearch = () => {
+    handleClearSearch();
+    setSearchQuery("");
+  };
+
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 bg-transparent  transition-transform duration-300 ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
-      <nav className="flex items-center justify-between p-4 border-2 bg-[#FEF3C7] border-black rounded-2xl mx-4 my-2">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 bg-transparent  transition-transform duration-300 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <nav className="flex items-center justify-between p-4 border-2 bg-[#fff6d0] border-black rounded-2xl mx-4 my-2">
         <div className="flex items-center md:hidden">
           <MenuDropdown />
         </div>
@@ -43,10 +58,18 @@ const Navbar = () => {
           <NavLinks />
         </div>
         <div className="flex items-center space-x-4">
-          <SearchBar />
+          <SearchBar
+            value={searchQuery}
+            onChange={({ target }) => {
+              setSearchQuery(target.value);
+            }}
+            handleSearch={handleSearch}
+            onClearSearch={onClearSearch}
+          />
           <Cart />
           <Wishlist />
           <User />
+          {/* <User userInfo={userInfo} onLogout={onLogout} /> */}
         </div>
       </nav>
     </header>

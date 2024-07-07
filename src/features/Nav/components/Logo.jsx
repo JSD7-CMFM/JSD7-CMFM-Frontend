@@ -1,8 +1,11 @@
-import React from 'react';
+import React from "react";
+import logo from "../../../assets/logo.svg";
 
 const Logo = () => {
   return (
-    <div className="text-2xl text-[#F35D3C]">Logo</div>
+    <div className="flex items-center md:ml-4">
+      <img src={logo} alt="Logo" className="h-10 w-10" />{" "}
+    </div>
   );
 };
 

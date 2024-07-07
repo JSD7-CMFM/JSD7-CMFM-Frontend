@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const MenuDropdown = () => {
   return (
@@ -23,9 +24,21 @@ const MenuDropdown = () => {
         tabIndex="0"
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
-        <li><a href="#">Homepage</a></li>
-        <li><a href="#">Portfolio</a></li>
-        <li><a href="#">About</a></li>
+        <li>
+          <Link to="/">HOME</Link>
+        </li>
+        <li>
+          <Link to="productList">PRODUCTLIST</Link>
+        </li>
+        <li>
+          <Link to="/register">REGISTER</Link>
+        </li>
+        <li>
+          <Link to="Account">ACCOUNT</Link>
+        </li>
+        <li>
+          <Link to="checkout">CHECKOUT</Link>
+        </li>
       </ul>
     </div>
   );

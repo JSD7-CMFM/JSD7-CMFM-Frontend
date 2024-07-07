@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { getInitials } from "../../../utils/helper.js";
 
 const User = () => {
   return (
@@ -20,7 +21,7 @@ const User = () => {
       >
         <li>
           <Link to="/login" className="justify-center">
-            Sign in
+            Sign in/Sign out
           </Link>
         </li>
       </ul>

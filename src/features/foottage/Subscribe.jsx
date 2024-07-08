@@ -9,7 +9,7 @@ const Subscribe = () => {
         <div className="md:flex w-full">
           <div className="p-10 space-y-1 bg-[rgb(255,255,255)] md:w-1/2 border-r border-black">
             <div className="flex">
-              <FaFortAwesome size={40} style={{ color: "#fcd434" }} />
+                  <img src ="/ponylogo.svg" style={{ width: '50px', height: 'auto' }} alt="Pony Logo"/>
               <h3 className="text-black text-[12px] font-mono w-1/2 pl-3 pb-3">
                 PICKME OFFICIAL STORE.
               </h3>

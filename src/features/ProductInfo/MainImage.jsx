@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../config/myAPIs';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../config/myAPIs";
+import { useParams } from "react-router-dom";
 
 const MainImage = () => {
   const { id } = useParams();
@@ -10,11 +10,11 @@ const MainImage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/products');
+        const response = await axiosInstance.get("/products");
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -48,4 +48,3 @@ const MainImage = () => {
 };
 
 export default MainImage;
-

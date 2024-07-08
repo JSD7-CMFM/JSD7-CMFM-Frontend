@@ -13,11 +13,11 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/products');
+        const response = await axiosInstance.get("/products");
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -51,7 +51,7 @@ const ProductDetails = () => {
   const combinedTotalPrice = parseFloat(totalPrice2).toFixed(2);
 
   return (
-    <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 md:rounded-2xl">
+    <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">
       <div className="px-2 py-3 w-full md:h-full">
         <div className="pb-5 text-3xl md:text-xl md:font-bold">
           <h1>{selectedProduct.name}</h1>
@@ -60,9 +60,7 @@ const ProductDetails = () => {
           <p>{selectedProduct.description}</p>
         </div>
 
-        <div className="pb-2 text-sm font-medium">
-          {/* <h2>SINGLE</h2> */}
-        </div>
+        <div className="pb-2 text-sm font-medium">{/* <h2>SINGLE</h2> */}</div>
         <DetailItem
           imgSrc={selectedProduct.product_img}
           description={selectedProduct.description}
@@ -98,4 +96,3 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-

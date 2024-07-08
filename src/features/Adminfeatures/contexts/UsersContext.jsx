@@ -17,8 +17,7 @@ export default function UsersContextProvider({ children }) {
 
   useEffect(() => {
     handleLoading();
-  }, []);
-
+  }, [])
   const deleteUser = async (id) => {
     try {
       await usersAPI.deleteUser(id);

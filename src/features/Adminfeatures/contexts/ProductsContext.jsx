@@ -8,13 +8,13 @@ export default function ProductContextProvider({ children }) {
 
   const handleLoading = async () => {
     const response = await productsAPI.getAllProducts();
-    setProducts(response.data.data);
+    setProducts(response.data);
   };
 
   useEffect(() => {
     handleLoading();
   }, []);
-
+  // console.log(products);
   return (
     <ProductContext.Provider value={{ products }}>
       {children}

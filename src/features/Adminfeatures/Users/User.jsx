@@ -1,30 +1,12 @@
-// src/components/Users.jsx
 import React, { useContext } from "react";
-// import { users as mockUsers } from "../../data/UserData";
-
-// import useUser from "../../../hooks/useUser";
-import { UserContext } from "../../../features/Adminfeatures/contexts/UsersContext";
+import useUser from "../../../hooks/useUser";
 
 const Users = ({ id }) => {
-  // console.log(data);
-  const { users, deleteUser, banUser } = useContext(UserContext);
+  const { users, deleteUser, banUser } = useUser()
 
   const handleBan = (id, currentStatus) => {
     banUser(id, currentStatus);
   };
-
-  // const handleBan = (id) => {
-  //   users((prevUsers) =>
-  //     prevUsers.map((users) =>
-  //       users.id === id
-  //         ? {
-  //             ...users,
-  //             status: users.status === "active" ? "banned" : "active",
-  //           }
-  //         : users
-  //     )
-  //   );
-  // };
 
   return (
     <div className="p-10">

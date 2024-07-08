@@ -12,6 +12,7 @@ import AccountPageContainer from "../pages/AccountProfile";
 import ProductListPage from "../pages/ProductListPage";
 import Container from "../layouts/Container";
 import UsersContextProvider from "../features/Adminfeatures/contexts/UsersContext";
+import ProductContextProvider from "../features/Adminfeatures/contexts/ProductsContext";
 
 const router = createBrowserRouter([
   {
@@ -68,8 +69,10 @@ const router = createBrowserRouter([
 
 export default function Router() {
   return (
-    <UsersContextProvider>
-      <RouterProvider router={router} />
-    </UsersContextProvider>
+    <ProductContextProvider>
+      <UsersContextProvider>
+        <RouterProvider router={router} />
+      </UsersContextProvider>
+    </ProductContextProvider>
   );
 }

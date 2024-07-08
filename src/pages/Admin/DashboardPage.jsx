@@ -1,10 +1,11 @@
 // src/pages/DashboardPage.js
 import React from "react";
-import Sidebar from "../../features/Adminfeatures/SideBar"
-import Dashboard from "../../features/Adminfeatures/Dashboard/Dashboard"
-import Users from "../../features/Adminfeatures/Users/User"
-import Products from "../../features/Adminfeatures/Products/Products"
-import { useState } from "react";
+import Sidebar from "../../features/Adminfeatures/SideBar";
+import Dashboard from "../../features/Adminfeatures/Dashboard/Dashboard";
+import Users from "../../features/Adminfeatures/Users/User";
+import Products from "../../features/Adminfeatures/Products/Products";
+import { useState, useContext } from "react";
+
 
 const DashboardPage = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");

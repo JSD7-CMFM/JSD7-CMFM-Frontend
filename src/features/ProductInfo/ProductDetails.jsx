@@ -1,38 +1,54 @@
 import React, { useState, useEffect } from "react";
 import DetailItem from "./DetailItem";
-import { Link } from "react-router-dom";
-import ProductList2 from "../../data/ProductListMockUp";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
 
 const ProductDetails = () => {
   const { id } = useParams();
-
-  const [quantity2, setQuantity2] = useState(0);
-  const [selectedProductId, setSelectedProductId] = useState(1); // Default selected product ID
-  const [selectedProduct, setSelectedProduct] = useState(null); // State to store selected product details
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [quantity2, setQuantity2] = useState(1);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      const product = ProductList2.find(
-        (product) => product.id === parseInt(id, 10)
-      );
-      console.log(product);
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/products");
+        setProducts(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log("id from useParams:", id); // Check the id extracted from useParams
+    console.log("products:", products); // Check the products state
+
+    if (id && products.length > 0) {
+      const product = products.find((product) => product._id === id); // Adjusted to direct comparison with id
+      console.log("selected product:", product); // Check the selected product found
       setSelectedProduct(product);
     }
-  }, [id]);
+  }, [id, products]);
 
   const incrementQuantity2 = () => {
     setQuantity2((prevQuantity) => prevQuantity + 1);
   };
 
   const decrementQuantity2 = () => {
-    setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 0));
+    setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  if (!selectedProduct) return null; // Handle case where selectedProduct is not yet loaded
+  if (loading || !selectedProduct) {
+    return <div>Loading...</div>;
+  }
 
-  const totalPrice2 = (quantity2 * selectedProduct.price).toFixed(2); // Calculate total price for single quantity
-  const combinedTotalPrice = parseFloat(totalPrice2).toFixed(2); // Calculate combined total price
+  const totalPrice2 = (quantity2 * selectedProduct.price).toFixed(2);
+  const combinedTotalPrice = parseFloat(totalPrice2).toFixed(2);
 
   return (
     <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">
@@ -46,7 +62,7 @@ const ProductDetails = () => {
 
         <div className="pb-2 text-sm font-medium">{/* <h2>SINGLE</h2> */}</div>
         <DetailItem
-          imgSrc={selectedProduct.imageUrl} // Displaying the second image of the selected product
+          imgSrc={selectedProduct.product_img}
           description={selectedProduct.description}
           size="Single"
         />
@@ -66,11 +82,10 @@ const ProductDetails = () => {
               +
             </button>
           </div>
-          <div className="font-bold text-xl">Total: ฿{totalPrice2}</div>
+          <div className="font-bold text-m">Total: ฿{totalPrice2}</div>
         </div>
-
         <Link to="/cart">
-          <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-xl md:py-2 md:px-2">
+          <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-l md:py-2 md:px-2">
             <h3 className="font-mono p-1">Add to cart</h3>
             <h3 className="font-mono p-1">฿{combinedTotalPrice}</h3>
           </div>

@@ -207,7 +207,7 @@
 
 // -----------------------------------------------------
 
-const ProductList2 = [
+const productList2 = [
   {
     id: 1,
     name: "Zsiga Let It Be",
@@ -546,4 +546,4 @@ const ProductList2 = [
   },
 ];
 
-export default ProductList2;
+export default productList2;

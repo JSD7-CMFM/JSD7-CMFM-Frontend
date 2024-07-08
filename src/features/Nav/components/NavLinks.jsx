@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NavLinks = () => {
   return (
-    <ul className="hidden md:flex space-x-4">
+    <ul className="hidden xl:flex space-x-4">
       <li>
         <Link to="/" className="btn btn-ghost text-xl">
           HOME

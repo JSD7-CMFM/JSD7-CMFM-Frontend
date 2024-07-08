@@ -86,7 +86,6 @@ const ProductDetails = () => {
           </div>
           <div className="font-bold text-m">Total: ฿{totalPrice2}</div>
         </div>
-
         <Link to="/cart">
           <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-l md:py-2 md:px-2">
             <h3 className="font-mono p-1">Add to cart</h3>

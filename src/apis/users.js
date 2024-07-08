@@ -4,7 +4,6 @@ import { setToken, setInfo, getToken } from "../utils/localStorage.js";
 const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
-    console.log("Login response:", response.data);
     const { token, id, firstName, email } = response.data;
     if (response.data && token) {
       setToken(token);
@@ -44,11 +43,11 @@ const getUser = async (id) => {
   return await axiosInstance.get(`/users/${id}`, config);
 };
 
-const editUser = async (id) => {
+const editUser = async (id, data) => {
   const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
   };
-  return await axiosInstance.patch(`/users/${id}`, config);
+  return await axiosInstance.patch(`/users/${id}`, data, config);
 };
 
 const getAllusers = async () => await axiosInstance.get("/users");

@@ -21,9 +21,6 @@ const Register = async (data) => {
   try {
     const response = await axiosInstance.post("/users/register", data);
     const { token } = response.data;
-    console.log("response: ", response);
-    console.log("data: ", response.data);
-    console.log("token: ", token);
 
     if (response.data && token) {
       setToken(token);
@@ -51,19 +48,11 @@ const editUser = async (id) => {
 
 const getAllUsers = async () => await axiosInstance.get("/users");
 
-const deleteUser = async (id) => {
-  const config = {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  };
-  return await axiosInstance.delete(`/users/${id}`, config);
-};
+const deleteUser = async (id) => await axiosInstance.delete(`/users/${id}`);
 
 const banUser = async (id, currentStatus) => {
-  const config = {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  };
   const newStatus = currentStatus === "active" ? "banned" : "active";
-  return await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config);
+  return await axiosInstance.patch(`/users/${id}`, { status: newStatus });
 };
 
 export default { Login, Register, getUser, getAllUsers, deleteUser, editUser, banUser };

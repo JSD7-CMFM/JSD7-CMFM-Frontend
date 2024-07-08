@@ -6,11 +6,28 @@ import Cart from "../features/Nav/components/Cart";
 import Wishlist from "../features/Nav/components/Wishlist";
 import User from "../features/Nav/components/User";
 import MenuDropdown from "../features/Nav/components/MenuDropdown";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
+  const isToken = localStorage.getItem("token");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showNavbar, setShowNavbar] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  const onLogout = () => {
+    removeToken.clear();
+    navigate("/login");
+  };
+
+  const handleSearch = () => {
+    if (searchQuery) {
+      onSearchNote(searchQuery);
+    }
+  };
+  const onClearSearch = () => {
+    handleClearSearch();
+    setSearchQuery("");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,16 +47,6 @@ const Navbar = () => {
     };
   }, [lastScrollY]);
 
-  const handleSearch = () => {
-    if (searchQuery) {
-      onSearchNote(searchQuery);
-    }
-  };
-  const onClearSearch = () => {
-    handleClearSearch();
-    setSearchQuery("");
-  };
-
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 bg-transparent  transition-transform duration-300 ${
@@ -57,19 +64,23 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-4">
           <NavLinks />
         </div>
+
         <div className="flex items-center space-x-4">
-          <SearchBar
-            value={searchQuery}
-            onChange={({ target }) => {
-              setSearchQuery(target.value);
-            }}
-            handleSearch={handleSearch}
-            onClearSearch={onClearSearch}
-          />
-          <Cart />
-          <Wishlist />
-          <User />
-          {/* <User userInfo={userInfo} onLogout={onLogout} /> */}
+          {isToken && (
+            <>
+              <SearchBar
+                value={searchQuery}
+                onChange={({ target }) => {
+                  setSearchQuery(target.value);
+                }}
+                handleSearch={handleSearch}
+                onClearSearch={onClearSearch}
+              />
+              <Cart />
+              <Wishlist />
+              <User userInfo />
+            </>
+          )}
         </div>
       </nav>
     </header>

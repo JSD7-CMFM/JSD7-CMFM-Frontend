@@ -14,9 +14,27 @@ export default function ProductContextProvider({ children }) {
   useEffect(() => {
     handleLoading();
   }, []);
-  // console.log(products);
+
+  const addProduct = async (data) => {
+    try {
+      const response = await productsAPI.addProduct(data);
+      setProducts([...products, response.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      await productsAPI.deleteProduct(id);
+      handleLoading();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider value={{ products, addProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   );

@@ -31,5 +31,9 @@ const fetchProducts = async () => {
 };
 
 const getAllProducts = async () => await axiosInstance.get("/products");
-;
-export default { fetchProducts, getAllProducts };
+
+const addProduct = async (data) => await axiosInstance.post("/products", data);
+
+const deleteProduct = async (id) => await axiosInstance.delete(`/products/${id}`);
+
+export default { fetchProducts, getAllProducts, addProduct, deleteProduct };

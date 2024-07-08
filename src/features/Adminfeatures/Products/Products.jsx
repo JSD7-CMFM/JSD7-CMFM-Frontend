@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useProduct from "../../../hooks/useProduct";
 
 const Products = () => {
-  const { products } = useProduct();
+  const { products, addProduct, deleteProduct } = useProduct();
   const [editingProductId, setEditingProductId] = useState(null);
   const [formData, setFormData] = useState({
     productId: "",
@@ -10,38 +10,45 @@ const Products = () => {
     category: "",
     name: "",
     description: "",
+    type: "",
     price: "",
     quantity: "",
     product_img: "",
-    productinfo1: "",
-    productinfo2: "",
+    productinfo: {
+      info1: "",
+      info2: "",
+    },
   });
   const [newProduct, setNewProduct] = useState({
     productId: "",
-    id: "",
     category: "",
     name: "",
     description: "",
+    type: "",
     price: "",
     quantity: "",
     product_img: "",
-    productinfo1: "",
-    productinfo2: "",
+    productinfo: {
+      info1: "",
+      info2: "",
+    },
   });
 
   const handleEdit = (product) => {
     setEditingProductId(product._id);
     setFormData({
       productId: product.productId,
-      id: product._id,
       category: product.category,
       name: product.name,
       description: product.description,
+      type: product.type,
       price: product.price,
       quantity: product.quantity,
       product_img: product.product_img,
-      productinfo1: product.productinfo.info1,
-      productinfo2: product.productinfo.info2,
+      productinfo: {
+        info1: product.productinfo.info1,
+        info2: product.productinfo.info2,
+      },
     });
   };
 
@@ -59,9 +66,7 @@ const Products = () => {
   };
 
   const handleDelete = (id) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product._id !== id)
-    );
+    deleteProduct(id);
   };
 
   const handleChange = (e) => {
@@ -74,35 +79,53 @@ const Products = () => {
 
   const handleNewProductChange = (e) => {
     const { name, value } = e.target;
-    setNewProduct((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setNewProduct((prevData) => {
+      if (name === "info1" || name === "info2") {
+        return {
+          ...prevData,
+          productinfo: {
+            ...prevData.productinfo,
+            [name]: value,
+          },
+        };
+      } else {
+        return {
+          ...prevData,
+          [name]: value,
+        };
+      }
+    });
   };
 
   const handleAddProduct = () => {
-    if (
-      parseFloat(newProduct.price) < 0 ||
-      parseFloat(newProduct.quantity) < 0
-    ) {
-      alert("Price and Quantity must be at least 0.00");
-      return;
-    }
-    setProducts((prevProducts) => [
-      ...prevProducts,
-      { ...newProduct, id: prevProducts.length + 1 }, // Assign a new id
-    ]);
+    const productToAdd = {
+      ...newProduct,
+      productinfo: {
+        info1: newProduct.productinfo.info1,
+        info2: newProduct.productinfo.info2,
+      },
+    };
+    console.log("Adding Product:", productToAdd);
+    addProduct(productToAdd)
+      .then((response) => {
+        console.log("Product added successfully:", response);
+      })
+      .catch((error) => {
+        console.error("Error adding product:", error);
+      });
     setNewProduct({
       productId: "",
-      id: "",
       category: "",
       name: "",
       description: "",
+      type: "",
       price: "",
       quantity: "",
       product_img: "",
-      productinfo1: "",
-      productinfo2: "",
+      productinfo: {
+        info1: "",
+        info2: "",
+      },
     });
   };
 
@@ -152,6 +175,15 @@ const Products = () => {
               </td>
               <td className="text-white py-2 px-4 border-b">
                 <input
+                  type="text"
+                  name="type"
+                  value={newProduct.type}
+                  onChange={handleNewProductChange}
+                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                />
+              </td>
+              <td className="text-white py-2 px-4 border-b">
+                <input
                   type="number"
                   name="price"
                   value={newProduct.price}
@@ -182,8 +214,8 @@ const Products = () => {
               <td className="text-white py-2 px-4 border-b">
                 <input
                   type="text"
-                  name="productinfo1"
-                  value={newProduct.productinfo1}
+                  name="info1"
+                  value={newProduct.productinfo.info1}
                   onChange={handleNewProductChange}
                   className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                 />
@@ -191,8 +223,8 @@ const Products = () => {
               <td className="text-white py-2 px-4 border-b">
                 <input
                   type="text"
-                  name="productinfo2"
-                  value={newProduct.productinfo2}
+                  name="info2"
+                  value={newProduct.productinfo.info2}
                   onChange={handleNewProductChange}
                   className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                 />
@@ -221,6 +253,9 @@ const Products = () => {
               </th>
               <th className="text-black py-2 px-4 border-b text-left w-2/12">
                 Description
+              </th>
+              <th className="text-black py-2 px-4 border-b text-left w-2/12">
+                Type
               </th>
               <th className="text-black py-2 px-4 border-b text-left w-2/12">
                 Price
@@ -296,6 +331,19 @@ const Products = () => {
                     />
                   ) : (
                     product.description
+                  )}
+                </td>
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
+                    <input
+                      type="text"
+                      name="type"
+                      value={formData.type}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    product.type
                   )}
                 </td>
                 <td className="text-black py-2 px-4 border-b">

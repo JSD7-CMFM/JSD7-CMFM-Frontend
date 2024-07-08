@@ -4,7 +4,6 @@ import { getId, getToken } from "../../../utils/localStorage.js";
 
 const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,10 +19,15 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      setUserGlobal(user);
+    }
+  }, [user, setUserGlobal]);
+
   if (!user) {
     return <div>Loading...</div>;
   }
-  setUserGlobal(user);
 
   return (
     <div id="acc-info" className="px-7">

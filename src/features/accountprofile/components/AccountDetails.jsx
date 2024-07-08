@@ -10,9 +10,9 @@ const AccountDetails = () => {
       try {
         const token = getToken();
         const getId = localStorage.getItem("id");
+        console.log("Get id:", getId);
         const response = await appAPI.getUser(getId);
         console.log("Response data:", response);
-        b;
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user:", error);

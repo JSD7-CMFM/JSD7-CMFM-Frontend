@@ -1,27 +1,28 @@
 // src/components/Users.jsx
-import React, { useState } from "react";
-// import { users as mockUsers } from "../../data/๊UserData";
-import { users as mockUsers } from "../../../data/UserData";
+import React, { useContext } from "react";
+// import { users as mockUsers } from "../../data/UserData";
 
-const Users = () => {
-  const [users, setUsers] = useState(mockUsers);
+// import useUser from "../../../hooks/useUser";
+import { UserContext } from "../../../features/Adminfeatures/contexts/UsersContext";
 
-  const handleBan = (id) => {
-    setUsers((prevUsers) =>
-      prevUsers.map((user) =>
-        user.id === id
-          ? {
-              ...user,
-              status: user.status === "available" ? "banned" : "available",
-            }
-          : user
-      )
-    );
-  };
+const Users = ({ id }) => {
+  // console.log(data);
+  const { users, deleteUser } = useContext(UserContext);
 
-  const handleDelete = (id) => {
-    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-  };
+  console.log(users);
+
+  // const handleBan = (id) => {
+  //   users((prevUsers) =>
+  //     prevUsers.map((users) =>
+  //       users.id === id
+  //         ? {
+  //             ...users,
+  //             status: users.status === "available" ? "banned" : "available",
+  //           }
+  //         : users
+  //     )
+  //   );
+  // };
 
   return (
     <div className="p-10">
@@ -31,43 +32,45 @@ const Users = () => {
           <thead>
             <tr>
               <th className="text-black py-2 border-b text-start">ID</th>
-              <th className="text-black py-2 border-b text-start">First Name</th>
+              <th className="text-black py-2 border-b text-start">
+                First Name
+              </th>
               <th className="text-black py-2 border-b text-start">Last Name</th>
               <th className="text-black py-2 border-b text-start">Email</th>
               <th className="text-black py-2 border-b text-start">Phone</th>
-              <th className="text-black py-2 border-b text-start">Address</th>
               <th className="text-black py-2 border-b text-start">Status</th>
               <th className="text-black py-2 border-b text-start">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td className="text-black py-2 border-b">{user.id}</td>
-                <td className="text-black py-2 border-b">{user.firstName}</td>
-                <td className="text-black py-2 border-b">{user.lastName}</td>
-                <td className="text-black py-2 border-b">{user.email}</td>
-                <td className="text-black py-2 border-b">{user.phone}</td>
-                <td className="text-black py-2 border-b">{user.address}</td>
+            {users.map((users) => (
+              <tr key={users._id}>
+                <td className="text-black py-2 border-b">{users._id}</td>
+                <td className="text-black py-2 border-b">{users.firstName}</td>
+                <td className="text-black py-2 border-b">{users.lastName}</td>
+                <td className="text-black py-2 border-b">{users.email}</td>
+                <td className="text-black py-2 border-b">
+                  {users.phoneNumber}
+                </td>
                 <td
                   className={`py-2 border-b ${
-                    user.status === "available"
+                    users.status === "available"
                       ? "text-green-500"
                       : "text-red-500"
                   }`}
                 >
-                  {user.status}
+                  {users.status}
                 </td>
                 <td className="py-2 border-b flex space-x-2">
                   <button
                     className="bg-yellow-500 text-white px-2 py-1 rounded w-20"
-                    onClick={() => handleBan(user.id)}
+                    onClick={() => handleBan(users.id)}
                   >
-                    {user.status === "available" ? "Ban" : "Unban"}
+                    {users.status === "available" ? "Ban" : "Unban"}
                   </button>
                   <button
                     className="bg-red-500 text-white px-2 py-1 rounded w-20"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => deleteUser(users._id)}
                   >
                     Delete
                   </button>

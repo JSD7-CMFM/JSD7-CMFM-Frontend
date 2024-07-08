@@ -49,8 +49,13 @@ const editUser = async (id) => {
   return await axiosInstance.patch(`/users/${id}`, config);
 };
 
-const getAllusers = async () => await axiosInstance.get("/users");
+const getAllUsers = async () => await axiosInstance.get("/users");
 
-const deleteUser = async () => await axiosInstance.delete("/users");
+const deleteUser = async (id) => {
+  const config = {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  };
+  return await axiosInstance.delete(`/users/${id}`, config);
+};
 
-export default { Login, Register, getUser, getAllusers, deleteUser, editUser };
+export default { Login, Register, getUser, getAllUsers, deleteUser, editUser };

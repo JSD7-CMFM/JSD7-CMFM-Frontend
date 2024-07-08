@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import React from "react";
-import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
 import HomePage from "../pages/Homepage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -12,15 +10,15 @@ import DashboardPage from "../pages/Admin/DashboardPage";
 import ForgetPassword from "../features/signinsignup/components/ForgetPW";
 import AccountPageContainer from "../pages/AccountProfile";
 import ProductListPage from "../pages/ProductListPage";
+import Container from "../layouts/Container";
+import UsersContextProvider from "../features/Adminfeatures/contexts/UsersContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <Container />
       </>
     ),
     children: [
@@ -69,5 +67,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function Router() {
-  return <RouterProvider router={router} />;
+  return (
+    <UsersContextProvider>
+      <RouterProvider router={router} />
+    </UsersContextProvider>
+  );
 }

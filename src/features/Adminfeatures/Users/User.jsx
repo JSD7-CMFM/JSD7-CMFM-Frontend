@@ -7,9 +7,11 @@ import { UserContext } from "../../../features/Adminfeatures/contexts/UsersConte
 
 const Users = ({ id }) => {
   // console.log(data);
-  const { users, deleteUser } = useContext(UserContext);
+  const { users, deleteUser, banUser } = useContext(UserContext);
 
-  console.log(users);
+  const handleBan = (id, currentStatus) => {
+    banUser(id, currentStatus);
+  };
 
   // const handleBan = (id) => {
   //   users((prevUsers) =>
@@ -17,7 +19,7 @@ const Users = ({ id }) => {
   //       users.id === id
   //         ? {
   //             ...users,
-  //             status: users.status === "available" ? "banned" : "available",
+  //             status: users.status === "active" ? "banned" : "active",
   //           }
   //         : users
   //     )
@@ -54,7 +56,7 @@ const Users = ({ id }) => {
                 </td>
                 <td
                   className={`py-2 border-b ${
-                    users.status === "available"
+                    users.status === "active"
                       ? "text-green-500"
                       : "text-red-500"
                   }`}
@@ -64,9 +66,9 @@ const Users = ({ id }) => {
                 <td className="py-2 border-b flex space-x-2">
                   <button
                     className="bg-yellow-500 text-white px-2 py-1 rounded w-20"
-                    onClick={() => handleBan(users.id)}
+                    onClick={() => handleBan(users._id, users.status)}
                   >
-                    {users.status === "available" ? "Ban" : "Unban"}
+                    {users.status === "active" ? "Ban" : "Unban"}
                   </button>
                   <button
                     className="bg-red-500 text-white px-2 py-1 rounded w-20"

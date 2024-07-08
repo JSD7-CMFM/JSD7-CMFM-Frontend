@@ -5,12 +5,14 @@ const UserContext = createContext();
 
 export default function UsersContextProvider({ children }) {
   const [users, setUsers] = useState([]);
-  // const navigate = useNavigate();
 
-  const handleLoading = async() => {
-    const response = await usersAPI.getAllUsers()
-    setUsers(response.data.data);
-    
+  const handleLoading = async () => {
+    try {
+      const response = await usersAPI.getAllUsers();
+      setUsers(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -25,9 +27,18 @@ export default function UsersContextProvider({ children }) {
       console.log(error);
     }
   };
-   
+
+  const banUser = async (id, currentStatus) => {
+    try {
+      await usersAPI.banUser(id, currentStatus);
+      handleLoading();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ users, deleteUser }}>
+    <UserContext.Provider value={{ users, deleteUser, banUser }}>
       {children}
     </UserContext.Provider>
   );

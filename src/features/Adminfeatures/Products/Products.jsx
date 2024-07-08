@@ -1,36 +1,54 @@
-// src/components/Products.jsx
 import React, { useState } from "react";
-import { products as mockProducts } from "../../../data/ProductData";
+import useProduct from "../../../hooks/useProduct";
 
 const Products = () => {
-  const [products, setProducts] = useState(mockProducts);
+  const { products, addProduct, deleteProduct } = useProduct();
   const [editingProductId, setEditingProductId] = useState(null);
   const [formData, setFormData] = useState({
+    productId: "",
     id: "",
     category: "",
     name: "",
+    description: "",
+    type: "",
     price: "",
     quantity: "",
-    productImage: "",
+    product_img: "",
+    productinfo: {
+      info1: "",
+      info2: "",
+    },
   });
   const [newProduct, setNewProduct] = useState({
-    id: "",
+    productId: "",
     category: "",
     name: "",
+    description: "",
+    type: "",
     price: "",
     quantity: "",
-    productImage: "",
+    product_img: "",
+    productinfo: {
+      info1: "",
+      info2: "",
+    },
   });
 
   const handleEdit = (product) => {
-    setEditingProductId(product.id);
+    setEditingProductId(product._id);
     setFormData({
-      id: product.id,
+      productId: product.productId,
       category: product.category,
       name: product.name,
+      description: product.description,
+      type: product.type,
       price: product.price,
       quantity: product.quantity,
-      productImage: product.productImage,
+      product_img: product.product_img,
+      productinfo: {
+        info1: product.productinfo.info1,
+        info2: product.productinfo.info2,
+      },
     });
   };
 
@@ -41,16 +59,14 @@ const Products = () => {
     }
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.id === id ? { ...product, ...formData } : product
+        product._id === id ? { ...product, ...formData } : product
       )
     );
     setEditingProductId(null);
   };
 
   const handleDelete = (id) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== id)
-    );
+    deleteProduct(id);
   };
 
   const handleChange = (e) => {
@@ -63,31 +79,53 @@ const Products = () => {
 
   const handleNewProductChange = (e) => {
     const { name, value } = e.target;
-    setNewProduct((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setNewProduct((prevData) => {
+      if (name === "info1" || name === "info2") {
+        return {
+          ...prevData,
+          productinfo: {
+            ...prevData.productinfo,
+            [name]: value,
+          },
+        };
+      } else {
+        return {
+          ...prevData,
+          [name]: value,
+        };
+      }
+    });
   };
 
   const handleAddProduct = () => {
-    if (
-      parseFloat(newProduct.price) < 0 ||
-      parseFloat(newProduct.quantity) < 0
-    ) {
-      alert("Price and Quantity must be at least 0.00");
-      return;
-    }
-    setProducts((prevProducts) => [
-      ...prevProducts,
-      { ...newProduct, id: prevProducts.length + 1 }, // Assign a new id
-    ]);
+    const productToAdd = {
+      ...newProduct,
+      productinfo: {
+        info1: newProduct.productinfo.info1,
+        info2: newProduct.productinfo.info2,
+      },
+    };
+    console.log("Adding Product:", productToAdd);
+    addProduct(productToAdd)
+      .then((response) => {
+        console.log("Product added successfully:", response);
+      })
+      .catch((error) => {
+        console.error("Error adding product:", error);
+      });
     setNewProduct({
-      id: "",
+      productId: "",
       category: "",
       name: "",
+      description: "",
+      type: "",
       price: "",
       quantity: "",
-      productImage: "",
+      product_img: "",
+      productinfo: {
+        info1: "",
+        info2: "",
+      },
     });
   };
 
@@ -99,8 +137,15 @@ const Products = () => {
           <thead>
             <tr className="bg-gray-800 text-white">
               <td className="text-white py-2 px-4 border-b">
-                {products.length + 1}
+                <input
+                  type="text"
+                  name="productId"
+                  value={newProduct.productId}
+                  onChange={handleNewProductChange}
+                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                />
               </td>
+              <td className="text-white py-2 px-4 border-b"></td>
               <td className="text-white py-2 px-4 border-b">
                 <input
                   type="text"
@@ -115,6 +160,24 @@ const Products = () => {
                   type="text"
                   name="name"
                   value={newProduct.name}
+                  onChange={handleNewProductChange}
+                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                />
+              </td>
+              <td className="text-white py-2 px-4 border-b">
+                <input
+                  type="text"
+                  name="description"
+                  value={newProduct.description}
+                  onChange={handleNewProductChange}
+                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                />
+              </td>
+              <td className="text-white py-2 px-4 border-b">
+                <input
+                  type="text"
+                  name="type"
+                  value={newProduct.type}
                   onChange={handleNewProductChange}
                   className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                 />
@@ -142,8 +205,26 @@ const Products = () => {
               <td className="text-white py-2 px-4 border-b">
                 <input
                   type="text"
-                  name="productImage"
-                  value={newProduct.productImage}
+                  name="product_img"
+                  value={newProduct.product_img}
+                  onChange={handleNewProductChange}
+                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                />
+              </td>
+              <td className="text-white py-2 px-4 border-b">
+                <input
+                  type="text"
+                  name="info1"
+                  value={newProduct.productinfo.info1}
+                  onChange={handleNewProductChange}
+                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                />
+              </td>
+              <td className="text-white py-2 px-4 border-b">
+                <input
+                  type="text"
+                  name="info2"
+                  value={newProduct.productinfo.info2}
                   onChange={handleNewProductChange}
                   className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                 />
@@ -159,6 +240,9 @@ const Products = () => {
             </tr>
             <tr>
               <th className="text-black py-2 px-4 border-b text-left w-1/12">
+                ProductId
+              </th>
+              <th className="text-black py-2 px-4 border-b text-left w-1/12">
                 ID
               </th>
               <th className="text-black py-2 px-4 border-b text-left w-2/12">
@@ -166,6 +250,12 @@ const Products = () => {
               </th>
               <th className="text-black py-2 px-4 border-b text-left w-2/12">
                 Name
+              </th>
+              <th className="text-black py-2 px-4 border-b text-left w-2/12">
+                Description
+              </th>
+              <th className="text-black py-2 px-4 border-b text-left w-2/12">
+                Type
               </th>
               <th className="text-black py-2 px-4 border-b text-left w-2/12">
                 Price
@@ -176,6 +266,12 @@ const Products = () => {
               <th className="text-black py-2 px-4 border-b text-left w-2/12">
                 Product Image
               </th>
+              <th className="text-black py-2 px-4 border-b text-left w-2/12">
+                Productinfo1
+              </th>
+              <th className="text-black py-2 px-4 border-b text-left w-2/12">
+                Productinfo2
+              </th>
               <th className="text-black py-2 px-4 border-b text-left w-1/12">
                 Actions
               </th>
@@ -183,10 +279,23 @@ const Products = () => {
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-                <td className="text-black py-2 px-4 border-b">{product.id}</td>
+              <tr key={product._id}>
                 <td className="text-black py-2 px-4 border-b">
-                  {editingProductId === product.id ? (
+                  {editingProductId === product._id ? (
+                    <input
+                      type="text"
+                      name="productId"
+                      value={formData.productId}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    product.productId
+                  )}
+                </td>
+                <td className="text-black py-2 px-4 border-b">{product._id}</td>
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
                     <input
                       type="text"
                       name="category"
@@ -199,7 +308,7 @@ const Products = () => {
                   )}
                 </td>
                 <td className="text-black py-2 px-4 border-b">
-                  {editingProductId === product.id ? (
+                  {editingProductId === product._id ? (
                     <input
                       type="text"
                       name="name"
@@ -212,7 +321,33 @@ const Products = () => {
                   )}
                 </td>
                 <td className="text-black py-2 px-4 border-b">
-                  {editingProductId === product.id ? (
+                  {editingProductId === product._id ? (
+                    <input
+                      type="text"
+                      name="description"
+                      value={formData.description}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    product.description
+                  )}
+                </td>
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
+                    <input
+                      type="text"
+                      name="type"
+                      value={formData.type}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    product.type
+                  )}
+                </td>
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
                     <input
                       type="number"
                       name="price"
@@ -226,7 +361,7 @@ const Products = () => {
                   )}
                 </td>
                 <td className="text-black py-2 px-4 border-b">
-                  {editingProductId === product.id ? (
+                  {editingProductId === product._id ? (
                     <input
                       type="number"
                       name="quantity"
@@ -239,18 +374,52 @@ const Products = () => {
                     product.quantity
                   )}
                 </td>
-                <td className="py-2 px-4 border-b">
-                  {editingProductId === product.id ? (
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
                     <input
                       type="text"
-                      name="productImage" // Set input name to productImage
-                      value={formData.productImage}
+                      name="product_img"
+                      value={formData.product_img}
                       onChange={handleChange}
                       className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                     />
                   ) : (
                     <img
-                      src={product.productImage}
+                      src={product.product_img}
+                      alt={product.name}
+                      className="w-20 h-20 object-cover"
+                    />
+                  )}
+                </td>
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
+                    <input
+                      type="text"
+                      name="productinfo1"
+                      value={formData.productinfo1}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    <img
+                      src={product.productinfo.info1}
+                      alt={product.name}
+                      className="w-20 h-20 object-cover"
+                    />
+                  )}
+                </td>
+                <td className="text-black py-2 px-4 border-b">
+                  {editingProductId === product._id ? (
+                    <input
+                      type="text"
+                      name="productinfo2"
+                      value={formData.productinfo2}
+                      onChange={handleChange}
+                      className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                    />
+                  ) : (
+                    <img
+                      src={product.productinfo.info2}
                       alt={product.name}
                       className="w-20 h-20 object-cover"
                     />
@@ -258,10 +427,10 @@ const Products = () => {
                 </td>
                 <td className="py-2 px-4 border-b">
                   <div className="flex space-x-2">
-                    {editingProductId === product.id ? (
+                    {editingProductId === product._id ? (
                       <button
                         className="bg-green-500 text-white px-2 py-1 rounded w-20"
-                        onClick={() => handleSave(product.id)}
+                        onClick={() => handleSave(product._id)}
                       >
                         Save
                       </button>
@@ -275,7 +444,7 @@ const Products = () => {
                     )}
                     <button
                       className="bg-red-500 text-white px-2 py-1 rounded w-20"
-                      onClick={() => handleDelete(product.id)}
+                      onClick={() => handleDelete(product._id)}
                     >
                       Delete
                     </button>

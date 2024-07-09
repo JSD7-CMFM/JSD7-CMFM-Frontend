@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useProduct from "../../../hooks/useProduct";
 
 const Products = () => {
-  const { products, addProduct, deleteProduct, editProduct } = useProduct();;
+  const { products, addProduct, deleteProduct, editProduct } = useProduct();
   const [editingProductId, setEditingProductId] = useState(null);
   const [formData, setFormData] = useState({
     productId: "",
@@ -173,6 +173,7 @@ const Products = () => {
               <td className="text-white py-2 px-4 border-b">
                 <input
                   type="number"
+                  min={1}
                   name="productId"
                   value={newProduct.productId}
                   onChange={handleNewProductChange}
@@ -212,8 +213,7 @@ const Products = () => {
                   name="type"
                   value={newProduct.type}
                   onChange={handleNewProductChange}
-                  className="w-20 border rounded px-2 py-1 text-white bg-gray-700"
-                  defaultValue={"Single"} 
+                  className="w-40 border rounded px-2 py-1 text-white bg-gray-700"
                 >
                   <option value="Box">Box</option>
                   <option value="Single">Single</option>

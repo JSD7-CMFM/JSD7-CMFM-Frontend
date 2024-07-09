@@ -4,41 +4,46 @@ import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
 
 const ProductDetails = ({ products }) => {
-  // const { id } = useParams();
-  // const [products, setProducts] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [quantity2, setQuantity2] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axiosInstance.get(`/products/${id}`);
-  //     console.log(response.data);
-  //     setProducts(response.data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching products:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
 
-  // useEffect(() => {
-  //   console.log("id from useParams:", id); // Check the id extracted from useParams
-  //   console.log("products:", products); // Check the products state
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!products) {
+      console.error('product is null');
+      return;
+    }
 
+    try {
+      // Create the new cart product object
+      const newCartProduct = {
+        product_id: products._id,
+        amount: quantity2,
+        name: products.name,
+        category: products.category,
+        description: products.description,
+        price: products.price,
+        product_img : products.product_img
+      };
 
-  //   if (id && products.length > 0) {
-  //     const product = products.find((product) => product._id === id); // Adjusted to direct comparison with id
-  //     console.log("selected product:", product); // Check the selected product found
-  //     setSelectedProduct(product);
-  //   }
-  // }, [id, products]);
+      const orderId = "668cf42249883037ca1c891a";
 
+      const response = await axiosInstance.patch(`/orders/${orderId}`, {
+      $push: { cart_products: newCartProduct }
+      });
 
-
+      console.log('Order updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating order:', error);
+      if (error.response) {
+        console.error('Server responded with:', error.response.data);
+      }
+    }
+  }
 
     const incrementQuantity2 = () => {
       setQuantity2((prevQuantity) => prevQuantity + 1);
@@ -92,7 +97,10 @@ const ProductDetails = ({ products }) => {
           <div className="font-bold text-m">Total: ฿{totalPrice2}</div>
         </div>
         <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-l md:py-2 md:px-2">
+          <form onSubmit={handleSubmit}>
             <button className="font-mono p-1">Add to cart</button>
+            <Link to="/cart"></Link>
+          </form>
           <h3 className="font-mono p-1">฿{combinedTotalPrice}</h3>
         </div>
       </div>

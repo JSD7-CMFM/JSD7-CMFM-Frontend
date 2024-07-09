@@ -8,11 +8,18 @@ const SignupForm = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [isFirstNameValid, setIsFirstNameValid] = useState(true);
   const [isLastNameValid, setIsLastNameValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [dataObject, setDataObject] = useState({});
+  const [isPasswordConfirmationValid, setIsPasswordConfirmationValid] =
+    useState(true);
+  const [isPasswordConfirmationTouched, setIsPasswordConfirmationTouched] =
+    useState(false);
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
   const navigate = useNavigate();
 
   const handleFirstNameChange = (event) => {
@@ -38,31 +45,46 @@ const SignupForm = () => {
     const value = event.target.value;
     setPassword(value);
     setIsPasswordValid(value.length > 8);
+    setIsPasswordConfirmationValid(value === passwordConfirmation);
   };
+
+  const handlePasswordConfirmationChange = (event) => {
+    const value = event.target.value;
+    setPasswordConfirmation(value);
+    setIsPasswordConfirmationTouched(true);
+    setIsPasswordConfirmationValid(value === password);
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    const value = event.target.value;
+    setPhoneNumber(value);
+    const phonePattern = /^[0-9]{10}$/;
+    setIsPhoneNumberValid(phonePattern.test(value));
+  };
+
   const handleSubmit = async () => {
-    // if (
-    //   isFirstNameValid &&
-    //   isLastNameValid &&
-    //   isEmailValid &&
-    //   isPasswordValid
-    // ) {
-    setDataObject({
-      firstName,
-      lastName,
-      email,
-      password,
-    });
-    // console.log(dataObject);
-    await usersAPI.Register(dataObject);
-    navigate("/");
-    // console.log(response.data);
-    // } else {
-    //   alert("Please fill out the form correctly");
-    // }
+    if (
+      isFirstNameValid &&
+      isLastNameValid &&
+      isEmailValid &&
+      isPasswordValid &&
+      isPasswordConfirmationValid &&
+      isPhoneNumberValid
+    ) {
+      const dataObject = {
+        firstName,
+        lastName,
+        email,
+        password,
+        phoneNumber,
+      };
+      const response = await usersAPI.Register(dataObject);
+      navigate("/");
+    }
   };
 
   return (
-    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center">
+    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center pt-[90px] h-screen">
       <h2 className="text-center text-4xl md:text-2xl">
         You're new around here
       </h2>
@@ -113,17 +135,56 @@ const SignupForm = () => {
           </h4>
         )}
         <input
-          type="password"
-          placeholder="Password*"
+          type="text"
+          placeholder="Phone number*"
           className={`mt-5 p-1 pl-4 rounded border ${
-            isPasswordValid ? "border-gray-300" : "border-red-500"
+            isPhoneNumberValid ? "border-gray-300" : "border-red-500"
           }`}
-          value={password}
-          onChange={handlePasswordChange}
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
         />
+        {!isPhoneNumberValid && (
+          <h4 className="text-red-500 text-[12px] text-center">
+            Please enter a valid phone number
+          </h4>
+        )}
+        <div className="relative mt-5">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password*"
+            className={`p-1 pl-4 rounded border w-full ${
+              isPasswordValid ? "border-gray-300" : "border-red-500"
+            }`}
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-2 text-gray-600"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
         {!isPasswordValid && (
           <h4 className="text-red-500 text-[12px] text-center">
             Password must be more than 8 characters
+          </h4>
+        )}
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="Confirm Password*"
+          className={`mt-5 p-1 pl-4 rounded border ${
+            isPasswordConfirmationTouched && !isPasswordConfirmationValid
+              ? "border-red-500"
+              : "border-gray-300"
+          }`}
+          value={passwordConfirmation}
+          onChange={handlePasswordConfirmationChange}
+        />
+        {isPasswordConfirmationTouched && !isPasswordConfirmationValid && (
+          <h4 className="text-red-500 text-[12px] text-center">
+            Passwords do not match
           </h4>
         )}
         <div className="mt-14 text-center">

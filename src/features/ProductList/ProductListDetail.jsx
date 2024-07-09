@@ -22,13 +22,12 @@ const ProductListDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosInstance.get("/products", {
+        const res = await axiosInstance.get("/products/search", {
           params: {
             ...filters,
           },
         });
         const { response, totalPage } = res.data;
-        console.log(response.data);
         setProducts(response);
         setPages(totalPage);
         setLoading(false);

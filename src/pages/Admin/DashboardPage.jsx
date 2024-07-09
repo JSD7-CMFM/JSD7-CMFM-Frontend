@@ -13,7 +13,7 @@ const DashboardPage = () => {
     <>
       <div className="min-h-screen flex bg-gray-100">
         <Sidebar setCurrentPage={setCurrentPage} />
-        <div className="flex-1 p-10">
+        <div className="bg-slate-100 flex-1 p-10">
           {currentPage === "dashboard" && <Dashboard />}
           {currentPage === "users" && <Users />}
           {currentPage === "products" && <Products />}

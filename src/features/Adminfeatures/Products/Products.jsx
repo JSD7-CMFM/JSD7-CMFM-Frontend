@@ -24,7 +24,7 @@ const Products = () => {
     category: "",
     name: "",
     description: "",
-    type: "",
+    type: "Box",
     price: "",
     quantity: "",
     product_img: "",
@@ -172,11 +172,12 @@ const Products = () => {
             <tr className="bg-gray-800 text-white">
               <td className="text-white py-2 px-4 border-b">
                 <input
-                  type="text"
+                  type="number"
+                  min={1}
                   name="productId"
                   value={newProduct.productId}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="max-w-20 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="text-white py-2 px-4 border-b"></td>
@@ -186,7 +187,7 @@ const Products = () => {
                   name="category"
                   value={newProduct.category}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="max-w-28 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="text-white py-2 px-4 border-b">
@@ -195,7 +196,7 @@ const Products = () => {
                   name="name"
                   value={newProduct.name}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="max-w-28 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="text-white py-2 px-4 border-b">
@@ -204,17 +205,19 @@ const Products = () => {
                   name="description"
                   value={newProduct.description}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="w-30 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="text-white py-2 px-4 border-b">
-                <input
-                  type="text"
+                <select
                   name="type"
                   value={newProduct.type}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
-                />
+                  className="w-40 border rounded px-2 py-1 text-white bg-gray-700"
+                >
+                  <option value="Box">Box</option>
+                  <option value="Single">Single</option>
+                </select>
               </td>
               <td className="text-white py-2 px-4 border-b">
                 <input
@@ -222,7 +225,7 @@ const Products = () => {
                   name="price"
                   value={newProduct.price}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="w-20 border rounded px-2 py-1 text-white bg-gray-700"
                   min="0"
                 />
               </td>
@@ -232,7 +235,7 @@ const Products = () => {
                   name="quantity"
                   value={newProduct.quantity}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="w-20 border rounded px-2 py-1 text-white bg-gray-700"
                   min="0"
                 />
               </td>
@@ -242,7 +245,7 @@ const Products = () => {
                   name="product_img"
                   value={newProduct.product_img}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="w-30 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="text-white py-2 px-4 border-b">
@@ -251,7 +254,7 @@ const Products = () => {
                   name="info1"
                   value={newProduct.productinfo.info1}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="w-30 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="text-white py-2 px-4 border-b">
@@ -260,7 +263,7 @@ const Products = () => {
                   name="info2"
                   value={newProduct.productinfo.info2}
                   onChange={handleNewProductChange}
-                  className="w-full border rounded px-2 py-1 text-white bg-gray-700"
+                  className="w-30 border rounded px-2 py-1 text-white bg-gray-700"
                 />
               </td>
               <td className="py-2 px-4 border-b">

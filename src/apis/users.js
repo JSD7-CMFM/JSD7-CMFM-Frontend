@@ -56,8 +56,14 @@ const getAllUsers = async () => await axiosInstance.get("/users");
 const deleteUser = async (id) => await axiosInstance.delete(`/users/${id}`);
 
 const banUser = async (id, currentStatus) => {
+  const config = {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  };
   const newStatus = currentStatus === "active" ? "banned" : "active";
-  return await axiosInstance.patch(`/users/${id}`, { status: newStatus });
+  // const response = await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
+  // const { message } = response.data
+  // console.log("response: ", message);
+  return await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
 };
 
 export default { Login, Register, getUser, getAllUsers, deleteUser, editUser, banUser };

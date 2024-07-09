@@ -50,6 +50,8 @@ const ProductListDetail = () => {
         <Box sx={{ width: "500px" }} margin={5}>
           <TextField
             fullWidth
+            sx={{ backgroundColor: "white", borderRadius: "5px" }}
+            color="primary"
             name="search"
             placeholder="search"
             onChange={(event) => {

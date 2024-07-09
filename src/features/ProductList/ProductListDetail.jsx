@@ -4,31 +4,46 @@ import { FaStar } from "react-icons/fa6";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs.js";
-
+import { Pagination, Box, TextField } from "@mui/material";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
 
 const ProductListDetail = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    search: "",
+    page: 1,
+    limit: 12,
+  });
+
+  const [pages, setPages] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/products');
-        setProducts(response.data);
+        const res = await axiosInstance.get("/products", {
+          params: {
+            ...filters,
+          },
+        });
+        const { response, totalPage } = res.data;
+        console.log(response.data);
+        setProducts(response);
+        setPages(totalPage);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures useEffect runs only on component mount
+  }, [filters.page, filters.search]); // Empty dependency array ensures useEffect runs only on component mount
 
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(products)
-
+  console.log(products);
 
   // const handleAddToCart = (index) => {
   //   const newQuantities = [...products];
@@ -38,7 +53,23 @@ const ProductListDetail = () => {
 
   return (
     <>
-      <div className="pt-[90px]"></div>
+      <div className="pt-[90px] flex justify-center">
+        <Box sx={{ width: "500px" }} margin={5}>
+          <TextField
+            fullWidth
+            name="search"
+            placeholder="search"
+            onChange={(event) => {
+              setTimeout(() => {
+                setFilters((prevFilter) => ({
+                  ...prevFilter,
+                  search: event.target.value,
+                }));
+              }, 1500);
+            }}
+          />
+        </Box>
+      </div>
       <div className="grid grid-cols-4 gap-4 p-4">
         {products.map((product, index) => (
           <div
@@ -67,7 +98,8 @@ const ProductListDetail = () => {
                 <FaStar style={{ color: "#74C0FC" }} />
                 <span className="text-xs ml-1">(99)</span>
               </div>
-              <Link to = {`/productinfo/${product._id}`}
+              <Link
+                to={`/productinfo/${product._id}`}
                 className="bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600"
               >
                 More Detail
@@ -75,6 +107,19 @@ const ProductListDetail = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center m-3">
+        <Pagination
+          count={pages}
+          page={filters?.page}
+          onChange={(e, value) => {
+            setFilters((prevfilter) => ({
+              ...prevfilter,
+              page: value,
+            }));
+          }}
+          size="large"
+        />
       </div>
     </>
   );

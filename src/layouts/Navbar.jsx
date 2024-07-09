@@ -14,10 +14,6 @@ const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const onLogout = () => {
-    removeToken.clear();
-    navigate("/login");
-  };
 
   const handleSearch = () => {
     if (searchQuery) {
@@ -66,21 +62,19 @@ const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {isToken && (
-            <>
-              <SearchBar
-                value={searchQuery}
-                onChange={({ target }) => {
-                  setSearchQuery(target.value);
-                }}
-                handleSearch={handleSearch}
-                onClearSearch={onClearSearch}
-              />
-              <Cart />
-              <Wishlist />
-              <User userInfo />
-            </>
-          )}
+          <>
+            <SearchBar
+              value={searchQuery}
+              onChange={({ target }) => {
+                setSearchQuery(target.value);
+              }}
+              handleSearch={handleSearch}
+              onClearSearch={onClearSearch}
+            />
+            <Cart />
+            <Wishlist />
+            <User />
+          </>
         </div>
       </nav>
     </header>

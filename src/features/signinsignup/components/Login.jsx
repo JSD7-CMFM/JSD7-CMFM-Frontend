@@ -28,15 +28,13 @@ function LoginForm() {
     const response = await usersAPI.Login(user);
     if (response && email === response.data.email) {
       navigate("/");
-      localStorage.setItem("firstName", response.data.firstName);
-      localStorage.setItem("id", response.data.id);
     } else {
       alert("Please enter a valid email address or password");
     }
   };
 
   return (
-    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center">
+    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center h-screen">
       <h2 className="text-center text-4xl md:text-2xl">Welcome Back</h2>
       <form
         className="pt-12 flex flex-col md:w-[473px]"

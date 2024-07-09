@@ -4,6 +4,7 @@ import { setToken, setInfo, getToken } from "../utils/localStorage.js";
 const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
+
     const { token, id, firstName, email } = response.data;
     if (response.data && token) {
       setToken(token);

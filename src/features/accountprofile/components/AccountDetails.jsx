@@ -38,6 +38,7 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
             {user.data.firstName} {user.data.lastName}
           </p>
         </div>
+
       </div>
       <div className="flex">
         <div className="flex w-full">
@@ -46,6 +47,7 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
             {user.data.email}
           </p>
         </div>
+
       </div>
       <div className="flex">
         <div className="flex w-full">
@@ -54,6 +56,7 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
             {user.data.phoneNumber}
           </p>
         </div>
+
       </div>
       <div className="flex justify-end">
         <button
@@ -62,6 +65,7 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
         >
           Edit Information
         </button>
+
       </div>
       <div>
         <p>Want to update your password?</p>

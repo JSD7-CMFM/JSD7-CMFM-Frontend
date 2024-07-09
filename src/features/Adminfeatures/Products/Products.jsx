@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useProduct from "../../../hooks/useProduct";
 
 const Products = () => {
-  const { products, addProduct, deleteProduct } = useProduct();
+  const { products, addProduct, deleteProduct, editProduct } = useProduct();
   const [editingProductId, setEditingProductId] = useState(null);
   const [formData, setFormData] = useState({
     productId: "",
@@ -52,17 +52,40 @@ const Products = () => {
     });
   };
 
-  const handleSave = (id) => {
-    if (parseFloat(formData.price) < 0 || parseFloat(formData.quantity) < 0) {
-      alert("Price and Quantity must be at least 0.00");
-      return;
-    }
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product._id === id ? { ...product, ...formData } : product
-      )
-    );
+  const handleSave = (editingProductId) => {
+    const productToSave = {
+      ...formData,
+      "productinfo.info1": formData.productinfo.info1,
+      "productinfo.info2": formData.productinfo.info2,
+    };
+
+    // Remove the nested productinfo object to avoid conflicts
+    delete productToSave.productinfo;
+
+    editProduct(editingProductId, productToSave)
+      .then((response) => {
+        console.log("Product saved successfully:", response);
+      })
+      .catch((error) => {
+        console.error("Error saving product:", error);
+      });
+
     setEditingProductId(null);
+    setFormData({
+      productId: "",
+      id: "",
+      category: "",
+      name: "",
+      description: "",
+      type: "",
+      price: "",
+      quantity: "",
+      product_img: "",
+      productinfo: {
+        info1: "",
+        info2: "",
+      },
+    });
   };
 
   const handleDelete = (id) => {
@@ -71,10 +94,21 @@ const Products = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name === "info1" || name === "info2") {
+      setFormData((prevData) => ({
+        ...prevData,
+        productinfo: {
+          ...prevData.productinfo,
+          [name]: value,
+        },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleNewProductChange = (e) => {
@@ -395,8 +429,8 @@ const Products = () => {
                   {editingProductId === product._id ? (
                     <input
                       type="text"
-                      name="productinfo1"
-                      value={formData.productinfo1}
+                      name="info1"
+                      value={formData.productinfo.info1}
                       onChange={handleChange}
                       className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                     />
@@ -412,8 +446,8 @@ const Products = () => {
                   {editingProductId === product._id ? (
                     <input
                       type="text"
-                      name="productinfo2"
-                      value={formData.productinfo2}
+                      name="info2"
+                      value={formData.productinfo.info2}
                       onChange={handleChange}
                       className="w-full border rounded px-2 py-1 text-white bg-gray-700"
                     />

@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getInitials } from "../../../utils/helper.js";
+import {
+  getFirstName,
+  getToken,
+  removeToken,
+} from "../../../utils/localStorage.js";
 
 const User = () => {
+  useEffect(() => {}, []);
+  const firstName = getFirstName();
+  const onLogout = () => {
+    removeToken();
+    window.location.reload();
+    useNavigate("/");
+  };
+
   return (
     <div className="dropdown dropdown-end">
       <div
         tabIndex="0"
         role="button"
-        className="btn btn-ghost avatar btn-circle"
+        className="btn btn-ghost avatar btn-circle border border-gray-800 bg-[#fffb7f]"
       >
         <div className="indicator">
-          <FaUser className="text-xl" />
+          {getToken() ? getInitials(firstName) : <FaUser className="text-xl" />}
         </div>
       </div>
       <ul
@@ -21,8 +34,11 @@ const User = () => {
       >
         <li>
           <Link to="/login" className="justify-center">
-            Sign in/Sign out
+            Sign in
           </Link>
+          <button className="justify-center" onClick={onLogout}>
+            Sign out
+          </button>
         </li>
       </ul>
     </div>

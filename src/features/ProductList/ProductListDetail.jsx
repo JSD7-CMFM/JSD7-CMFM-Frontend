@@ -30,12 +30,6 @@ const ProductListDetail = () => {
   console.log(products)
 
 
-  // const handleAddToCart = (index) => {
-  //   const newQuantities = [...products];
-  //   newQuantities[index]++;
-  //   setProducts(newQuantities);
-  // };
-
   return (
     <>
       <div className="pt-[90px]"></div>

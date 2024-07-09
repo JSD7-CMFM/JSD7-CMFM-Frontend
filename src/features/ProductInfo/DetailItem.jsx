@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Assuming you are using React Router for routing
-import axiosInstance from "../../config/myAPIs.js"; // Import your axios instance
+import { useParams } from 'react-router-dom';
+import axiosInstance from "../../config/myAPIs.js";
 
 const DetailItem = () => {
-  const { id } = useParams(); // Get the id from URL params
+  const { id } = useParams();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState(null); // State to hold the selected product
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,20 +17,21 @@ const DetailItem = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
-        // Handle error state here (e.g., set loading to false, show error message)
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures useEffect runs only on component mount
+  }, []);
 
   useEffect(() => {
-    // Find the product by id once products are fetched
     if (products.length > 0) {
       const selectedProduct = products.find((prod) => prod._id === id);
-      setProduct(selectedProduct); // Set the product state
+      setProduct(selectedProduct);
     }
-  }, [products, id]); // Update whenever products or id changes
+  }, [products, id]);
+
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -40,22 +41,18 @@ const DetailItem = () => {
     return <div>Product not found</div>;
   }
 
-  // Assuming product structure contains imgSrc, description, size, and category
-  const { imgSrc, description, type, category } = product;
-
   return (
     <div className="flex pb-4 md:text-xl">
       <div className="w-24 border-black border md:w-32 rounded-2xl">
         <img className="w-full h-full object-cover rounded-2xl" src={product.product_img} alt="Detail" />
       </div>
       <div className="ml-4 mt-2">
-        <h3>{description}</h3>
+        <h3>{product.description}</h3>
         <div className="text-xs text-black md:text-[16px] badge mt-2 md:p-3 bg-pink-300">{product.type} Type</div>
-        <div className="badge mt-2 ml-2 md:p-3 text-[16px]  bg-green-300">{category}</div>
+        <div className="badge mt-2 ml-2 md:p-3 text-[16px]  bg-green-300">{product.category}</div>
       </div>
     </div>
   );
 };
 
 export default DetailItem;
-

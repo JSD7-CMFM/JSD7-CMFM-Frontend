@@ -3,7 +3,7 @@ import DetailItem from "./DetailItem";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
 
-const ProductDetails = () => {
+const ProductDetails1 = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -149,4 +149,4 @@ const handleSubmit = async (event) => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetails1;

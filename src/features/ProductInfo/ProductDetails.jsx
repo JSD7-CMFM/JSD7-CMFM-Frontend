@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import DetailItem from "./DetailItem";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
@@ -24,9 +24,11 @@ const ProductDetails = ({ products }) => {
   //   fetchData();
   // }, []);
 
+
   // useEffect(() => {
   //   console.log("id from useParams:", id); // Check the id extracted from useParams
   //   console.log("products:", products); // Check the products state
+
 
   //   if (id && products.length > 0) {
   //     const product = products.find((product) => product._id === id); // Adjusted to direct comparison with id
@@ -35,19 +37,24 @@ const ProductDetails = ({ products }) => {
   //   }
   // }, [id, products]);
 
-  const incrementQuantity2 = () => {
-    setQuantity2((prevQuantity) => prevQuantity + 1);
-  };
 
-  const decrementQuantity2 = () => {
-    setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-  };
-  if (!products) {
+
+
+    const incrementQuantity2 = () => {
+      setQuantity2((prevQuantity) => prevQuantity + 1);
+    };
+
+
+    const decrementQuantity2 = () => {
+      setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    };
+    if (!products) {
     return <div>Loading...</div>;
   }
 
   const totalPrice2 = (quantity2 * products.price).toFixed(2);
   const combinedTotalPrice = parseFloat(totalPrice2).toFixed(2);
+
 
   return (
     <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">
@@ -84,12 +91,10 @@ const ProductDetails = ({ products }) => {
           </div>
           <div className="font-bold text-m">Total: ฿{totalPrice2}</div>
         </div>
-        <Link to="/cart">
-          <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-l md:py-2 md:px-2">
-            <h3 className="font-mono p-1">Add to cart</h3>
-            <h3 className="font-mono p-1">฿{combinedTotalPrice}</h3>
-          </div>
-        </Link>
+        <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-l md:py-2 md:px-2">
+            <button className="font-mono p-1">Add to cart</button>
+          <h3 className="font-mono p-1">฿{combinedTotalPrice}</h3>
+        </div>
       </div>
     </div>
   );

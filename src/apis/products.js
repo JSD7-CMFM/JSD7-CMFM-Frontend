@@ -6,7 +6,7 @@
 // export default allProducts
 
 // fetchProducts.js
-
+import { getToken } from "../utils/localStorage.js";
 import axiosInstance from "../config/myAPIs.js";
 import axios from "axios";
 
@@ -30,12 +30,31 @@ const fetchProducts = async () => {
   }
 };
 
-const getAllProducts = async () => await axiosInstance.get("/products");
+const getAllProducts = async () => await axiosInstance.get("/products", {
+  params: {
+    search: "",
+    page: 1,
+    limit: 36,
+  }
+});
 
-const addProduct = async (data) => await axiosInstance.post("/products", data);
+const addProduct = async (data) => {
+  const config = {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  };
+  return await axiosInstance.post("/products", data, config);
+};
 
-const deleteProduct = async (id) => await axiosInstance.delete(`/products/${id}`);
+const deleteProduct = async (id) =>
+  await axiosInstance.delete(`/products/${id}`);
 
-const editProduct = async (id, data) => await axiosInstance.patch(`/products/${id}`, data);
+const editProduct = async (id, data) =>
+  await axiosInstance.patch(`/products/${id}`, data);
 
-export default { fetchProducts, getAllProducts, addProduct, deleteProduct, editProduct };
+export default {
+  fetchProducts,
+  getAllProducts,
+  addProduct,
+  deleteProduct,
+  editProduct,
+};

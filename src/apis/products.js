@@ -36,4 +36,6 @@ const addProduct = async (data) => await axiosInstance.post("/products", data);
 
 const deleteProduct = async (id) => await axiosInstance.delete(`/products/${id}`);
 
-export default { fetchProducts, getAllProducts, addProduct, deleteProduct };
+const editProduct = async (id, data) => await axiosInstance.patch(`/products/${id}`, data);
+
+export default { fetchProducts, getAllProducts, addProduct, deleteProduct, editProduct };

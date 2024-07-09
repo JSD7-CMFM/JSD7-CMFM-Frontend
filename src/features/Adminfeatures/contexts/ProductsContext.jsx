@@ -33,8 +33,17 @@ export default function ProductContextProvider({ children }) {
     }
   };
 
+  const editProduct = async (id, data) => {
+    try {
+      await productsAPI.editProduct(id, data);
+      handleLoading();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ products, addProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products, addProduct, deleteProduct, editProduct }}>
       {children}
     </ProductContext.Provider>
   );

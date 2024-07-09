@@ -3,10 +3,18 @@ import AccountDetails from "../features/accountprofile/components/AccountDetails
 import OrderHistory from "../features/accountprofile/components/OrderHistory";
 import Addresses from "../features/accountprofile/components/Addresses";
 import Editdata from "../features/accountprofile/components/EditData.jsx";
+import { useNavigate } from "react-router-dom";
 
 const AccountPageContainer = () => {
   const [activeSection, setActiveSection] = useState("acc-info");
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSignout = () => {
+    localStorage.clear();
+    navigate("/");
+    window.location.reload();
+  };
 
   const showSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -45,7 +53,10 @@ const AccountPageContainer = () => {
               >
                 ADDRESSES
               </p>
-              <p className="mb-2 hover:underline hover:text-red-500 cursor-pointer md:mt-11">
+              <p
+                onClick={handleSignout}
+                className="mb-2 hover:underline hover:text-red-500 cursor-pointer md:mt-11"
+              >
                 LOGOUT
               </p>
             </div>

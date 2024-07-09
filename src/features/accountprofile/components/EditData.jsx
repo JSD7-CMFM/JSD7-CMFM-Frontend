@@ -52,7 +52,8 @@ const Editdata = ({ setActiveSection, user }) => {
       };
 
       await users.editUser(user.data._id, dataObject);
-      navigate("/");
+      navigate("/Account");
+      window.location.reload();
     }
   };
 

@@ -7,8 +7,9 @@ export default function ProductContextProvider({ children }) {
   const [products, setProducts] = useState([]);
 
   const handleLoading = async () => {
-    const response = await productsAPI.getAllProducts();
-    setProducts(response.data);
+    const res = await productsAPI.getAllProducts();
+    const { response } = res.data;
+    setProducts(response);
   };
 
   useEffect(() => {

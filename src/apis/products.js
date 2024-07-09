@@ -30,7 +30,13 @@ const fetchProducts = async () => {
   }
 };
 
-const getAllProducts = async () => await axiosInstance.get("/products");
+const getAllProducts = async () => await axiosInstance.get("/products", {
+  params: {
+    search: "",
+    page: 1,
+    limit: 36,
+  }
+});
 
 const addProduct = async (data) => {
   const config = {

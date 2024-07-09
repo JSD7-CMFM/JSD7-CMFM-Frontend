@@ -22,7 +22,7 @@ const ProductListDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosInstance.get("/products/search", {
+        const res = await axiosInstance.get("/products", {
           params: {
             ...filters,
           },

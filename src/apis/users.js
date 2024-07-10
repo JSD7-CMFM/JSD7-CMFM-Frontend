@@ -5,11 +5,11 @@ const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
 
-    const { token, id, firstName, email, cart } = response.data;
+    const { token, id, firstName, email, cart, isAdmin } = response.data;
     console.log("response: ", response.data);
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email, cart);
+      setInfo(id, firstName, email, cart, isAdmin);
     }
     return response;
   } catch (error) {

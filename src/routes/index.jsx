@@ -13,6 +13,7 @@ import ProductListPage from "../pages/ProductListPage";
 import Container from "../layouts/Container";
 import UsersContextProvider from "../features/Adminfeatures/contexts/UsersContext";
 import ProductContextProvider from "../features/Adminfeatures/contexts/ProductsContext";
+import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
 
 const router = createBrowserRouter([
   {
@@ -63,7 +64,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <DashboardPage />,
+    element: (
+      <AuthenticateAdmin>
+        <DashboardPage />
+      </AuthenticateAdmin>
+    ),
   },
 ]);
 

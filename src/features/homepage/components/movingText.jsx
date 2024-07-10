@@ -5,16 +5,16 @@ const MovingSection = () => {
     return (
       <div className="flex">
         <p className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px]">
-          Something moving
+          PONY MART
         </p>
         <p className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px]">
-          Something moving
+          PONY MART
         </p>
         <p className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px]">
-          Something moving
+          PONY MART
         </p>
         <p className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px]">
-          Something moving
+          PONY MART
         </p>
       </div>
     );

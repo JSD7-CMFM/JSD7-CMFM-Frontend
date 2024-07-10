@@ -28,7 +28,7 @@ const ProductListDetail = () => {
           },
         });
         const { response, totalPage } = res.data;
-        console.log(response.data);
+        console.log(res.data);
         setProducts(response);
         setPages(totalPage);
         setLoading(false);
@@ -43,7 +43,7 @@ const ProductListDetail = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(products);
+  // console.log(products);
 
   // const handleAddToCart = (index) => {
   //   const newQuantities = [...products];

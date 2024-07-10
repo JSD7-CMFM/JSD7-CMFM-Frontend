@@ -19,16 +19,6 @@ const NavLinks = () => {
           REGISTER
         </Link>
       </li>
-      <li>
-        <Link to="Account" className="btn btn-ghost text-xl">
-          ACCOUNT
-        </Link>
-      </li>
-      <li>
-        <Link to="checkout" className="btn btn-ghost text-xl">
-          CHECKOUT
-        </Link>
-      </li>
     </ul>
   );
 };

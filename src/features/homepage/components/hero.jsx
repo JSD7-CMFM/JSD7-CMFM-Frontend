@@ -1,5 +1,6 @@
 import React from "react";
 import MovingSection from "./movingText";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -19,18 +20,22 @@ const TextSection = () => {
       id="text-section"
       className="px-4 py-12 flex flex-col items-center justify-center md:w-1/2 md:px-[98px] md:py-[120px] md:items-start bg-[#b5e3d8] text-[#252222]"
     >
-      <h2 className="text-[36px]">Header</h2>
+      <h2 className="text-[36px]">PONY MART</h2>
       <p className="text-center mt-4 md:text-left">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam esse
-        labore
+        At Pony Mart, you'll find carefully curated collections featuring
+        products from leading brands and independent artists, including special
+        and limited edition collectibles. We stand out for our wide variety of
+        styles and price ranges, guaranteed authenticity and quality,
+        user-friendly shopping experience, and efficient nationwide shipping.
       </p>
-      <p className="text-center md:text-left">Lorem ipsum dolor sit amet</p>
-      <a
+      {/* <p className="text-center md:text-left">Lorem ipsum dolor sit amet</p> */}
+      <Link
+        to="productList"
         href="#"
         className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border border-black"
       >
-        Button
-      </a>
+        Pony Mart
+      </Link>
     </div>
   );
 };
@@ -43,12 +48,12 @@ const PictureSection = () => {
     >
       <picture>
         <img
-          src="https://thehoneypot.co/cdn/shop/files/828Dmobile.png"
+          src="https://prod-eurasian-res.popmart.com/default/20240620_111032_499440_____02_____1200x648.jpg?x-oss-process=image/format,webp"
           className="block md:hidden object-cover object-top h-full w-full overflow-hidden"
           alt="Hero"
         />
         <img
-          src="https://thehoneypot.co/cdn/shop/files/3A0C9E9A-C507-48CD-83D1-5F1582339396.png"
+          src="https://prod-eurasian-res.popmart.com/default/20240620_111032_499440_____02_____1200x648.jpg?x-oss-process=image/format,webp"
           className="hidden md:block object-cover object-top h-full w-full overflow-hidden"
           alt="Hero"
         />

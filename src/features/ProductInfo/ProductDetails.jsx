@@ -113,7 +113,7 @@ const ProductDetails = ({ products }) => {
         <div>
           <form onSubmit={handleSubmit}>
             <button
-              className="btn btn-l rounded-xl btn-outline bg-yellow-500 hover:bg-red-500 text-[18px] space-y-2 text-black p-3 space-x-20"
+              className="btn btn-l rounded-xl btn-outline bg-blue-300 hover:bg-blue-200 text-[18px] space-y-2 text-black p-3 space-x-20"
               onClick={handleOpen} // Open modal on button click
             >
               Add to cart

@@ -1,11 +1,11 @@
 import React, { useState }  from "react";
 import CartCard from "./CartCard";
-import CartList from "./TestCart";
+import CartList from "./CartList.jsx";
 
 
 
 
-const SelectCart = ({setTotalPrice}) => {
+const SelectCart = ({cart, UpdateAmount, handleDelete, loading}) => {
   const [isChecked, setIsChecked] = useState(true);
     const handleSelectAllChange = () => {
     setIsChecked(!isChecked); // Toggle isChecked state
@@ -22,19 +22,8 @@ const SelectCart = ({setTotalPrice}) => {
         <div className="bg-white flex">
           <div className="form-control">
             <div className="flex-col">
-              <div className="flex">
-                <label className="label cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isChecked}
-                    onChange={handleSelectAllChange}
-                    className="checkbox checkbox-lg"
-                  />
-                </label>
-                <h1 className="text-black p-4 text-[18px]">Select All</h1>
-              </div>
               <div>
-                <CartList setTotalPrice={setTotalPrice} />
+                <CartList cart={cart} UpdateAmount={UpdateAmount} handleDelete={handleDelete} loading={loading} />
               </div>
             </div>
           </div>

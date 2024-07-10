@@ -2,59 +2,72 @@ import { useState, useEffect } from "react";
 import DetailItem from "./DetailItem";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
+import { getCartState, getId } from "../../utils/localStorage.js";
+import { createOrder, updateOrder } from "../../apis/orders.js";
 
 const ProductDetails = ({ products }) => {
-  // const { id } = useParams();
-  // const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity2, setQuantity2] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axiosInstance.get(`/products/${id}`);
-  //     console.log(response.data);
-  //     setProducts(response.data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching products:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-
-  // useEffect(() => {
-  //   console.log("id from useParams:", id); // Check the id extracted from useParams
-  //   console.log("products:", products); // Check the products state
-
-
-  //   if (id && products.length > 0) {
-  //     const product = products.find((product) => product._id === id); // Adjusted to direct comparison with id
-  //     console.log("selected product:", product); // Check the selected product found
-  //     setSelectedProduct(product);
-  //   }
-  // }, [id, products]);
-
-
-
-
-    const incrementQuantity2 = () => {
-      setQuantity2((prevQuantity) => prevQuantity + 1);
-    };
-
-
-    const decrementQuantity2 = () => {
-      setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-    };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!products) {
+      console.error("product is null");
+      return;
+    }
+
+    try {
+      const userId = getId();
+      // Create the new cart product object
+      const newCartProduct = {
+        product_id: products._id,
+        amount: quantity2,
+        name: products.name,
+        // category: products.category,
+        // description: products.description,
+        // price: products.price,
+        // product_img: products.product_img,
+      };
+
+      const orderId = getCartState();
+      console.log("orderId:", orderId);
+      if (orderId === "No_cart") {
+        const response = await createOrder({
+          user_id: userId,
+          cart_products: [newCartProduct],
+        });
+        console.log("Order created successfully:", response.data);
+      } else {
+        const response = await updateOrder(orderId, newCartProduct);
+        console.log("Order update successfully:", response.data);
+      }
+    } catch (error) {
+      console.error("Error updating order:", error);
+      if (error.response) {
+        console.error("Server responded with:", error.response.data);
+      }
+    }
+  };
+  // const response = await axiosInstance.patch(`/orders/${orderId}`, {
+  //   $push: { cart_products: newCartProduct },
+  // });
+
+  // console.log("Order updated successfully:", response.data);
+
+  const incrementQuantity2 = () => {
+    setQuantity2((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decrementQuantity2 = () => {
+    setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+  if (!products) {
     return <div>Loading...</div>;
   }
 
   const totalPrice2 = (quantity2 * products.price).toFixed(2);
   const combinedTotalPrice = parseFloat(totalPrice2).toFixed(2);
-
 
   return (
     <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">
@@ -92,7 +105,10 @@ const ProductDetails = ({ products }) => {
           <div className="font-bold text-m">Total: ฿{totalPrice2}</div>
         </div>
         <div className="border-black border rounded-xl p-1 flex justify-between w-full bg-[#4BA6DE] text-white text-[12px] font-bold tracking-widest md:text-l md:py-2 md:px-2">
+          <form onSubmit={handleSubmit}>
             <button className="font-mono p-1">Add to cart</button>
+            <Link to="/cart"></Link>
+          </form>
           <h3 className="font-mono p-1">฿{combinedTotalPrice}</h3>
         </div>
       </div>

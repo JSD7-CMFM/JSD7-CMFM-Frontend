@@ -5,10 +5,11 @@ const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
 
-    const { token, id, firstName, email } = response.data;
+    const { token, id, firstName, email, cart } = response.data;
+    console.log("response: ", response.data);
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email);
+      setInfo(id, firstName, email, cart);
     }
     return response;
   } catch (error) {
@@ -66,4 +67,12 @@ const banUser = async (id, currentStatus) => {
   return await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
 };
 
-export default { Login, Register, getUser, getAllUsers, deleteUser, editUser, banUser };
+export default {
+  Login,
+  Register,
+  getUser,
+  getAllUsers,
+  deleteUser,
+  editUser,
+  banUser,
+};

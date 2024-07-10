@@ -11,11 +11,13 @@ const Editdata = ({ setActiveSection, user }) => {
   const [isLastNameValid, setIsLastNameValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
+
   const handleFirstNameChange = (event) => {
     const value = event.target.value;
     setFirstName(value);
     setIsFirstNameValid(/^[A-Za-z]*$/.test(value));
   };
+
   const navigate = useNavigate();
 
   const handleLastNameChange = (event) => {
@@ -34,7 +36,7 @@ const Editdata = ({ setActiveSection, user }) => {
   const handlePasswordChange = (event) => {
     const value = event.target.value;
     setPassword(value);
-    setIsPasswordValid(value.length > 8);
+    setIsPasswordValid(value.length > 0 && value !== "");
   };
 
   const handleSubmit = async () => {
@@ -51,9 +53,16 @@ const Editdata = ({ setActiveSection, user }) => {
         password,
       };
 
-      await users.editUser(user.data._id, dataObject);
-      navigate("/Account");
-      window.location.reload();
+      try {
+        const response = await users.editUser(user.data._id, dataObject);
+        console.log(response);
+        if ((response.data.message = "Update successfully")) {
+          navigate("/Account");
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error updating user:", error.response.data.message);
+      }
     }
   };
 
@@ -66,7 +75,7 @@ const Editdata = ({ setActiveSection, user }) => {
         <h1 className="text-xl">Edit Your Info</h1>
       </div>
       <form
-        className=" flex flex-col w-full md:pt-6"
+        className="flex flex-col w-full md:pt-6"
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex">
@@ -76,7 +85,7 @@ const Editdata = ({ setActiveSection, user }) => {
           <input
             type="text"
             placeholder="First name*"
-            className={` p-1 pl-4 rounded border w-full ${
+            className={`p-1 pl-4 rounded border w-full ${
               isFirstNameValid ? "border-gray-300" : "border-red-500"
             }`}
             value={firstName}
@@ -138,10 +147,16 @@ const Editdata = ({ setActiveSection, user }) => {
           value={password}
           onChange={handlePasswordChange}
         />
+        {!isPasswordValid && (
+          <h4 className="text-red-500 text-[12px] text-center">
+            Password cannot be empty
+          </h4>
+        )}
         <button
           type="submit"
           onClick={handleSubmit}
           className="w-full mt-5 py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
+          disabled={!isPasswordValid}
         >
           Make Change
         </button>

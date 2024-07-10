@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import appAPI from "../../../apis/users.js";
-import { getToken } from "../../../utils/localStorage.js";
+import { getId, getToken } from "../../../utils/localStorage.js";
 
-const AccountDetails = () => {
+const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = getToken();
-        const getId = localStorage.getItem("id");
-        console.log("Get id:", getId);
-        const response = await appAPI.getUser(getId);
+        const userId = getId();
+        const response = await appAPI.getUser(userId);
         console.log("Response data:", response);
         setUser(response.data);
       } catch (error) {
@@ -21,6 +18,12 @@ const AccountDetails = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setUserGlobal(user);
+    }
+  }, [user, setUserGlobal]);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -35,11 +38,7 @@ const AccountDetails = () => {
             {user.data.firstName} {user.data.lastName}
           </p>
         </div>
-        <div>
-          <button className="border-b-2 rounded-sm bg-slate-400 px-4 ml-10">
-            Edit
-          </button>
-        </div>
+
       </div>
       <div className="flex">
         <div className="flex w-full">
@@ -48,11 +47,7 @@ const AccountDetails = () => {
             {user.data.email}
           </p>
         </div>
-        <div>
-          <button className="border-b-2 rounded-sm bg-slate-400 px-4 ml-10 invisible">
-            Edit
-          </button>
-        </div>
+
       </div>
       <div className="flex">
         <div className="flex w-full">
@@ -61,11 +56,16 @@ const AccountDetails = () => {
             {user.data.phoneNumber}
           </p>
         </div>
-        <div>
-          <button className="border-b-2 rounded-sm bg-slate-400 px-4 ml-10">
-            Edit
-          </button>
-        </div>
+
+      </div>
+      <div className="flex justify-end">
+        <button
+          className="border-b-2 rounded-sm bg-[#AAD8EE] px-4 ml-10"
+          onClick={() => setActiveSection("acc-edit")}
+        >
+          Edit Information
+        </button>
+
       </div>
       <div>
         <p>Want to update your password?</p>

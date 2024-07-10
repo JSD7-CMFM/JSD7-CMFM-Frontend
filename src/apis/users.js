@@ -4,11 +4,12 @@ import { setToken, setInfo, getToken } from "../utils/localStorage.js";
 const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
-    console.log("Login response:", response.data);
-    const { token, id, firstName, email } = response.data;
+
+    const { token, id, firstName, email, cart } = response.data;
+    console.log("response: ", response.data);
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email);
+      setInfo(id, firstName, email, cart);
     }
     return response;
   } catch (error) {
@@ -44,15 +45,34 @@ const getUser = async (id) => {
   return await axiosInstance.get(`/users/${id}`, config);
 };
 
-const editUser = async (id) => {
+const editUser = async (id, data) => {
   const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
   };
-  return await axiosInstance.patch(`/users/${id}`, config);
+  return await axiosInstance.patch(`/users/${id}`, data, config);
 };
 
-const getAllusers = async () => await axiosInstance.get("/users");
+const getAllUsers = async () => await axiosInstance.get("/users");
 
-const deleteUser = async () => await axiosInstance.delete("/users");
+const deleteUser = async (id) => await axiosInstance.delete(`/users/${id}`);
 
-export default { Login, Register, getUser, getAllusers, deleteUser, editUser };
+const banUser = async (id, currentStatus) => {
+  const config = {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  };
+  const newStatus = currentStatus === "active" ? "banned" : "active";
+  // const response = await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
+  // const { message } = response.data
+  // console.log("response: ", message);
+  return await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
+};
+
+export default {
+  Login,
+  Register,
+  getUser,
+  getAllUsers,
+  deleteUser,
+  editUser,
+  banUser,
+};

@@ -28,7 +28,6 @@ const ProductListDetail = () => {
           },
         });
         const { response, totalPage } = res.data;
-        console.log(res.data);
         setProducts(response);
         setPages(totalPage);
         setLoading(false);
@@ -43,13 +42,7 @@ const ProductListDetail = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  // console.log(products);
-
-  // const handleAddToCart = (index) => {
-  //   const newQuantities = [...products];
-  //   newQuantities[index]++;
-  //   setProducts(newQuantities);
-  // };
+  console.log(products);
 
   return (
     <>
@@ -57,6 +50,8 @@ const ProductListDetail = () => {
         <Box sx={{ width: "500px" }} margin={5}>
           <TextField
             fullWidth
+            sx={{ backgroundColor: "white", borderRadius: "5px" }}
+            color="primary"
             name="search"
             placeholder="search"
             onChange={(event) => {

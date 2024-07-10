@@ -26,6 +26,7 @@ function LoginForm() {
     e.preventDefault();
     const user = { email, password };
     const response = await usersAPI.Login(user);
+    console.log("response login: ", response);
     if (response && email === response.data.email) {
       navigate("/");
     } else {

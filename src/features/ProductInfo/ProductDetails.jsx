@@ -2,64 +2,72 @@ import { useState, useEffect } from "react";
 import DetailItem from "./DetailItem";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
+import { getCartState, getId } from "../../utils/localStorage.js";
+import { createOrder, updateOrder } from "../../apis/orders.js";
 
 const ProductDetails = ({ products }) => {
-
   const [loading, setLoading] = useState(true);
   const [quantity2, setQuantity2] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!products) {
-      console.error('product is null');
+      console.error("product is null");
       return;
     }
 
     try {
+      const userId = getId();
       // Create the new cart product object
       const newCartProduct = {
         product_id: products._id,
         amount: quantity2,
         name: products.name,
-        category: products.category,
-        description: products.description,
-        price: products.price,
-        product_img : products.product_img
+        // category: products.category,
+        // description: products.description,
+        // price: products.price,
+        // product_img: products.product_img,
       };
 
-      const orderId = "668cf42249883037ca1c891a";
-
-      const response = await axiosInstance.patch(`/orders/${orderId}`, {
-      $push: { cart_products: newCartProduct }
-      });
-
-      console.log('Order updated successfully:', response.data);
+      const orderId = getCartState();
+      console.log("orderId:", orderId);
+      if (orderId === "No_cart") {
+        const response = await createOrder({
+          user_id: userId,
+          cart_products: [newCartProduct],
+        });
+        console.log("Order created successfully:", response.data);
+      } else {
+        const response = await updateOrder(orderId, newCartProduct);
+        console.log("Order update successfully:", response.data);
+      }
     } catch (error) {
-      console.error('Error updating order:', error);
+      console.error("Error updating order:", error);
       if (error.response) {
-        console.error('Server responded with:', error.response.data);
+        console.error("Server responded with:", error.response.data);
       }
     }
-  }
+  };
+  // const response = await axiosInstance.patch(`/orders/${orderId}`, {
+  //   $push: { cart_products: newCartProduct },
+  // });
 
-    const incrementQuantity2 = () => {
-      setQuantity2((prevQuantity) => prevQuantity + 1);
-    };
+  // console.log("Order updated successfully:", response.data);
 
+  const incrementQuantity2 = () => {
+    setQuantity2((prevQuantity) => prevQuantity + 1);
+  };
 
-    const decrementQuantity2 = () => {
-      setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-    };
-    if (!products) {
+  const decrementQuantity2 = () => {
+    setQuantity2((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+  if (!products) {
     return <div>Loading...</div>;
   }
 
   const totalPrice2 = (quantity2 * products.price).toFixed(2);
   const combinedTotalPrice = parseFloat(totalPrice2).toFixed(2);
-
 
   return (
     <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">

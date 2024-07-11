@@ -74,7 +74,7 @@ const AccountPageContainer = () => {
           {activeSection === "acc-order" && (
             <OrderHistory orderHistory={user.userOrderHistory} />
           )}
-          {activeSection === "acc-address" && <Addresses />}
+          {activeSection === "acc-address" && <Addresses user={user.data} />}
           {activeSection === "acc-edit" && (
             <Editdata setActiveSection={setActiveSection} user={user} />
           )}

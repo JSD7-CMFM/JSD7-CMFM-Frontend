@@ -5,9 +5,16 @@ export const getOrders = () => axiosInstance.get(`/orders/`);
 export const getOrderById = (orderId) =>
   axiosInstance.get(`/orders/${orderId}`);
 
-export const updateOrder = async (orderId, data) => {
+export const updateOrder = async (orderId, data, source) => {
+  const config = {
+    headers: { Source: source },
+  };
   try {
-    const response = await axiosInstance.patch(`/orders/${orderId}`, data);
+    const response = await axiosInstance.patch(
+      `/orders/${orderId}`,
+      data,
+      config
+    );
     return response;
   } catch (error) {
     console.error("Add to cart Error:", error);

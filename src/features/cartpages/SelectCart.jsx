@@ -1,20 +1,17 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import CartCard from "./CartCard";
 import CartList from "./CartList.jsx";
 
-
-
-
-const SelectCart = ({cart, UpdateAmount, handleDelete, loading}) => {
-  const [isChecked, setIsChecked] = useState(true);
-    const handleSelectAllChange = () => {
-    setIsChecked(!isChecked); // Toggle isChecked state
-    // Logic to toggle all other checkboxes based on isChecked state
-    const checkboxes = document.querySelectorAll('.checkbox-md');
-    checkboxes.forEach((checkbox) => {
-      checkbox.checked = !isChecked;
-    });
-  };
+const SelectCart = ({ cart, UpdateAmount, loading }) => {
+  // const [isChecked, setIsChecked] = useState(true);
+  //   const handleSelectAllChange = () => {
+  //   setIsChecked(!isChecked); // Toggle isChecked state
+  //   // Logic to toggle all other checkboxes based on isChecked state
+  //   const checkboxes = document.querySelectorAll('.checkbox-md');
+  //   checkboxes.forEach((checkbox) => {
+  //     checkbox.checked = !isChecked;
+  //   });
+  // };
 
   return (
     <div>
@@ -23,7 +20,11 @@ const SelectCart = ({cart, UpdateAmount, handleDelete, loading}) => {
           <div className="form-control">
             <div className="flex-col">
               <div>
-                <CartList cart={cart} UpdateAmount={UpdateAmount} handleDelete={handleDelete} loading={loading} />
+                <CartList
+                  cart={cart}
+                  UpdateAmount={UpdateAmount}
+                  loading={loading}
+                />
               </div>
             </div>
           </div>

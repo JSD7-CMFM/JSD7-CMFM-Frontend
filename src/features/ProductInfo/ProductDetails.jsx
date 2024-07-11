@@ -7,11 +7,10 @@ import { getCartState, getId } from "../../utils/localStorage.js";
 import { createOrder, updateOrder } from "../../apis/orders.js";
 import { Modal, Box, Typography, Fade, Backdrop } from "@mui/material";
 import { Link } from "react-router-dom";
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes } from "react-icons/fa";
 import { CgSpaceBetween } from "react-icons/cg";
 import { MdOutlineGamepad } from "react-icons/md";
 import { MdGames } from "react-icons/md";
-
 
 const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -50,7 +49,11 @@ const ProductDetails = ({ products }) => {
         });
         console.log("Order created successfully:", response.data);
       } else {
-        const response = await updateOrder(orderId, newCartProduct);
+        const response = await updateOrder(
+          orderId,
+          newCartProduct,
+          "addProduct"
+        );
         console.log("Order update successfully:", response.data);
       }
     } catch (error) {
@@ -133,47 +136,74 @@ const ProductDetails = ({ products }) => {
                 <Box
                   sx={{
                     width: 500,
-                    maxWidth: '90%', // Responsive width
-                    bgcolor: '#f2e4c9', // Light pastel color
+                    maxWidth: "90%", // Responsive width
+                    bgcolor: "#f2e4c9", // Light pastel color
                     borderRadius: 8,
-                    boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.2)', // Soft shadow
+                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)", // Soft shadow
                     p: 4,
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <Typography id="modal-modal-title" variant="h5" component="h3" sx={{ textAlign: 'center', mb: 2 , p:5}}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h5"
+                    component="h3"
+                    sx={{ textAlign: "center", mb: 2, p: 5 }}
+                  >
                     Item has been added to cart
                   </Typography>
-                  <div sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+                  <div
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      mt: 4,
+                    }}
+                  >
                     <div className="flex justify-between mx-10">
-                    <Link to="/productlist">
-                      <button className="btn btn-s rounded-xl btn-outline hover:bg-pink-300 text-[18px] text-black bg-green-500 p-3 " sx={{ width: '45%', fontSize: '1.2rem', pl: 20 ,mr: 5 }}>
+                      <Link to="/productlist">
+                        <button
+                          className="btn btn-s rounded-xl btn-outline hover:bg-pink-300 text-[18px] text-black bg-green-500 p-3 "
+                          sx={{
+                            width: "45%",
+                            fontSize: "1.2rem",
+                            pl: 20,
+                            mr: 5,
+                          }}
+                        >
                           Shop more
-                          <MdGames  style={{ fontSize: '2rem' }}/>
-                      </button>
-                    </Link>
-                    <Link to="/cart">
-                      <button className="btn btn-s rounded-xl btn-outline hover:bg-orange-400 text-[18px] text-black bg-red-500 p-3" sx={{ width: '45%', fontSize: '1.2rem', pr: 20 , ml: 5 }}>
+                          <MdGames style={{ fontSize: "2rem" }} />
+                        </button>
+                      </Link>
+                      <Link to="/cart">
+                        <button
+                          className="btn btn-s rounded-xl btn-outline hover:bg-orange-400 text-[18px] text-black bg-red-500 p-3"
+                          sx={{
+                            width: "45%",
+                            fontSize: "1.2rem",
+                            pr: 20,
+                            ml: 5,
+                          }}
+                        >
                           View Cart
-                          <MdGames  style={{ fontSize: '2rem' }}/>
-                      </button>
-                    </Link>
+                          <MdGames style={{ fontSize: "2rem" }} />
+                        </button>
+                      </Link>
                     </div>
                   </div>
                   <button
                     onClick={handleClose}
                     style={{
-                      position: 'absolute',
+                      position: "absolute",
                       top: 10,
                       right: 10,
-                      cursor: 'pointer',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      fontSize: '1.5rem',
-                      color: '#FF6347', // Red color for close button
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
+                      border: "none",
+                      fontSize: "1.5rem",
+                      color: "#FF6347", // Red color for close button
                     }}
                   >
                     <FaTimes />

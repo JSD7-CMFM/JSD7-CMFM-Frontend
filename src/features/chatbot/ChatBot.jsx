@@ -2,29 +2,31 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const ChatBot = () => {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [chat, setChat] = useState([]);
+
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+  };
 
   const sendMessage = async () => {
+    if (!message.trim()) return; // ไม่ส่งข้อความที่ว่างเปล่า
+    setChat([...chat, { user: 'user', message }]);
+    setMessage(''); // เคลียร์ช่อง input
     try {
-      const response = await axios.post('http://localhost:3000/chat', { message: input });
-      setMessages([...messages, { user: input, bot: response.data.reply }]);
-      setInput('');
+      const response = await axios.post('http://localhost:3000/chat', { message });
+      setChat([...chat, { user: 'user', message }, { user: 'bot', message: response.data.reply }]);
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <div>
+    <div className="fixed bottom-5 right-5">
       <button
-        className="fixed bottom-5 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg"
-        onClick={toggleModal}
+        onClick={toggleChat}
+        className="bg-blue-500 text-white p-3 rounded-full shadow-lg"
       >
         Chat
       </button>
@@ -32,26 +34,31 @@ const ChatBot = () => {
         <div className="fixed bottom-16 right-5 bg-white border border-gray-300 shadow-lg rounded-lg w-80 max-h-96 flex flex-col">
           <div className="flex justify-between items-center p-3 border-b border-gray-300">
             <h2 className="text-lg font-bold">ChatBot</h2>
-            <button className="text-gray-500" onClick={toggleModal}>X</button>
+            <button onClick={toggleChat} className="text-red-500">&times;</button>
           </div>
-          <div className="flex-1 overflow-y-auto p-3">
-            {messages.map((msg, index) => (
-              <div key={index} className="mb-2">
-                <p className="text-sm text-blue-600">User: {msg.user}</p>
-                <p className="text-sm text-gray-800">Bot: {msg.bot}</p>
+          <div className="flex-1 p-3 overflow-y-auto">
+            {chat.map((chatMessage, index) => (
+              <div key={index} className={chatMessage.user === 'bot' ? 'text-left' : 'text-right'}>
+                <p className={chatMessage.user === 'bot' ? 'bg-gray-200 p-2 rounded-lg inline-block' : 'bg-blue-200 p-2 rounded-lg inline-block'}>
+                  {chatMessage.message}
+                </p>
               </div>
             ))}
           </div>
           <div className="p-3 border-t border-gray-300 flex items-center">
             <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="flex-1 p-2 border border-gray-300 rounded-lg"
+              placeholder="Type a message..."
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') sendMessage();
+              }}
             />
             <button
               onClick={sendMessage}
-              className="ml-2 bg-blue-500 text-white p-2 rounded-lg"
+              className="bg-blue-500 text-white p-2 rounded-lg ml-2"
             >
               Send
             </button>

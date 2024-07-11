@@ -21,6 +21,15 @@ export const updateOrder = async (orderId, data, source) => {
     throw error;
   }
 };
+export const deleteOrder = async (orderId) => {
+  try {
+    const response = await axiosInstance.delete(`/orders/${orderId}`);
+    return response;
+  } catch (error) {
+    console.error("Add to cart Error:", error);
+    throw error;
+  }
+};
 
 export const createOrder = async (data) => {
   try {

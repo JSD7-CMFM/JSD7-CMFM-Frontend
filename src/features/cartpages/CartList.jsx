@@ -5,14 +5,37 @@ import { getCartState } from "../../utils/localStorage.js";
 import { LuTrash2 } from "react-icons/lu";
 import { updateOrder } from "../../apis/orders.js";
 
-const CartList = ({ cart, UpdateAmount, loading }) => {
+const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
+  // const handleQuantityChange = async (productId, newQuantity) => {
+  //   try {
+  //     // Update locally first for responsive UI
+  //     const updatedCart = cart.map(product => {
+  //       if (product._id === productId) {
+  //         return { ...product, amount: newQuantity };
+  //       }
+  //       return product;
+  //     });
+  //     setCart(updatedCart);
+
+  //     // Then update on the server
+  //     const response = await axiosInstance.patch(`/products/${productId}`, {
+  //       amount: newQuantity
+  //     });
+  //     console.log(`Successfully updated quantity for product ${productId} to ${newQuantity}`);
+  //   } catch (error) {
+  //     console.error(`Error updating quantity for product ${productId}:`, error);
+  //   }
+  // };
+
   const handleDelete = async (id) => {
     try {
+      console.log(id);
       const cartId = getCartState();
       const updatedCart = cart.filter((product) => product.product_id !== id);
       console.log(updatedCart);
       const response = await updateOrder(cartId, updatedCart, "delete");
       console.log("delete successful", response);
+      fetchCart();
     } catch (error) {
       console.log("error", error);
     }

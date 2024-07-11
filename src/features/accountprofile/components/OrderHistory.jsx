@@ -1,10 +1,10 @@
 import React from "react";
 
 const OrderHistory = ({ orderHistory }) => {
-  console.log(orderHistory);
+  console.log(typeof orderHistory);
   return (
     <div id="acc-order" className="">
-      {orderHistory ? (
+      {orderHistory && orderHistory.length > 0 ? (
         <div className="">
           <h2 className="text-[19px] text-center">Your Order History</h2>
           {orderHistory.map((order, index) => (

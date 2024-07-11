@@ -1,14 +1,16 @@
 import React from "react";
 
-const Addresses = () => {
+const Addresses = ({ user }) => {
   return (
     <div id="acc-address" className="px-7">
       <div id="top-box" className="mb-3 border-b-2 pb-10 flex justify-between">
         <div id="address-section">
-          <h3 className="mb-3 font-medium uppercase">Default Address</h3>
-          <p>Name Surname</p>
+          <h3 className="mb-3 font-medium uppercase">Address</h3>
+          <p>
+            {user.firstName} {user.lastName}
+          </p>
           <p>#</p>
-          <p className="mb-4">Thailand, ,</p>
+          <p className="mb-4">{user.address}</p>
           <a href="#" className="underline">
             Delete
           </a>

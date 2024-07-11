@@ -3,6 +3,7 @@ import axiosInstance from "../../config/myAPIs";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { getCartState } from "../../utils/localStorage.js";
 import { LuTrash2 } from "react-icons/lu";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
 
@@ -27,10 +28,15 @@ const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
   //   }
   // };
 
-
+  // import CircularProgress from "@mui/material/CircularProgress";
+  // const [loading, setLoading] = useState(false);
   if (!loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+      <CircularProgress />;
+      </div>)
   }
+
 
   return (
     <div>

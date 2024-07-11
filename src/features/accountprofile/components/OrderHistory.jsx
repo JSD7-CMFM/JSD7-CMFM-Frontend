@@ -6,7 +6,7 @@ const OrderHistory = ({ orderHistory }) => {
     <div id="acc-order" className="">
       {orderHistory ? (
         <div className="">
-          <h2 className="text-[19px] text-center">Your Order History</h2>
+          <h2 className="text-[19px] text-center font-bold uppercase">Your Order History</h2>
           {orderHistory.map((order, index) => (
             <div
               key={order._id}

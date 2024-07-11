@@ -26,7 +26,9 @@ const TotalCart = ({ cart }) => {
                 <h1> { (product?.price*product?.amount).toFixed(2)}</h1>
             </div>
             ))}
-            <h1 className="text-black font-san p-4">Shipping fee</h1>
+          </div>
+          <div>
+            <h1 className="text-black font-san p-4">Shipping fee</h1> 
           </div>
           <div className="p-5 flex justify-around bg-slate-100">
             <h1 className="text-black font-san p-2">Total</h1>

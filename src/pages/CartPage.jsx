@@ -9,22 +9,21 @@ const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const fetchCart = async () => {
+    try {
+      const orderId = getCartState();
+      console.log("orderId:", orderId);
+      const response = await axiosInstance.get(`/orders/${orderId}`);
+      const products = response.data.cart_products;
+      setCart(products);
+      setLoading(true);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+      setLoading(true);
+    }
+  };
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const orderId = getCartState();
-        console.log("orderId:", orderId);
-        const response = await axiosInstance.get(`/orders/${orderId}`);
-        const products = response.data.cart_products;
-        setCart(products);
-        setLoading(true);
-        console.log(response);
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-        setLoading(true);
-      }
-    };
-
     fetchCart();
   }, []);
 
@@ -58,6 +57,7 @@ const CartPage = () => {
             cart={cart}
             UpdateAmount={UpdateAmount}
             loading={loading}
+            fetchCart={fetchCart}
           />
         </div>
         <div className="w-full md:w-1/2 bg-gray-100">

@@ -5,7 +5,7 @@ import { getCartState } from "../../utils/localStorage.js";
 import { LuTrash2 } from "react-icons/lu";
 import { updateOrder } from "../../apis/orders.js";
 
-const CartList = ({ cart, UpdateAmount, loading }) => {
+const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
   // const handleQuantityChange = async (productId, newQuantity) => {
   //   try {
   //     // Update locally first for responsive UI
@@ -29,11 +29,13 @@ const CartList = ({ cart, UpdateAmount, loading }) => {
 
   const handleDelete = async (id) => {
     try {
+      console.log(id);
       const cartId = getCartState();
       const updatedCart = cart.filter((product) => product.product_id === id);
       console.log(updatedCart);
       const response = await updateOrder(cartId, updatedCart, "delete");
       console.log("delete successful", response);
+      fetchCart();
     } catch (error) {
       console.log("error", error);
     }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CartCard from "./CartCard";
 import CartList from "./CartList.jsx";
 
-const SelectCart = ({ cart, UpdateAmount, loading }) => {
+const SelectCart = ({ cart, UpdateAmount, loading, fetchCart }) => {
   // const [isChecked, setIsChecked] = useState(true);
   //   const handleSelectAllChange = () => {
   //   setIsChecked(!isChecked); // Toggle isChecked state
@@ -24,6 +24,7 @@ const SelectCart = ({ cart, UpdateAmount, loading }) => {
                   cart={cart}
                   UpdateAmount={UpdateAmount}
                   loading={loading}
+                  fetchCart={fetchCart}
                 />
               </div>
             </div>

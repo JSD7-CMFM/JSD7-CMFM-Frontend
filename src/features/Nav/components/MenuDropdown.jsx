@@ -31,13 +31,7 @@ const MenuDropdown = () => {
           <Link to="productList">PRODUCTLIST</Link>
         </li>
         <li>
-          <Link to="/register">REGISTER</Link>
-        </li>
-        <li>
-          <Link to="Account">ACCOUNT</Link>
-        </li>
-        <li>
-          <Link to="checkout">CHECKOUT</Link>
+          <Link to="/">ABOUT US</Link>
         </li>
       </ul>
     </div>

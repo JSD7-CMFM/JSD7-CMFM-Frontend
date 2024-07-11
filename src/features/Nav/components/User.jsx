@@ -19,8 +19,8 @@ const User = () => {
   };
 
   return (
-    <Link to="/account">
-      <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-end">
+      {getToken() ? (
         <div
           tabIndex="0"
           role="button"
@@ -34,31 +34,45 @@ const User = () => {
             )}
           </div>
         </div>
-
-        <ul
+      ) : (
+        <div
           tabIndex="0"
-          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          role="button"
+          className="btn btn-ghost avatar btn-circle border border-gray-800 bg-[#fffb7f]"
         >
-          <li>
-            {getToken() ? (
+          <div className="indicator">
+            <FaUser className="text-xl" />
+          </div>
+        </div>
+      )}
+
+      <ul
+        tabIndex="0"
+        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        <li>
+          {getToken() ? (
+            <>
+              <Link to="/account" className="justify-center">
+                My Account
+              </Link>
               <button className="justify-center" onClick={onLogout}>
                 Sign out
               </button>
-            ) : (
+            </>
+          ) : (
+            <>
               <Link to="/login" className="justify-center">
                 Sign in
               </Link>
-            )}
-            {/* <Link to="/login" className="justify-center">
-            Sign in
-          </Link>
-          <button className="justify-center" onClick={onLogout}>
-            Sign out
-          </button> */}
-          </li>
-        </ul>
-      </div>
-    </Link>
+              <Link to="/register" className="justify-center">
+                Sign up
+              </Link>
+            </>
+          )}
+        </li>
+      </ul>
+    </div>
   );
 };
 

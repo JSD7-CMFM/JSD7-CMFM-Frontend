@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaStar, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ProductList = [
   {
@@ -90,17 +91,19 @@ const ProductCard = () => {
                     5.0 (99)
                   </h3>
                 </div>
-                <button className="btn btn-info btn-xs m-2 text-[8px]">
+                <button className="btn btn-info btn-xs m-2 text-m">
                   The Monster
                 </button>
                 <div>
-                  <div className="flex items-center justify-around">
-                    <div className="border-black border rounded-md m-4 p-1 flex justify-center w-4/5">
-                      <h3 className="text-[10px] text-black font-mono p-1 flex ">
-                        ADD TO CART
-                      </h3>
+                  <Link to="productList">
+                    <div className="flex items-center justify-around">
+                      <div className="border-black border rounded-md m-4 p-1 flex justify-center w-4/5 bg-[#C8B2F2] hover:bg-[#F0EB76]">
+                        <h3 className="text-xl text-black font-mono p-1 flex">
+                          MORE DETAIL
+                        </h3>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>

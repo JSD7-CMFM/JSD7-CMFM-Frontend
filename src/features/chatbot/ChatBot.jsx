@@ -11,12 +11,14 @@ const ChatBot = () => {
   };
 
   const sendMessage = async () => {
-    if (!message.trim()) return; // ไม่ส่งข้อความที่ว่างเปล่า
-    setChat([...chat, { user: 'user', message }]);
-    setMessage(''); // เคลียร์ช่อง input
+    if (!message.trim()) return;
+    const newChat = [...chat, { user: 'user', message }];
+    setChat(newChat);
+    setMessage('');
+
     try {
       const response = await axios.post('http://localhost:3000/chat', { message });
-      setChat([...chat, { user: 'user', message }, { user: 'bot', message: response.data.reply }]);
+      setChat([...newChat, { user: 'bot', message: response.data.reply }]);
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -24,10 +26,7 @@ const ChatBot = () => {
 
   return (
     <div className="fixed bottom-5 right-5">
-      <button
-        onClick={toggleChat}
-        className="bg-blue-500 text-white p-3 rounded-full shadow-lg"
-      >
+      <button onClick={toggleChat} className="bg-blue-500 text-white p-3 rounded-full shadow-lg">
         Chat
       </button>
       {isOpen && (
@@ -56,10 +55,7 @@ const ChatBot = () => {
                 if (e.key === 'Enter') sendMessage();
               }}
             />
-            <button
-              onClick={sendMessage}
-              className="bg-blue-500 text-white p-2 rounded-lg ml-2"
-            >
+            <button onClick={sendMessage} className="bg-blue-500 text-white p-2 rounded-lg ml-2">
               Send
             </button>
           </div>
@@ -68,7 +64,5 @@ const ChatBot = () => {
     </div>
   );
 };
- 
-//test
 
 export default ChatBot;

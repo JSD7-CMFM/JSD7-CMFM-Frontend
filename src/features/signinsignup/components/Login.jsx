@@ -9,6 +9,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   // const [loginError, setLoginError] = useState(false);
+  const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -25,8 +26,10 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { email, password };
+    setDisable(true)
     const response = await usersAPI.Login(user);
     console.log("response login: ", response);
+    setDisable(false)
     if (response && email === response.data.email) {
       navigate("/");
     } else {
@@ -66,7 +69,11 @@ function LoginForm() {
           Forgot Password?
         </a>
         <div className="mt-14 text-center">
-          <button className="py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5">
+          <button className="py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
+            disabled={disable}
+  
+          >
+
             LOGIN
           </button>
           <Link

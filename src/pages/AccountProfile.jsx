@@ -15,7 +15,6 @@ const AccountPageContainer = () => {
     navigate("/");
     window.location.reload();
   };
-
   const showSection = (sectionId) => {
     setActiveSection(sectionId);
   };
@@ -64,7 +63,7 @@ const AccountPageContainer = () => {
         </div>
         <div
           id="acc-display"
-          className="bg-white border border-black rounded min-h-[450px] md:min-h-[510px] pt-8 md:w-[638px]"
+          className="bg-white border border-black rounded min-h-[450px] md:h-[510px] p-4 md:w-[638px] overflow-y-scroll"
         >
           {activeSection === "acc-info" && (
             <AccountDetails
@@ -72,7 +71,9 @@ const AccountPageContainer = () => {
               setUserGlobal={setUser}
             />
           )}
-          {activeSection === "acc-order" && <OrderHistory />}
+          {activeSection === "acc-order" && (
+            <OrderHistory orderHistory={user.userOrderHistory} />
+          )}
           {activeSection === "acc-address" && <Addresses />}
           {activeSection === "acc-edit" && (
             <Editdata setActiveSection={setActiveSection} user={user} />

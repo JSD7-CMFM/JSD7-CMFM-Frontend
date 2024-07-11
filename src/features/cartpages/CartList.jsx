@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../config/myAPIs";
 import { FaStar, FaTrash } from "react-icons/fa";
+import { getCartState } from "../../utils/localStorage.js";
+import { LuTrash2 } from "react-icons/lu";
 
-const CartList = () => {
-  const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
+const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const orderId = "668cf42249883037ca1c891a";
-        const response = await axiosInstance.get(`/orders/${orderId}`);
-        setCart(response.data.cart_products); 
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching cart:', error);
-        setLoading(false);
-      }
-    };
+  // const handleQuantityChange = async (productId, newQuantity) => {
+  //   try {
+  //     // Update locally first for responsive UI
+  //     const updatedCart = cart.map(product => {
+  //       if (product._id === productId) {
+  //         return { ...product, amount: newQuantity };
+  //       }
+  //       return product;
+  //     });
+  //     setCart(updatedCart);
 
-    fetchCart();
-  }, []);
+  //     // Then update on the server
+  //     const response = await axiosInstance.patch(`/products/${productId}`, {
+  //       amount: newQuantity
+  //     });
+  //     console.log(`Successfully updated quantity for product ${productId} to ${newQuantity}`);
+  //   } catch (error) {
+  //     console.error(`Error updating quantity for product ${productId}:`, error);
+  //   }
+  // };
 
-  const handleQuantityChange = (productId, newQuantity) => {
-    // ฟังก์ชันนี้ยังไม่ได้ถูกนิยาม ควรเพิ่มลอจิกการอัปเดตปริมาณสินค้าที่นี่
-    console.log(`Update quantity for product ${productId} to ${newQuantity}`);
-  };
 
-  if (loading) {
+  if (!loading) {
     return <div>Loading...</div>;
   }
 
@@ -39,13 +40,7 @@ const CartList = () => {
         cart.map((product) => (
           <div key={product._id}>
             <div className="w-full border rounded-md m-3 border border-gray-600">
-              <label className="label cursor-pointer">
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  className="checkbox checkbox-md"
-                />
-              </label>
+              <button onClick={() =>  handleDelete(product.product_id) } > <LuTrash2 style={{ fontSize: '2rem' , color: 'pink' }}/></button>
               <div className="border-black border rounded-xl bg-white m-2 flex">
                 <div className="w-full p-1 flex-col relative group">
                   <img
@@ -60,10 +55,9 @@ const CartList = () => {
                   />
                 </div>
                 <div className="flex-col w-full">
-                <h3 className="font-mono text-black text-[12px] mt-2 ml-2">
-                  {product.name}
-                </h3>
-
+                  <h3 className="font-mono text-black text-[12px] mt-2 ml-2">
+                    {product.name}
+                  </h3>
                   <div className="mx-2 flex">
                     {[...Array(5)].map((_, index) => (
                       <FaStar key={index} style={{ color: "#74C0FC" }} />
@@ -76,6 +70,9 @@ const CartList = () => {
                     {product.category}
                   </button>
                   <div>
+                    <div className="bg-black p-1">
+                      <input className="text-black" type="number" value={product.amount||null} defaultValue={product.amount} onChange={(e) => UpdateAmount(product.product_id, e.target.value)}/>
+                    </div>
                     <div className="flex items-center">
                       <div className="border-black border rounded-md m-4 p-1 flex justify-between w-4/5">
                         <h3 className="text-[10px] text-black font-mono p-1">
@@ -119,10 +116,10 @@ const CartList = () => {
                   </div>
                   <div className="border-black border rounded-md m-4 p-1 flex justify-between w-4/5">
                     <h3 className="text-[10px] text-black font-mono p-1">
-                      Total Price
+                      Price
                     </h3>
                     <h3 className="text-[10px] text-black font-mono p-1 ">
-                      ${product.price * product.amount}
+                      ${product.price}
                     </h3>
                   </div>
                 </div>
@@ -136,4 +133,3 @@ const CartList = () => {
 };
 
 export default CartList;
-

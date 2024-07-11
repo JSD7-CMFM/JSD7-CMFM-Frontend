@@ -15,8 +15,8 @@ const NavLinks = () => {
         </Link>
       </li>
       <li>
-        <Link to="/register" className="btn btn-ghost text-xl">
-          REGISTER
+        <Link to="/" className="btn btn-ghost text-xl">
+          ABOUT US
         </Link>
       </li>
     </ul>

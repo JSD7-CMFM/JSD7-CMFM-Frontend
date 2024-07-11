@@ -1,13 +1,10 @@
 import React from "react";
 
-
 const TotalCart = ({ cart }) => {
-  const totalPrice =  cart.reduce(
-    (acc, curr) => {
-      return acc + (curr.price*curr.amount)
-    }
-    , 0
-  );
+  const totalPrice = cart.reduce((acc, curr) => {
+    return acc + curr.price * curr.amount;
+  }, 0);
+
   return (
     <div>
       <div className="">
@@ -16,24 +13,24 @@ const TotalCart = ({ cart }) => {
             <h1 className="text-black font-san p-4 pt-[30px]">Subtotal</h1>
             <div className="flex flex-row justify-between">
               <h1>ชื่อ</h1>
-              <h1> จำนวน </h1>
-              <h1> ราคา </h1>
+              <h1>จำนวน</h1>
+              <h1>ราคา</h1>
             </div>
             {cart?.map((product) => (
-               <div className="flex flex-row justify-between">
-                <h1> { product?.name}</h1>
-              <h1> {product?.amount} </h1>
-                <h1> { (product?.price*product?.amount).toFixed(2)}</h1>
-            </div>
+              <div className="flex flex-row justify-between" key={product._id}>
+                <h1>{product?.name}</h1>
+                <h1>{product?.amount}</h1>
+                <h1>{(product?.price * product?.amount).toFixed(2)}</h1>
+              </div>
             ))}
           </div>
           <div>
-            <h1 className="text-black font-san p-4">Shipping fee</h1> 
+            <h1 className="text-black font-san p-4">Shipping fee</h1>
           </div>
           <div className="p-5 flex justify-around bg-slate-100">
             <h1 className="text-black font-san p-2">Total</h1>
             <h1 className="text-black font-san p-2">
-              ฿{totalPrice.toFixed(2)}{" "}
+              ฿{totalPrice.toFixed(2)}
             </h1>
           </div>
           <div className="flex justify-center bg-slate-100 p-2">
@@ -46,6 +43,7 @@ const TotalCart = ({ cart }) => {
 };
 
 export default TotalCart;
+
 
 /* const TotalCart = () => {
   return (

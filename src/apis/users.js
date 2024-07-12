@@ -19,7 +19,6 @@ const Login = async (user) => {
 };
 
 const Register = async (data) => {
-  console.log(data);
   try {
     const response = await axiosInstance.post("/users/register", data);
     const { token, id, firstName, email, cart, isAdmin } = response.data;

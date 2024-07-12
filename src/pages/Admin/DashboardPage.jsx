@@ -4,6 +4,7 @@ import Sidebar from "../../features/Adminfeatures/SideBar";
 import Dashboard from "../../features/Adminfeatures/Dashboard/Dashboard";
 import Users from "../../features/Adminfeatures/Users/User";
 import Products from "../../features/Adminfeatures/Products/Products";
+import Orders from "../../features/Adminfeatures/Orders/Orders";
 import { useState } from "react";
 import ChatBot from "../../features/chatbot/ChatBot"
 
@@ -19,6 +20,7 @@ const DashboardPage = () => {
           {currentPage === "dashboard" && <Dashboard />}
           {currentPage === "users" && <Users />}
           {currentPage === "products" && <Products />}
+          {currentPage === "orders" && <Orders />}
         </div>
       </div>
     </>

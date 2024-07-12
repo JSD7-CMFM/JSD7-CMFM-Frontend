@@ -43,7 +43,6 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
           <div key={product._id}>
             <div className="w-full rounded-md m-3 border border-gray-600">
               <button onClick={() => handleDelete(product.product_id)}>
-                {" "}
                 <LuTrash2 style={{ fontSize: "2rem", color: "pink" }} />
               </button>
               <div className="border-black border rounded-xl bg-white m-2 flex">

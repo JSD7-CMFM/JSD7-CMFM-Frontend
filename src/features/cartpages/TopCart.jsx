@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCartShopping } from "react-icons/fa6";
 
-const TopCart = () => {
+const TopCart = ({cart}) => {
   return (
     <div>
       <div className="w-full bg-white p-2 border-b border-black pt-[90px]">
@@ -11,7 +11,8 @@ const TopCart = () => {
             My Cart
           </h1>
           <div className="p-5 mt-2 space-x-10 pr-4">
-            <FaCartShopping size={30} style={{ color: "#0d0a01" }} />
+            <FaCartShopping size={50} style={{ color: "#0d0a01" }} />
+            <h3> 1 </h3>
           </div>
         </div>
       </div>

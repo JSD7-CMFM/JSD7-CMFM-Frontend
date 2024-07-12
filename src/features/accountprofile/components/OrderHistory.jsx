@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { RiShoppingBag4Fill } from "react-icons/ri";
 
 const OrderHistory = ({ orderHistory }) => {
   console.log(typeof orderHistory);
@@ -49,16 +51,19 @@ const OrderHistory = ({ orderHistory }) => {
           <h2 className="mb-8 px-7 text-[19px]">
             Looks like you haven't placed any orders yet.
           </h2>
-          <div className="bg-[#AAD8EE]">
+          <div className="bg-[#AAD8EE] rounded-xl m-5 w-auto">
             <div className="p-14 text-center">
               <h2 className="text-[22px] mb-5">Find your item</h2>
-              <a
-                href="#"
-                className="py-[10px] px-6 bg-white hover:bg-[#F0EB76] rounded-lg border border-black"
-              >
-                Button
-              </a>
-            </div>
+                <div>
+                  <Link
+                    to="/productlist" className="py-2 px-6 bg-white hover:bg-yellow-300 rounded-lg border border-black inline-block">
+                    SHOP NOW
+                  </Link>
+                  <div className="flex justify-center relative m-3" >
+                  <RiShoppingBag4Fill size={200} color="#ffffff" />
+              </div>
+                </div>
+              </div>
           </div>
         </>
       )}

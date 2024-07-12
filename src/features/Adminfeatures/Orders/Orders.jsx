@@ -12,16 +12,19 @@ const Orders = () => {
   };
 
   const handleSave = async (orderId) => {
-    // console.log(orderId, status)
-    await editOrder(orderId, { status });
-    setOrders((prevOrders) =>
-      prevOrders.map((order) =>
-        order._id === orderId ? { ...order, status } : order
-      )
-    );
-    setEditingOrderId(null);
-    setStatus("");
-    console.log("Order saved successfully");
+    try {
+      await editOrder(orderId, { status }, "updateStatus");
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order._id === orderId ? { ...order, status } : order
+        )
+      );
+      setEditingOrderId(null);
+      setStatus("");
+      console.log("Order saved successfully");
+    } catch (error) {
+      console.error("Error saving order:", error);
+    }
   };
 
   const handleStatusChange = (e) => {
@@ -79,7 +82,7 @@ const Orders = () => {
                   )}
                 </td>
                 <td className="text-black py-2 px-4 border-b">
-                  {order.address}
+                  {order.address.address}, {order.address.province}, {order.address.country}, {order.address.zipcode}
                 </td>
                 <td className="py-2 px-4 border-b">
                   <div className="flex space-x-2">

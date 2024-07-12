@@ -21,7 +21,6 @@ const DashboardPage = () => {
           {currentPage === "users" && <Users />}
           {currentPage === "products" && <Products />}
           {currentPage === "orders" && <Orders />}
-
         </div>
       </div>
     </>

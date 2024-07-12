@@ -2,8 +2,7 @@ import axiosInstance from "../config/myAPIs";
 import { setCartState } from "../utils/localStorage.js";
 
 const getAllOrders = async () => await axiosInstance.get(`/orders/`);
-const getOrderById = (orderId) =>
-  axiosInstance.get(`/orders/${orderId}`);
+const getOrderById = (orderId) => axiosInstance.get(`/orders/${orderId}`);
 
 const updateOrder = async (orderId, data, source) => {
   const config = {
@@ -15,16 +14,16 @@ const updateOrder = async (orderId, data, source) => {
       data,
       config
     );
-    return response;
+    return response.data;
   } catch (error) {
-    console.error("Add to cart Error:", error);
     throw error;
   }
 };
 
 const editOrder = async (id, data) => {
-  const config = "updateStatus"
-  // console.log(id, data)
+  const config = {
+    headers: { Source: "updateStatus" }
+  };
   await axiosInstance.patch(`/orders/${id}`, data, config);
 };
 

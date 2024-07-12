@@ -15,7 +15,7 @@ const NavLinks = () => {
         </Link>
       </li>
       <li>
-        <Link to="/" className="btn btn-ghost text-xl">
+        <Link to="AboutUs" className="btn btn-ghost text-xl">
           ABOUT US
         </Link>
       </li>

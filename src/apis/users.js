@@ -22,10 +22,10 @@ const Register = async (data) => {
   console.log(data);
   try {
     const response = await axiosInstance.post("/users/register", data);
-    const { token, id, firstName, email, isAdmin } = response.data;
+    const { token, id, firstName, email, cart, isAdmin } = response.data;
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email, isAdmin);
+      setInfo(id, firstName, email, cart, isAdmin);
       return response;
     }
   } catch (error) {

@@ -6,6 +6,7 @@ import { getOrderById, updateOrder } from "../apis/orders.js";
 import { getCartState, getId, setCartState } from "../utils/localStorage.js";
 import { useNavigate } from "react-router-dom";
 import ConfirmLeaveModal from "../features/checkout/components/ConfirmLeave.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const CheckoutPage = () => {
   const [checkout, setCheckout] = useState(false);
@@ -13,6 +14,7 @@ const CheckoutPage = () => {
   const [user, setUser] = useState(null);
   const [rememberAddress, setRememberAddress] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState({
     address: "",
     province: "",
@@ -28,6 +30,7 @@ const CheckoutPage = () => {
         return;
       }
       try {
+        setLoading(false);
         const responseUser = await userApi.getUser(userId);
         const responseOrder = await getOrderById(orderId);
         const products = responseOrder.data;
@@ -42,6 +45,7 @@ const CheckoutPage = () => {
           country: fetchedUser.address?.country || "",
           zipcode: fetchedUser.address?.zipcode || "",
         });
+        setLoading(true);
         console.log(responseUser.data);
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -92,6 +96,13 @@ const CheckoutPage = () => {
     setShowModal(false);
   };
 
+  if (!loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
     <div className="bg-gray-100 py-10 pt-[150px]">
       <div className="max-w-6xl mx-auto px-4 md:flex md:space-x-8">

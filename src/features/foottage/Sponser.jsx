@@ -10,8 +10,8 @@ import {
 const Sponser = () => {
   return (
     <>
-      <div className="bg-[rgb(200,178,242)] p-10 border border-black border-t-0">
-        <h1 className="text-black text-[30px] text-center justify-center py-6">
+      <div className="bg-[rgb(208,192,239)] p-10 border border-black border-t-0 ">
+        <h1 className="text-black text-[48px] text-center justify-center py-6 uppercase">
           We're out here!
         </h1>
         <div className="flex justify-center py-7 space-x-10 cursor: pointer;">
@@ -35,7 +35,7 @@ const Sponser = () => {
               </a>
         </div>
         <div className="flex justify-center py-6">
-          <button className="btn btn-s rounded btn-outline hover:bg-yellow-300 text-[12px] space-y-2 text-black bg-slate-200 p-3">
+          <button className="btn btn-s rounded-md btn-outline hover:bg-yellow-300 text-[16px] font-semibold space-y-2 text-black bg-slate-200 p-3">
             FIND US IN STORES
           </button>
         </div>

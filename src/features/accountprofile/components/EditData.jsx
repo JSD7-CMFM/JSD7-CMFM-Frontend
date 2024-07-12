@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import users from "../../../apis/users.js";
 import { useNavigate } from "react-router-dom";
+import { FaPhone } from "react-icons/fa";
 
 const Editdata = ({ setActiveSection, user }) => {
   const [firstName, setFirstName] = useState(user.data.firstName);
@@ -69,8 +70,8 @@ const Editdata = ({ setActiveSection, user }) => {
   return (
     <div className="px-7">
       <div>
-        <button className="pb-5" onClick={() => setActiveSection("acc-info")}>
-          &lt; Go Back
+        <button className="pb-5 font-bold text-[30px] text-yellow-800 " onClick={() => setActiveSection("acc-info")}>
+          &lt;
         </button>
         <h1 className="text-xl">Edit Your Info</h1>
       </div>
@@ -79,8 +80,8 @@ const Editdata = ({ setActiveSection, user }) => {
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex">
-          <label htmlFor="firstName" className="min-w-[100px]">
-            First Name
+          <label htmlFor="firstName" className="min-w-[120px] font">
+            First Name :
           </label>
           <input
             type="text"
@@ -98,8 +99,8 @@ const Editdata = ({ setActiveSection, user }) => {
           )}
         </div>
         <div className="flex mt-5">
-          <label htmlFor="lastName" className="min-w-[100px]">
-            Last Name
+          <label htmlFor="lastName" className="min-w-[120px]">
+            Last Name :
           </label>
           <input
             type="text"
@@ -117,9 +118,14 @@ const Editdata = ({ setActiveSection, user }) => {
           )}
         </div>
         <div className="flex mt-5">
-          <label htmlFor="phoneNumber" className="min-w-[100px]">
+          <div className="w-[120px] flex justify-inline mb-4">
+            <label htmlFor="phoneNumber" className="min-">
             Phone
-          </label>
+            </label>
+            <div className="mt-1 mx-2"> <FaPhone /> </div>
+             <label htmlFor="phoneNumber" className="min-">:
+            </label>
+          </div>
           <input
             type="text"
             placeholder="Phone number*"
@@ -155,7 +161,7 @@ const Editdata = ({ setActiveSection, user }) => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className="w-full mt-5 py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
+          className="w-full mt-5 py-[8px] px-6 bg-white hover:border-black hover:bg-blue-200 rounded-lg border border-gray-300 mr-5"
           disabled={!isPasswordValid}
         >
           Make Change

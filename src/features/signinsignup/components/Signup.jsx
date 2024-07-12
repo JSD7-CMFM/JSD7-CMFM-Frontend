@@ -79,17 +79,18 @@ const SignupForm = () => {
         phoneNumber,
       };
       const response = await usersAPI.Register(dataObject);
+      console.log("response signup", response);
       navigate("/");
     }
   };
 
   return (
     <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center pt-[90px] h-screen">
-      <h2 className="text-center text-4xl md:text-2xl">
+      <h2 className="text-center font-bold text-[42px] md:text-2xl uppercase">
         You're new around here
       </h2>
       <form
-        className="pt-12 flex flex-col md:w-[473px] md:pt-6"
+        className="pt-12 flex flex-col md:w-[473px] md:pt-6  bg-white rounded-xl p-5 m-5 border border-black"
         onSubmit={(e) => e.preventDefault()}
       >
         <input

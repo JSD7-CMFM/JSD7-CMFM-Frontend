@@ -3,31 +3,11 @@ import axiosInstance from "../../config/myAPIs";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { getCartState } from "../../utils/localStorage.js";
 import { LuTrash2 } from "react-icons/lu";
+import CircularProgress from "@mui/material/CircularProgress";
 import { updateOrder } from "../../apis/orders.js";
 import { Link } from "react-router-dom";
 
 const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
-  // const handleQuantityChange = async (productId, newQuantity) => {
-  //   try {
-  //     // Update locally first for responsive UI
-  //     const updatedCart = cart.map(product => {
-  //       if (product._id === productId) {
-  //         return { ...product, amount: newQuantity };
-  //       }
-  //       return product;
-  //     });
-  //     setCart(updatedCart);
-
-  //     // Then update on the server
-  //     const response = await axiosInstance.patch(`/products/${productId}`, {
-  //       amount: newQuantity
-  //     });
-  //     console.log(`Successfully updated quantity for product ${productId} to ${newQuantity}`);
-  //   } catch (error) {
-  //     console.error(`Error updating quantity for product ${productId}:`, error);
-  //   }
-  // };
-
   const handleDelete = async (id) => {
     try {
       const cartId = getCartState();
@@ -40,12 +20,16 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
   };
 
   if (!loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <CircularProgress />;
+      </div>
+    );
   }
 
   return (
     <div>
-      {cart.length === 0 && getCartState() !== "No_cart" ? (
+      {cart.length === 0 || getCartState() !== "No_cart" ? (
         <div className="pt-5">
           No product in cart, wanna see our TOYS?!!
           <Link to="/productList">

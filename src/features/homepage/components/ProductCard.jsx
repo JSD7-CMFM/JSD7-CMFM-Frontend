@@ -25,18 +25,16 @@ const ProductList = [
   },
   {
     id: 3,
-    name: "DIMOO x Dumbo",
-    price: 35,
-    description: "DIMOO x Dumbo Action Figure",
-    imageUrl:
-      "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
-    imageUrl2:
-      "https://prod-eurasian-res.popmart.com/default/20240612_103708_563109____5_____1200x1200.jpg",
+    name: "CRYBABY",
+    price: 45,
+    description: "CRYBABY x PONYMART ",
+    imageUrl: "/ProductPhotos/CRYBABY1.jpeg",
+    imageUrl2: "/ProductPhotos/CRYBABY2.jpeg",
   },
   {
     id: 4,
     name: "DIMOO x Dumbo",
-    price: 45,
+    price: 35,
     description: "DIMOO x Dumbo Action Figure",
     imageUrl:
       "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
@@ -57,61 +55,53 @@ const ProductCard = () => {
   };
 
   return (
-    <div className="grid grid-cols-4">
-      {ProductList.map((product, index) => (
-        <div key={product.id} className="flex">
-          <div className="flex">
-            <div className="border-black border rounded-xl bg-white m-2 flex-col">
-              <div className="w-full p-1 flex-col relative group  ">
+    <>
+      <Link to="/productlist">
+        <div className="grid grid-cols-4 gap-4 m-5 ">
+          {ProductList.map((product, index) => (
+            <div
+              key={product._id}
+              className="border border-gray-200 rounded-xl overflow-hidden relative group mb-4 pb-10 bg-white shadow-2xl "
+            >
+              <div className="relative group">
                 <img
                   src={product.imageUrl}
+                  className="absolute inset-0 rounded-2xl w-auto object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0"
                   alt={product.name}
-                  className="absolute inset-0 rounded-2xl w-auto p-1 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0"
                 />
                 <img
                   src={product.imageUrl2}
-                  alt={product.name}
                   className="inset-0 rounded-xl w-auto object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-100"
+                  alt={product.name}
                 />
               </div>
-              <div className="flex-col w-full">
-                <h3 className="font-mono text-black text-[12px] mt-2 ml-2 ">
+              <div className="p-4 bg-white">
+                <h3 className="text-[16px] font-semibold text-gray-900 mb-2 ">
                   {product.name}
                 </h3>
-                <h3 className="font-mono text-black text-[12px] ml-2">
+                <p className="text-[14px] text-gray-700 mb-2">
                   {product.description}
-                </h3>
-                <div className="mx-2 flex">
+                </p>
+                <div className="flex items-center mb-2 absolute left-4 bottom-5">
                   <FaStar style={{ color: "#74C0FC" }} />
                   <FaStar style={{ color: "#74C0FC" }} />
                   <FaStar style={{ color: "#74C0FC" }} />
                   <FaStar style={{ color: "#74C0FC" }} />
                   <FaStar style={{ color: "#74C0FC" }} />
-                  <h3 className="font-mono text-black text-[8px] inline-flex">
-                    5.0 (99)
-                  </h3>
-                </div>
-                <button className="btn btn-info btn-xs m-2 text-m">
-                  The Monster
-                </button>
-                <div>
-                  <Link to="productList">
-                    <div className="flex items-center justify-around">
-                      <div className="border-black border rounded-md m-4 p-1 flex justify-center w-4/5 bg-[#C8B2F2] hover:bg-[#F0EB76]">
-                        <h3 className="text-xl text-black font-mono p-1 flex">
-                          MORE DETAIL
-                        </h3>
-                      </div>
-                    </div>
-                  </Link>
+                  <span className="text-xs ml-1">(99)</span>
                 </div>
               </div>
+              <Link
+                to="/productlist"
+                className="bg-blue-500 text-white text-[12px] font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase absolute right-2 bottom-0 mb-4 ml-4"
+              >
+                More Detail
+              </Link>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
-      ;
-    </div>
+      </Link>
+    </>
   );
 };
 

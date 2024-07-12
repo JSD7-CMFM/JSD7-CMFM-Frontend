@@ -6,6 +6,7 @@ import { getOrderById } from "../apis/orders.js";
 import { getCartState } from "../utils/localStorage.js";
 import { updateOrder } from "../apis/orders.js";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
@@ -15,9 +16,11 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     if (orderId === "No_cart") {
+      setLoading(true);
       return;
     }
     try {
+      setLoading(false);
       const response = await getOrderById(orderId);
       const products = response.data.cart_products;
       setCart(products);
@@ -27,10 +30,18 @@ const CartPage = () => {
       setLoading(true);
     }
   };
+
   useEffect(() => {
     fetchCart();
   }, []);
 
+  if (!loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <CircularProgress />
+      </div>
+    );
+  }
   const UpdateAmount = (id, amount) => {
     if (amount < 1) {
       return;

@@ -9,7 +9,10 @@ const Addresses = ({ user }) => {
           <p>
             {user.firstName} {user.lastName}
           </p>
-          <p className="mb-4"></p>
+          <p className="mb-4">
+            {user.address.address} {user.address.province}
+            {user.address.country} {user.address.zipcode}
+          </p>
           <a href="#" className="underline">
             Delete
           </a>

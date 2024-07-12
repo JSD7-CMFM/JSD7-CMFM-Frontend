@@ -42,10 +42,12 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center h-screen">
-      <h2 className="text-center text-4xl md:text-2xl">Welcome Back</h2>
+    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center h-screen ">
+      <h2 className="text-center text-[42px] font-bold md:text-2xl uppercase ">
+        Welcome Back
+      </h2>
       <form
-        className="pt-12 flex flex-col md:w-[473px]"
+        className="pt-12 flex flex-col md:w-[473px] border border-black m-5 p-20 bg-white rounded-xl"
         onSubmit={handleSubmit}
       >
         <input

@@ -10,7 +10,6 @@ const AccountPageContainer = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-
   const handleSignout = () => {
     localStorage.clear();
     navigate("/");
@@ -77,6 +76,9 @@ const AccountPageContainer = () => {
           )}
           {activeSection === "acc-address" && <Addresses user={user.data} />}
           {activeSection === "acc-edit" && (
+            <Editdata setActiveSection={setActiveSection} user={user} />
+          )}
+          {activeSection === "acc-edit-address" && (
             <Editdata setActiveSection={setActiveSection} user={user} />
           )}
         </div>

@@ -26,7 +26,7 @@ const User = () => {
           role="button"
           className="btn btn-ghost avatar btn-circle border border-gray-800 bg-[#fffb7f]"
         >
-          <div className="indicator">
+          <div className="indicator text-xl w-[1.5rem]">
             {getToken() ? (
               getInitials(firstName)
             ) : (

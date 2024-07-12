@@ -163,6 +163,8 @@ const Products = () => {
     });
   };
 
+  const sortedProducts = products.slice().sort((a, b) => a.productId - b.productId);
+
   return (
     <div className="p-10">
       <h1 className="text-black text-3xl font-bold mb-6">Products</h1>
@@ -315,7 +317,7 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {sortedProducts.map((product) => (
               <tr key={product._id}>
                 <td className="text-black py-2 px-4 border-b">
                   {editingProductId === product._id ? (
@@ -372,13 +374,17 @@ const Products = () => {
                 </td>
                 <td className="text-black py-2 px-4 border-b">
                   {editingProductId === product._id ? (
-                    <input
+                    <select
                       type="text"
                       name="type"
                       value={formData.type}
                       onChange={handleChange}
                       className="w-full border rounded px-2 py-1 text-white bg-gray-700"
-                    />
+                      
+                    >
+                      <option value="Box">Box</option>
+                  <option value="Single">Single</option>
+                    </select>
                   ) : (
                     product.type
                   )}

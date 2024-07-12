@@ -13,7 +13,9 @@ import ProductListPage from "../pages/ProductListPage";
 import Container from "../layouts/Container";
 import UsersContextProvider from "../features/Adminfeatures/contexts/UsersContext";
 import ProductContextProvider from "../features/Adminfeatures/contexts/ProductsContext";
+import OrderContextProvider from "../features/Adminfeatures/contexts/OrdersContext";
 import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
+import Order from "../features/Adminfeatures/contexts/OrdersContext";
 
 const router = createBrowserRouter([
   {
@@ -74,10 +76,12 @@ const router = createBrowserRouter([
 
 export default function Router() {
   return (
-    <ProductContextProvider>
-      <UsersContextProvider>
-        <RouterProvider router={router} />
-      </UsersContextProvider>
-    </ProductContextProvider>
+    <OrderContextProvider>
+      <ProductContextProvider>
+        <UsersContextProvider>
+          <RouterProvider router={router} />
+        </UsersContextProvider>
+      </ProductContextProvider>
+    </OrderContextProvider>
   );
 }

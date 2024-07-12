@@ -1,11 +1,11 @@
 import axiosInstance from "../config/myAPIs";
 import { setCartState } from "../utils/localStorage.js";
 
-export const getOrders = () => axiosInstance.get(`/orders/`);
-export const getOrderById = (orderId) =>
+const getAllOrders = async () => await axiosInstance.get(`/orders/`);
+const getOrderById = (orderId) =>
   axiosInstance.get(`/orders/${orderId}`);
 
-export const updateOrder = async (orderId, data, source) => {
+const updateOrder = async (orderId, data, source) => {
   const config = {
     headers: { Source: source },
   };
@@ -21,7 +21,14 @@ export const updateOrder = async (orderId, data, source) => {
     throw error;
   }
 };
-export const deleteOrder = async (orderId) => {
+
+const editOrder = async (id, data) => {
+  const config = "updateStatus"
+  // console.log(id, data)
+  await axiosInstance.patch(`/orders/${id}`, data, config);
+};
+
+const deleteOrder = async (orderId) => {
   try {
     const response = await axiosInstance.delete(`/orders/${orderId}`);
     return response;
@@ -31,7 +38,7 @@ export const deleteOrder = async (orderId) => {
   }
 };
 
-export const createOrder = async (data) => {
+const createOrder = async (data) => {
   try {
     const response = await axiosInstance.post(`/orders`, data);
     console.log(response.data);
@@ -44,4 +51,24 @@ export const createOrder = async (data) => {
     console.error("Add to cart Error:", error);
     throw error;
   }
+};
+
+// Use named export for individual functions
+export {
+  getAllOrders,
+  getOrderById,
+  updateOrder,
+  deleteOrder,
+  createOrder,
+  editOrder,
+};
+
+// If needed, use default export for an object containing all functions
+export default {
+  getAllOrders,
+  getOrderById,
+  updateOrder,
+  deleteOrder,
+  createOrder,
+  editOrder,
 };

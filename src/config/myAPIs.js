@@ -1,9 +1,9 @@
 import axios from "axios";
-import { BASE_URL } from "../utils/constant";
+// import { BASE_URL } from "../utils/constant";
 import { getToken } from "../utils/localStorage.js";
 
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "https://jsd7-cmfm-backend.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },

@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../config/myAPIs.js";
 import CircularProgress from "@mui/material/CircularProgress";
 
+
 const ProductInfoPage = () => {
   const { id } = useParams();
   const [products, setProducts] = useState({});
@@ -34,7 +35,7 @@ const ProductInfoPage = () => {
       </div>
     );
     }
-  
+
   console.log(products);
 
   return (

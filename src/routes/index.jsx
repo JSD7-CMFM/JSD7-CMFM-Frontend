@@ -14,6 +14,7 @@ import Container from "../layouts/Container";
 import UsersContextProvider from "../features/Adminfeatures/contexts/UsersContext";
 import ProductContextProvider from "../features/Adminfeatures/contexts/ProductsContext";
 import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
+import AboutUs from "../pages/AboutUs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "Account",
         element: <AccountPageContainer />,
+      },
+      {
+        path: "AboutUs",
+        element: <AboutUs />,
       },
     ],
   },

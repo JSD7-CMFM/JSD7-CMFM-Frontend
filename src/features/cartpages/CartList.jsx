@@ -4,6 +4,7 @@ import { FaStar, FaTrash } from "react-icons/fa";
 import { getCartState } from "../../utils/localStorage.js";
 import { LuTrash2 } from "react-icons/lu";
 import { updateOrder } from "../../apis/orders.js";
+import { Link } from "react-router-dom";
 
 const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
   // const handleQuantityChange = async (productId, newQuantity) => {
@@ -29,12 +30,9 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
 
   const handleDelete = async (id) => {
     try {
-      console.log(id);
       const cartId = getCartState();
       const updatedCart = cart.filter((product) => product.product_id === id);
-      console.log(updatedCart);
       const response = await updateOrder(cartId, updatedCart, "delete");
-      console.log("delete successful", response);
       fetchCart();
     } catch (error) {
       console.log("error", error);
@@ -47,8 +45,15 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
 
   return (
     <div>
-      {cart.length === 0 ? (
-        <div>No items in cart.</div>
+      {cart.length === 0 && getCartState() !== "No_cart" ? (
+        <div className="pt-5">
+          No product in cart, wanna see our TOYS?!!
+          <Link to="/productList">
+            <button className="ml-4 p-2 bg-blue-300 text-white rounded">
+              Go to Product List
+            </button>
+          </Link>
+        </div>
       ) : (
         cart.map((product) => (
           <div key={product._id}>
@@ -91,14 +96,13 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                         className="text-black"
                         type="number"
                         value={product.amount || null}
-                        defaultValue={product.amount}
                         onChange={(e) =>
                           UpdateAmount(product.product_id, e.target.value)
                         }
                       />
                     </div>
                     <div className="flex items-center">
-                      <div className="border-black border rounded-md m-4 p-1 flex justify-between w-4/5">
+                      {/* <div className="border-black border rounded-md m-4 p-1 flex justify-between w-4/5">
                         <h3 className="text-[10px] text-black font-mono p-1">
                           ADD
                         </h3>
@@ -129,7 +133,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                             +
                           </button>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="w-1/5 justify-around space-l-5">
                         <FaTrash
                           className="fa-solid fa-trash fa-2xl py-10"

@@ -5,17 +5,17 @@ export const setInfo = (id, firstName, email, cart, isAdmin) => {
   localStorage.setItem("id", id);
   localStorage.setItem("firstName", firstName);
   localStorage.setItem("email", email);
-  localStorage.setItem("isAdmin", isAdmin);
+  // localStorage.setItem("isAdmin", isAdmin);
   localStorage.setItem("cart", cart);
 };
 export const getToken = () => localStorage.getItem(ACCESS_TOKEN);
 export const getEmail = () => localStorage.getItem("email");
 export const getFirstName = () => localStorage.getItem("firstName");
 export const getId = () => localStorage.getItem("id");
-export const getIsAdmin = () => {
-  const isAdmin = localStorage.getItem('isAdmin');
-  return isAdmin === 'true';
-};
+// export const getIsAdmin = () => {
+//   const isAdmin = localStorage.getItem("isAdmin");
+//   return isAdmin === "true";
+// };
 
 export const setCartState = (cart) => localStorage.setItem("cart", cart);
 export const getCartState = () => localStorage.getItem("cart");

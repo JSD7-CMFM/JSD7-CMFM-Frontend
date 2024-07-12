@@ -22,14 +22,10 @@ const Register = async (data) => {
   console.log(data);
   try {
     const response = await axiosInstance.post("/users/register", data);
-    const { token, id, firstName, email } = response.data;
-    console.log("response: ", response);
-    console.log("data: ", response.data);
-    console.log("token: ", token);
-
+    const { token, id, firstName, email, isAdmin } = response.data;
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email);
+      setInfo(id, firstName, email, isAdmin);
       return response;
     }
   } catch (error) {
@@ -45,9 +41,9 @@ const getUser = async (id) => {
   return await axiosInstance.get(`/users/${id}`, config);
 };
 
-const editUser = async (id, data) => {
+const editUser = async (id, data, source) => {
   const config = {
-    headers: { Authorization: `Bearer ${getToken()}` },
+    headers: { Authorization: `Bearer ${getToken()}`, Source: source },
   };
   return await axiosInstance.patch(`/users/${id}`, data, config);
 };
@@ -64,7 +60,11 @@ const banUser = async (id, currentStatus) => {
   // const response = await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
   // const { message } = response.data
   // console.log("response: ", message);
-  return await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
+  return await axiosInstance.patch(
+    `/users/${id}`,
+    { status: newStatus },
+    config
+  );
 };
 
 export default {

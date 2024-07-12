@@ -3,16 +3,6 @@ import CartCard from "./CartCard";
 import CartList from "./CartList.jsx";
 
 const SelectCart = ({ cart, UpdateAmount, loading, fetchCart }) => {
-  // const [isChecked, setIsChecked] = useState(true);
-  //   const handleSelectAllChange = () => {
-  //   setIsChecked(!isChecked); // Toggle isChecked state
-  //   // Logic to toggle all other checkboxes based on isChecked state
-  //   const checkboxes = document.querySelectorAll('.checkbox-md');
-  //   checkboxes.forEach((checkbox) => {
-  //     checkbox.checked = !isChecked;
-  //   });
-  // };
-
   return (
     <div>
       <section className="px-5 bg-white w-full">

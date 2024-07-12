@@ -1,10 +1,9 @@
-import React from 'react'
-import SignupForm from '../features/signinsignup/components/Signup';
+import React from "react";
+import SignupForm from "../features/signinsignup/components/Signup";
+
 
 const RegisterPage = () => {
-  return (
-    <SignupForm />
-  );
-}
+  return <SignupForm />;
+};
 
-export default RegisterPage
+export default RegisterPage;

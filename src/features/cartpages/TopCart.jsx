@@ -6,7 +6,7 @@ const TopCart = () => {
     <div>
       <div className="w-full bg-white p-2 border-b border-black pt-[90px]">
         <div className="pl-5 w-full flex justify-between">
-          <h1 className="font-sans font-semibold text-[22px] text-black p-5">
+          <h1 className="font-sans font-bold text-[40px] text-black p-5 uppercase">
             {" "}
             My Cart
           </h1>

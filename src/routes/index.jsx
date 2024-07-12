@@ -15,6 +15,7 @@ import UsersContextProvider from "../features/Adminfeatures/contexts/UsersContex
 import ProductContextProvider from "../features/Adminfeatures/contexts/ProductsContext";
 import OrderContextProvider from "../features/Adminfeatures/contexts/OrdersContext";
 import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
+import AboutUs from "../pages/AboutUs.jsx";
 import Order from "../features/Adminfeatures/contexts/OrdersContext";
 
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "Account",
         element: <AccountPageContainer />,
+      },
+      {
+        path: "AboutUs",
+        element: <AboutUs />,
       },
     ],
   },

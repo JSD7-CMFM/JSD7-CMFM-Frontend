@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import appAPI from "../../../apis/users.js";
 import { getId, getToken } from "../../../utils/localStorage.js";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
+const AccountDetails = ({ setActiveSection, setUserGlobal}) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -26,41 +27,42 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   }, [user, setUserGlobal]);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <CircularProgress />
+      </div>)
   }
+
 
   return (
     <div id="acc-info" className="px-7">
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="pr-10 w-[50px]">Name</h2>
-          <p className="mb-7 border-b-2 bg-slate-100 rounded w-full text-center">
+          <h2 className="mt-7 p-1 text justify-inline text-[18px] font-semibold w-[100px]">Name :</h2>
+          <h2 className="mt-7 mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
             {user.data.firstName} {user.data.lastName}
-          </p>
+          </h2>
         </div>
-
       </div>
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="pr-10 w-[50px]">Email</h2>
-          <p className="mb-7 border-b-2 bg-slate-100 rounded w-full text-center">
+          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">Email : </h2>
+          <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
             {user.data.email}
-          </p>
+          </h2>
         </div>
-
       </div>
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="pr-10 w-[50px]">Phone</h2>
-          <p className="mb-7 border-b-2 bg-slate-100 rounded w-full text-center">
+          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">Phone :</h2>
+          <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
             {user.data.phoneNumber}
-          </p>
+          </h2>
         </div>
-
       </div>
       <div className="flex justify-end">
         <button
-          className="border-b-2 rounded-sm bg-[#AAD8EE] px-4 ml-10"
+          className="border-b-2 rounded-md bg-[#AAD8EE] px-4 ml-10 p-2"
           onClick={() => setActiveSection("acc-edit")}
         >
           Edit Information
@@ -68,8 +70,8 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
 
       </div>
       <div>
-        <p>Want to update your password?</p>
-        <p className="underline">Reset my password</p>
+        <p className="mt-10">Want to update your password?</p>
+        <button className="underline" onClick={() => setActiveSection("acc-edit")} cursor-pointer >Reset my password</button>
       </div>
     </div>
   );

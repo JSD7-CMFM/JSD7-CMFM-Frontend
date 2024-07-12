@@ -1,12 +1,12 @@
 import axios from "axios";
-// import { BASE_URL } from "../utils/constant";
+import { BASE_URL } from "../utils/constant";
 import { getToken } from "../utils/localStorage.js";
 
 const axiosInstance = axios.create({
-  baseURL: "https://jsd7-cmfm-backend.onrender.com",
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-  },
+  },  
 });
 
 axiosInstance.interceptors.request.use(

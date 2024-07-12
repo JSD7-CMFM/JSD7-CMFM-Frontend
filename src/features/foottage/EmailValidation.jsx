@@ -23,7 +23,7 @@ const EmailInput = () => {
   };
 
   return (
-    <div className="border border-black space-x-10 flex p-2 rounded-md">
+    <div className="border border-black space-x-10 flex p-2 rounded-md overflow-x-auto ">
       <div className="flex justify-between">
         <div className="flex-col">
           <input
@@ -48,7 +48,7 @@ const EmailInput = () => {
       </div>
       <button
         onClick={handleSubscribe}
-        className=" bg-yellow-300 text-black px-3 py-1 rounded-md items-center text-[16px] font-bold"
+        className=" bg-yellow-300 text-black px-3 py-1 rounded-md items-center uppercase text-[16px] font-semibold hover:bg-yellow-400"
       >
         Subscribe
       </button>

@@ -78,12 +78,16 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                       5.0 (99)
                     </h3>
                   </div>
+                  <button className="badge mt-2 ml-2 md:p-3 text-[14px]  bg-pink-300">
+                    {product.type} Type
+                  </button>
                   <button className="badge mt-2 ml-2 md:p-3 text-[14px]  bg-green-300">
                     {product.category}
                   </button>
                   <div>
-                    <div className="flex justify-center text-left">
-                      <h2 className="" >Quaility : </h2>
+                    <div className="flex-start">
+                      <div className="flex justify-start text-left pl-5 py-5">
+                      <h2 className="text-left" >Quaility : </h2>
                       <input
                         className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
                         type="number"
@@ -92,6 +96,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                           UpdateAmount(product.product_id, e.target.value)
                         }
                       />
+                    </div>
                     </div>
                   </div>
                   <div className="m-4 p-1 flex justify-between w-[100px]">

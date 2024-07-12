@@ -2,53 +2,35 @@ import React, { useState, useEffect } from "react";
 import TopCart from "../features/cartpages/TopCart";
 import SelectCart from "../features/cartpages/SelectCart";
 import TotalCart from "../features/cartpages/TotalCart";
-import axiosInstance from "../config/myAPIs.js";
+import { getOrderById } from "../apis/orders.js";
 import { getCartState } from "../utils/localStorage.js";
+import { updateOrder } from "../apis/orders.js";
+import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
-
-
-//   useEffect(() => {
-//     const fetchCart = async () => {
-//       try {
-//         setLoading(false)
-//         const orderId = getCartState();
-//         console.log("orderId:", orderId);
-//         const response = await axiosInstance.get(`/orders/${orderId}`);
-//         const products = response.data.cart_products;
-//         setCart(
-//           products.map((product) => ({
-//             ...product,
-//             deleted: false,
-//           }))
-//         );
-//         setLoading(true);
-//         console.log(response);
-//       } catch (error) {
-//         console.error("Error fetching cart:", error);
-//         setLoading(true);
-//       }
-//     };
+  const orderId = getCartState();
+  const navigate = useNavigate();
 
   const fetchCart = async () => {
+    if (orderId === "No_cart") {
+      setLoading(true);
+      return;
+    }
     try {
-      setLoading(false)
-      const orderId = getCartState();
-      console.log("orderId:", orderId);
-      const response = await axiosInstance.get(`/orders/${orderId}`);
+      setLoading(false);
+      const response = await getOrderById(orderId);
       const products = response.data.cart_products;
       setCart(products);
       setLoading(true);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching cart:", error);
       setLoading(true);
     }
   };
-  
+
   useEffect(() => {
     fetchCart();
   }, []);
@@ -72,8 +54,21 @@ const CartPage = () => {
     });
     setCart(updatedCart);
   };
+  const totalPrice = cart.reduce((acc, curr) => {
+    return acc + curr.price * curr.amount;
+  }, 0);
 
-
+  const checkoutHandler = async () => {
+    const order = {
+      cart_products: cart,
+      total_price: totalPrice,
+    };
+    const response = await updateOrder(orderId, order, "checkout");
+    if (response) {
+      navigate("/checkout");
+    }
+    return response;
+  };
 
   return (
     <div className="md:px-[100px]">
@@ -81,7 +76,6 @@ const CartPage = () => {
       <div className="flex flex-col sm:flex-col md:flex-row w-auto">
         <div className="w-full md:w-2/3">
           <SelectCart
-    
             cart={cart}
             UpdateAmount={UpdateAmount}
             loading={loading}
@@ -89,7 +83,11 @@ const CartPage = () => {
           />
         </div>
         <div className="w-full md:w-1/2 bg-gray-100">
-          <TotalCart cart={cart} />
+          <TotalCart
+            cart={cart}
+            totalPrice={totalPrice}
+            checkoutHandler={checkoutHandler}
+          />
         </div>
       </div>
     </div>

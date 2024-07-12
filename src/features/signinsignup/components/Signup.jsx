@@ -79,6 +79,7 @@ const SignupForm = () => {
         phoneNumber,
       };
       const response = await usersAPI.Register(dataObject);
+      console.log("response signup", response);
       navigate("/");
     }
   };
@@ -157,6 +158,7 @@ const SignupForm = () => {
             }`}
             value={password}
             onChange={handlePasswordChange}
+            autoComplete="new-password"
           />
           <button
             type="button"
@@ -181,6 +183,7 @@ const SignupForm = () => {
           }`}
           value={passwordConfirmation}
           onChange={handlePasswordConfirmationChange}
+          autoComplete="new-password"
         />
         {isPasswordConfirmationTouched && !isPasswordConfirmationValid && (
           <h4 className="text-red-500 text-[12px] text-center">

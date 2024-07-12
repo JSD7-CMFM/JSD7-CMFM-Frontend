@@ -4,9 +4,10 @@ import { FaStar, FaTrash } from "react-icons/fa";
 import { getCartState } from "../../utils/localStorage.js";
 import { LuTrash2 } from "react-icons/lu";
 import CircularProgress from "@mui/material/CircularProgress";
+import { updateOrder } from "../../apis/orders.js";
 
-const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
 
+const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
   // const handleQuantityChange = async (productId, newQuantity) => {
   //   try {
   //     // Update locally first for responsive UI
@@ -28,15 +29,26 @@ const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
   //   }
   // };
 
-  // import CircularProgress from "@mui/material/CircularProgress";
-  // const [loading, setLoading] = useState(false);
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      const cartId = getCartState();
+      const updatedCart = cart.filter((product) => product.product_id === id);
+      console.log(updatedCart);
+      const response = await updateOrder(cartId, updatedCart, "delete");
+      console.log("delete successful", response);
+      fetchCart();
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   if (!loading) {
     return (
       <div className="flex items-center justify-center h-screen">
       <CircularProgress />;
       </div>)
   }
-
 
   return (
     <div>
@@ -45,8 +57,11 @@ const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
       ) : (
         cart.map((product) => (
           <div key={product._id}>
-            <div className="w-full border rounded-md m-3 border border-gray-600">
-              <button onClick={() =>  handleDelete(product.product_id) } > <LuTrash2 style={{ fontSize: '2rem' , color: 'pink' }}/></button>
+            <div className="w-full rounded-md m-3 border border-gray-600">
+              <button onClick={() => handleDelete(product.product_id)}>
+                {" "}
+                <LuTrash2 style={{ fontSize: "2rem", color: "pink" }} />
+              </button>
               <div className="border-black border rounded-xl bg-white m-2 flex">
                 <div className="w-full p-1 flex-col relative group">
                   <img
@@ -77,7 +92,15 @@ const CartList = ({ cart, UpdateAmount, handleDelete , loading}) => {
                   </button>
                   <div>
                     <div className="bg-black p-1">
-                      <input className="text-black" type="number" value={product.amount||null} defaultValue={product.amount} onChange={(e) => UpdateAmount(product.product_id, e.target.value)}/>
+                      <input
+                        className="text-black"
+                        type="number"
+                        value={product.amount || null}
+                        defaultValue={product.amount}
+                        onChange={(e) =>
+                          UpdateAmount(product.product_id, e.target.value)
+                        }
+                      />
                     </div>
                     <div className="flex items-center">
                       <div className="border-black border rounded-md m-4 p-1 flex justify-between w-4/5">

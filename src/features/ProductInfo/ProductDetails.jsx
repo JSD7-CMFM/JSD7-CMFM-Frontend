@@ -38,6 +38,7 @@ const ProductDetails = ({ products }) => {
         description: products.description,
         price: products.price,
         product_img: products.product_img,
+        type: products.type
       };
 
       const orderId = getCartState();

@@ -13,9 +13,6 @@ const Addresses = ({ user }) => {
             {user.address.address} {user.address.province}
             {user.address.country} {user.address.zipcode}
           </p>
-          <a href="#" className="underline">
-            Delete
-          </a>
         </div>
         <div id="edit-button">
           <a href="#" className="underline">

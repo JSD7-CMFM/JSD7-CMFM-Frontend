@@ -8,13 +8,21 @@ function LoginForm() {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [disable, setDisable] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [isEmailTouched, setIsEmailTouched] = useState(false);
+  const [isPasswordTouched, setIsPasswordTouched] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
+    setIsEmailTouched(true);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailPattern.test(newEmail));
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    setIsPasswordTouched(true);
   };
 
   const handleSubmit = async (e) => {
@@ -22,8 +30,8 @@ function LoginForm() {
     setLoginError("");
     const user = { email, password };
 
-    if (!isEmailValid) {
-      setLoginError("Please enter a valid email address.");
+    if (!isEmailValid || email === "" || password === "") {
+      setLoginError("Please enter a valid email address and password.");
       return;
     }
 
@@ -70,7 +78,7 @@ function LoginForm() {
           placeholder="Password*"
           className="mt-5 p-1 pl-4 rounded border border-gray-300"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
           autoComplete="current-password"
         />
         <a href="/forget" className="underline text-[12px] text-right pt-1">
@@ -84,7 +92,7 @@ function LoginForm() {
         <div className="mt-14 text-center">
           <button
             className="py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
-            disabled={disable}
+            disabled={disable || !isEmailTouched || !isPasswordTouched}
           >
             LOGIN
           </button>
@@ -99,5 +107,4 @@ function LoginForm() {
     </div>
   );
 }
-
 export default LoginForm;

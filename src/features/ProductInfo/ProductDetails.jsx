@@ -81,11 +81,11 @@ const ProductDetails = ({ products }) => {
   return (
     <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">
       <div className="px-2 py-3 w-full md:h-full">
-        <div className="pb-5 text-3xl md:text-xl md:font-bold">
-          <h1>{products.name}</h1>
+        <div className=" text-3xl md:text-xl md:font-bold pb-3">
+          <h1 className="text-[24px] font-semibold">{products.name}</h1>
         </div>
         <div className="pb-4">
-          <p>{products.description}</p>
+          <h1 className="text-[16px]">{products.description}</h1>
         </div>
 
         <div className="pb-2 text-sm font-medium">{/* <h2>SINGLE</h2> */}</div>

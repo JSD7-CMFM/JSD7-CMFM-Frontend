@@ -40,7 +40,7 @@ const ProductList = [
       "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
     imageUrl2:
       "https://prod-eurasian-res.popmart.com/default/20240612_103708_563109____5_____1200x1200.jpg",
-  },
+  }
 ];
 
 const ProductCard = () => {
@@ -57,11 +57,11 @@ const ProductCard = () => {
   return (
     <>
       <Link to="/productlist">
-        <div className="grid grid-cols-4 gap-4 m-5 ">
+        <div className="grid grid-cols-4 gap-4 m-5">
           {ProductList.map((product, index) => (
             <div
               key={product._id}
-              className="border border-gray-200 rounded-xl overflow-hidden relative group mb-4 pb-10 bg-white shadow-2xl "
+              className="border border-gray-200 rounded-xl overflow-hidden relative group mb-4 pb-10 bg-white shadow-2xl w-[300px] h-[450px]"
             >
               <div className="relative group">
                 <img

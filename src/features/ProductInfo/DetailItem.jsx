@@ -43,8 +43,8 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
 
 
   return (
-    <div className="flex pb-4 md:text-xl">
-      <div className="w-24 border-black border md:w-32 rounded-2xl">
+    <div className="flex pb-4 md:text-xl  p-2 rounded-2xl bg-white bg-opacity-50">
+      <div className="w-30 md:w-32 rounded-2xl">
         <img
           className="w-full h-full object-cover rounded-2xl"
           src={imgSrc}
@@ -52,7 +52,7 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
         />
       </div>
       <div className="ml-4 mt-2">
-        <h3>{description}</h3>
+        <h3 className="text-[16px]">{description}</h3>
         <div className="text-xs text-black md:text-[16px] badge mt-2 md:p-3 bg-pink-300">
           {type} Type
         </div>

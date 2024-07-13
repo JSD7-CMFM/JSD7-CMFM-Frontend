@@ -22,7 +22,7 @@ const fetchProducts2 = async () => {
 };
 const fetchProducts = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/products"); // Assuming the API returns JSON data
+    const response = await axiosInstance.get("/products"); // Assuming the API returns JSON data
     return response.data; // Return the data if needed
   } catch (error) {
     console.error("Error fetching products:", error);

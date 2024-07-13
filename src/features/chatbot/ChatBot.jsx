@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import axiosInstance from '../../config/myAPIs';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +18,8 @@ const ChatBot = () => {
     const newChat = [...chat, { user: 'user', message }];
     setChat(newChat);
     setMessage('');
-
     try {
-      const response = await axios.post('http://localhost:3000/chat', { message });
+      const response = await axiosInstance.post('/chat', { message });
       setChat([...newChat, { user: 'bot', message: response.data.reply }]);
     } catch (error) {
       console.error('Error sending message:', error);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import MovingSectionAlter from "../../../features/homepage/components/movingTextAlter.jsx";
 
 const ProductList = [
   {
@@ -101,6 +102,7 @@ const ProductCard = () => {
           ))}
         </div>
       </Link>
+      <MovingSectionAlter />
     </>
   );
 };

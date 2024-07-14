@@ -18,7 +18,6 @@ import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
 import AboutUs from "../pages/AboutUs.jsx";
 import ScrollToTop from "../utils/scrollToTop.js";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -71,29 +70,27 @@ const router = createBrowserRouter([
       },
       {
         path: "Random",
-        element: <randomPage />
+        element: <randomPage />,
       },
     ],
   },
   {
     path: "/admin",
     element: (
-      <AuthenticateAdmin>
-        <ScrollToTop />
-        <DashboardPage />
-      </AuthenticateAdmin>
+      <OrderContextProvider>
+        <ProductContextProvider>
+          <UsersContextProvider>
+            <AuthenticateAdmin>
+              <ScrollToTop />
+              <DashboardPage />
+            </AuthenticateAdmin>
+          </UsersContextProvider>
+        </ProductContextProvider>
+      </OrderContextProvider>
     ),
   },
 ]);
 
 export default function Router() {
-  return (
-    <OrderContextProvider>
-      <ProductContextProvider>
-        <UsersContextProvider>
-          <RouterProvider router={router} />
-        </UsersContextProvider>
-      </ProductContextProvider>
-    </OrderContextProvider>
-  );
+  return <RouterProvider router={router} />;
 }

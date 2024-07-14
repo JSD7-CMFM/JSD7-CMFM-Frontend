@@ -37,7 +37,6 @@ export const getIsAdmin = () => {
 
   try {
     const decodedToken = decodeJWT(token);
-    console.log(decodedToken);
     return decodedToken && decodedToken.isAdmin === true;
   } catch (error) {
     console.error("Invalid token:", error);

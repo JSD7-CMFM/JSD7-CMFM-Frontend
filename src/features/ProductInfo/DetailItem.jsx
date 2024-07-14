@@ -24,7 +24,6 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
   //   fetchData();
   // }, []); // Empty dependency array ensures useEffect runs only on component mount
 
-
   // useEffect(() => {
   //   // Find the product by id once products are fetched
   //   if (products.length > 0) {
@@ -41,7 +40,6 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
     return <div>Product not found</div>;
   }
 
-
   return (
     <div className="flex pb-4 md:text-xl  p-2 rounded-2xl bg-[rgb(45,204,240)] bg-opacity-30 border-2 drop-shadow-lg">
       <div className="w-50 md:w-32 rounded-2xl pl-4">
@@ -56,7 +54,7 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
         <div className="text-xs text-black md:text-[16px] badge mt-2 md:p-3 bg-pink-300">
           {type} Type
         </div>
-        <div className="badge mt-2 ml-2 md:p-3 text-[16px] font  bg-green-300">
+        <div className="badge text-black mt-2 ml-2 md:p-3 text-[16px] font  bg-green-300">
           {category}
         </div>
       </div>
@@ -65,4 +63,3 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
 };
 
 export default DetailItem;
-

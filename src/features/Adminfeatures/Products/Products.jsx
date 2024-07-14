@@ -139,7 +139,6 @@ const Products = () => {
         info2: newProduct.productinfo.info2,
       },
     };
-    console.log("Adding Product:", productToAdd);
     addProduct(productToAdd)
       .then((response) => {
         console.log("Product added successfully:", response);

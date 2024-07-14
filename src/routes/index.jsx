@@ -69,6 +69,10 @@ const router = createBrowserRouter([
         path: "AboutUs",
         element: <AboutUs />,
       },
+      {
+        path: "Random",
+        element: <randomPage />
+      },
     ],
   },
   {

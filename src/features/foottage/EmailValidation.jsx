@@ -23,7 +23,7 @@ const EmailInput = () => {
   };
 
   return (
-    <div className="border border-black space-x-10 flex p-2 rounded-md overflow-x-auto ">
+    <div className="border border-gray-200 space-x-10 flex p-2 rounded-md overflow-x-auto flex-col">
       <div className="flex justify-between">
         <div className="flex-col">
           <input

@@ -30,7 +30,7 @@ const OrderHistory = ({ orderHistory }) => {
                     <div className="w-[30px] text-center">{index + 1}</div>
                     <div className="flex w-full justify-around">
                       <div>
-                        <p>Name: {product.name}</p>
+                        <p className="text-left">Name: {product.name}</p>
                         <p>Price: {product.price}</p>
                         <p>Amount: {product.amount}</p>
                       </div>

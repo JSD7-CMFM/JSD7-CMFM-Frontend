@@ -58,7 +58,15 @@ const ProductCard = () => {
   return (
     <>
       <Link to="/productlist">
-        <div className="grid grid-cols-4 gap-4 m-5">
+        <div className="relative pt-[120px]">
+          <h1 className="pl-5 text-green text-[60px] font-bold shadow-xl">NEW ARRIVALS</h1>
+          <div className="flex w-[600px] h-auto animate-rightToLeft relative" >
+          <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_360649____5_____1200x1200.jpg" />
+          <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_704359____4_____1200x1200.jpg" />
+          <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_563249____6_____1200x1200.jpg" />
+        </div>
+        </div>
+        {/* <div className="grid grid-cols-4 gap-4 p-5 bg-white">
           {ProductList.map((product, index) => (
             <div
               key={product._id}
@@ -100,7 +108,7 @@ const ProductCard = () => {
               </Link>
             </div>
           ))}
-        </div>
+        </div> */}
       </Link>
       <MovingSectionAlter />
     </>

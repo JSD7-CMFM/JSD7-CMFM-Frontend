@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const InfoSection = () => {
   return (
-    <div className="px-6 py-28 bg-[#FDF4EB] border-2 border-black md:px-48 lg:px-96">
+    <div className="px-6 py-28 bg-[#FDF4EB] border-2 border-white md:px-48 lg:px-96">
       <div className="text-3xl md:text-4xl lg:text-6xl text-center font-light pb-6">
         <h3>ABOUT PONY MART</h3>
       </div>
@@ -19,7 +19,7 @@ const InfoSection = () => {
       <Link to="productList" className="flex justify-center">
         <button
           to="productList"
-          className="border-2 border-black w-full md:w-1/2 lg:w-1/4 rounded-md py-4 bg-white font-semibold text-lg md:text-xl hover:bg-[#F0EB76]"
+          className="border-2 border-gray-300 w-full md:w-1/2 lg:w-1/4 rounded-xl py-4 bg-white font-semibold text-lg md:text-xl hover:bg-[#F0EB76]"
         >
           LEARN MORE
         </button>

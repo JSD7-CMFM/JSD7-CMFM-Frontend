@@ -10,6 +10,7 @@ const Homepage = () => {
       <Hero />
       <VideoPlayer />
       <ProductCard />
+      <Hero />
       <ShowProduct />
     </>
   );

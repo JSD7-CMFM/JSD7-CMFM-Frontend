@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../config/myAPIs";
 import { FaStar } from "react-icons/fa";
 import { getCartState } from "../../utils/localStorage.js";
-import { FaTrash } from "react-icons/fa";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateOrder } from "../../apis/orders.js";
 import { Link } from "react-router-dom";
@@ -45,7 +45,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
               <div className="border-gray-200 border rounded-xl bg-white m-2 p-2  flex shadow-2xl">
                 <button onClick={() => handleDelete(product.product_id)}>
                 {" "}
-                <FaTrash className="absolute top-2 right-5 " style={{ fontSize: "2rem", color: "pink" }}   />
+                <RiDeleteBack2Fill className="absolute top-2 right-5 " style={{ fontSize: "2rem", color: "pink" }}   />
               </button>
                 <div className="w-full p-1 flex-col relative group">
                   <img
@@ -80,7 +80,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                   <div>
                     <div className="flex-start">
                       <div className="flex justify-start text-left pl-5 py-5">
-                      <h2 className="text-left" >Quaility : </h2>
+                      <h2 className="text-left" >Quanity : </h2>
                       <input
                         className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
                         type="number"

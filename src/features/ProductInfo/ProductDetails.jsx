@@ -24,6 +24,7 @@ const ProductDetails = ({ products }) => {
     event.preventDefault();
     if (!products) {
       console.error("product is null");
+      setLoading(false)
       return;
     }
 
@@ -74,7 +75,13 @@ const ProductDetails = ({ products }) => {
   };
 
   if (!products) {
-    return <div>Loading...</div>;
+    if (!loading) {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <CircularProgress />
+        </div>
+      );
+    }
   }
 
   const totalPrice2 = (quantity2 * products.price).toFixed(2);

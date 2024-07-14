@@ -7,9 +7,9 @@ import VideoPlayer from "../features/carousel/components/VideoCarousel.jsx";
 const Homepage = () => {
   return (
     <>
-      {/* <VideoPlayer /> */}
       <ProductCard />
       <Hero />
+      <VideoPlayer />
       <ShowProduct />
     </>
   );

@@ -1,11 +1,13 @@
 import React from "react";
-import MovingSection from "./movingText";
 import { Link } from "react-router-dom";
+import MovingSectionAlter from "./movingTextAlter";
+import MovingSection from "./movingText";
+
 
 const Hero = () => {
   return (
     <section id="hero" className="bg-[#b5e3d8]">
-      <MovingSection />
+      <MovingSectionAlter />
       <div id="main-container" className="md:flex md:flex-row-reverse">
         <TextSection />
         <PictureSection />

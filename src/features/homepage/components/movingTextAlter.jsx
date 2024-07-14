@@ -43,7 +43,7 @@ const MovingSectionAlter = () => {
   return (
     <div
       id="moving-container"
-      className="bg-[#e71111] overflow-hidden border-black border"
+      className="bg-[#f7b7ed] overflow-hidden border-white border"
     >
       <div
         id="moving-section"

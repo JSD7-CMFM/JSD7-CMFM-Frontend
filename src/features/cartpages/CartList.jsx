@@ -44,9 +44,12 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
             <div className="w-full rounded-md relative">
               <div className="border-gray-200 border rounded-xl bg-white m-2 p-2  flex shadow-2xl">
                 <button onClick={() => handleDelete(product.product_id)}>
-                {" "}
-                <FaTrash className="absolute top-2 right-5 " style={{ fontSize: "2rem", color: "pink" }}   />
-              </button>
+                  {" "}
+                  <FaTrash
+                    className="absolute top-2 right-5 "
+                    style={{ fontSize: "2rem", color: "pink" }}
+                  />
+                </button>
                 <div className="w-full p-1 flex-col relative group">
                   <img
                     src={product.product_img}
@@ -80,16 +83,16 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                   <div>
                     <div className="flex-start">
                       <div className="flex justify-start text-left pl-5 py-5">
-                      <h2 className="text-left" >Quaility : </h2>
-                      <input
-                        className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
-                        type="number"
-                        value={product.amount || null}
-                        onChange={(e) =>
-                          UpdateAmount(product.product_id, e.target.value)
-                        }
-                      />
-                    </div>
+                        <h2 className="text-left">Quaility : </h2>
+                        <input
+                          className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
+                          type="number"
+                          value={product.amount || null}
+                          onChange={(e) =>
+                            UpdateAmount(product.product_id, e.target.value)
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="m-4 p-1 flex justify-between w-[100px]">

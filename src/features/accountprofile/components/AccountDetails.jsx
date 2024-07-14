@@ -3,7 +3,7 @@ import appAPI from "../../../apis/users.js";
 import { getId, getToken } from "../../../utils/localStorage.js";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const AccountDetails = ({ setActiveSection, setUserGlobal}) => {
+const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -30,15 +30,17 @@ const AccountDetails = ({ setActiveSection, setUserGlobal}) => {
     return (
       <div className="flex items-center justify-center h-screen">
         <CircularProgress />
-      </div>)
+      </div>
+    );
   }
-
 
   return (
     <div id="acc-info" className="px-7">
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="mt-7 p-1 text justify-inline text-[18px] font-semibold w-[100px]">Name :</h2>
+          <h2 className="mt-7 p-1 text justify-inline text-[18px] font-semibold w-[100px]">
+            Name :
+          </h2>
           <h2 className="mt-7 mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
             {user.data.firstName} {user.data.lastName}
           </h2>
@@ -46,7 +48,9 @@ const AccountDetails = ({ setActiveSection, setUserGlobal}) => {
       </div>
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">Email : </h2>
+          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">
+            Email :{" "}
+          </h2>
           <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
             {user.data.email}
           </h2>
@@ -54,7 +58,9 @@ const AccountDetails = ({ setActiveSection, setUserGlobal}) => {
       </div>
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">Phone :</h2>
+          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">
+            Phone :
+          </h2>
           <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
             {user.data.phoneNumber}
           </h2>
@@ -62,16 +68,20 @@ const AccountDetails = ({ setActiveSection, setUserGlobal}) => {
       </div>
       <div className="flex justify-end">
         <button
-          className="border-b-2 rounded-md bg-[#AAD8EE] px-4 ml-10 p-2"
+          className="border-b-2 rounded-md bg-[#AAD8EE] px-4 ml-10 p-2 hover:cursor-pointer hover:opacity-45"
           onClick={() => setActiveSection("acc-edit")}
         >
           Edit Information
         </button>
-
       </div>
       <div>
         <p className="mt-10">Want to update your password?</p>
-        <button className="underline" onClick={() => setActiveSection("acc-edit")} cursor-pointer >Reset my password</button>
+        <button
+          className="underline cursor-pointer"
+          onClick={() => setActiveSection("acc-edit")}
+        >
+          Reset my password
+        </button>
       </div>
     </div>
   );

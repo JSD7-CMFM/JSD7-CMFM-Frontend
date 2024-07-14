@@ -1,6 +1,6 @@
 import React from "react";
 
-const Addresses = ({ user }) => {
+const Addresses = ({ user, setActiveSection }) => {
   return (
     <div id="acc-address" className="px-7">
       <div id="top-box" className="mb-3 border-b-2 pb-10 flex justify-between">
@@ -14,18 +14,15 @@ const Addresses = ({ user }) => {
             {user.address.country} {user.address.zipcode}
           </p>
         </div>
-        <div id="edit-button">
-          <a href="#" className="underline">
-            Edit
-          </a>
-        </div>
       </div>
-      <div className="mt-7 mb-4">
+      <div className="mt-7 mb-4 flex justify-end">
         <a
-          href="#"
-          className="py-[10px] px-6 bg-white hover:bg-[#F0EB76] rounded-lg border border-black"
+          className="py-[10px] px-6 bg-white hover:bg-[#F0EB76] rounded-lg border border-black hover:cursor-pointer"
+          onClick={() => {
+            setActiveSection("acc-edit-address");
+          }}
         >
-          Add New
+          Edit
         </a>
       </div>
     </div>

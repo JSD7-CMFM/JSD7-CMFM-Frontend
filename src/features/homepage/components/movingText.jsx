@@ -1,5 +1,5 @@
 import React from "react";
-import { RiFireLine } from "react-icons/ri";
+import { PiFireFill } from "react-icons/pi";
 
 const MovingSection = () => {
   const MovingContent = () => {
@@ -8,33 +8,33 @@ const MovingSection = () => {
         <div className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px] flex  text-white">
           HOT DEALS
           <div className="flex p-1">
-            <RiFireLine />
-            <RiFireLine />
-            <RiFireLine />
+            <PiFireFill />
+            <PiFireFill />
+            <PiFireFill />
           </div>
         </div>
         <div className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px] flex text-white">
           HOT DEALS
           <div className="flex p-1">
-            <RiFireLine />
-            <RiFireLine />
-            <RiFireLine />
+            <PiFireFill />
+            <PiFireFill />
+            <PiFireFill />
           </div>
         </div>
         <div className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px] flex  text-white">
           HOT DEALS
           <div className="flex p-1">
-            <RiFireLine />
-            <RiFireLine />
-            <RiFireLine />
+            <PiFireFill />
+            <PiFireFill />
+            <PiFireFill />
           </div>
         </div>
         <div className="py-[10px] px-[12.5px] whitespace-nowrap md:pt-[17px] md:pb-5 md:px-12 md:text-[20px] flex  text-white">
           HOT DEALS
           <div className="flex p-1">
-            <RiFireLine />
-            <RiFireLine />
-            <RiFireLine />
+           <PiFireFill />
+            <PiFireFill />
+            <PiFireFill />
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ const MovingSection = () => {
   return (
     <div
       id="moving-container"
-      className="bg-[#e71111] overflow-hidden border-black border"
+      className="bg-[#f7b7ed] overflow-hidden border-white border"
     >
       <div
         id="moving-section"

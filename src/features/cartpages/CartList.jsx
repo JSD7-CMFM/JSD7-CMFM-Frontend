@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../config/myAPIs";
 import { FaStar } from "react-icons/fa";
 import { getCartState } from "../../utils/localStorage.js";
-import { FaTrash } from "react-icons/fa";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateOrder } from "../../apis/orders.js";
 import { Link } from "react-router-dom";
@@ -42,10 +42,10 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
         cart.map((product) => (
           <div key={product._id}>
             <div className="w-full rounded-md relative">
-              <div className="border-black border rounded-xl bg-white m-2 flex shadow-2xl">
+              <div className="border-gray-200 border rounded-xl bg-white m-2 p-2  flex shadow-2xl">
                 <button onClick={() => handleDelete(product.product_id)}>
                 {" "}
-                <FaTrash className="absolute top-2 right-5 " style={{ fontSize: "2rem", color: "pink" }}   />
+                <RiDeleteBack2Fill className="absolute top-2 right-5 " style={{ fontSize: "2rem", color: "pink" }}   />
               </button>
                 <div className="w-full p-1 flex-col relative group">
                   <img
@@ -71,12 +71,16 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                       5.0 (99)
                     </h3>
                   </div>
+                  <button className="badge mt-2 ml-2 md:p-3 text-[14px]  bg-pink-300">
+                    {product.type} Type
+                  </button>
                   <button className="badge mt-2 ml-2 md:p-3 text-[14px]  bg-green-300">
                     {product.category}
                   </button>
                   <div>
-                    <div className="flex justify-center text-left">
-                      <h2 className="" >Quaility : </h2>
+                    <div className="flex-start">
+                      <div className="flex justify-start text-left pl-5 py-5">
+                      <h2 className="text-left" >Quanity : </h2>
                       <input
                         className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
                         type="number"
@@ -85,6 +89,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                           UpdateAmount(product.product_id, e.target.value)
                         }
                       />
+                    </div>
                     </div>
                   </div>
                   <div className="m-4 p-1 flex justify-between w-[100px]">

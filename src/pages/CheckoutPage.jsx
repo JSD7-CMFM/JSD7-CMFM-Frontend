@@ -3,6 +3,7 @@ import OrderSummary from "../features/checkout/components/OrderSummary";
 import Checkout from "../features/checkout/components/Checkout ";
 import userApi from "../apis/users.js";
 import { getOrderById, updateOrder } from "../apis/orders.js";
+import  sendMail  from "../apis/mail.js";
 import { getCartState, getId, setCartState } from "../utils/localStorage.js";
 import { useNavigate } from "react-router-dom";
 import ConfirmLeaveModal from "../features/checkout/components/ConfirmLeave.jsx";
@@ -64,6 +65,7 @@ const CheckoutPage = () => {
       console.log(address);
       console.log(typeof address);
       const responseOrder = await updateOrder(orderId, address, "success");
+      await sendMail(orderId);
       if (rememberAddress) {
         try {
           const responseUser = await userApi.editUser(

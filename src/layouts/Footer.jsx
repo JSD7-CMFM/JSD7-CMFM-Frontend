@@ -29,8 +29,8 @@ const Footer = () => {
   return (
     <section className="">
       {/* column1 */}
-      <Sponser />
-      <Subscribe />
+      {/* <Sponser />  */}
+      {/* <Subscribe />  */}
       <Credit />
     </section>
   );

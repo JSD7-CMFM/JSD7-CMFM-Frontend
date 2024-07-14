@@ -1,10 +1,13 @@
 import React from "react";
-import MovingSection from "./movingText";
 import { Link } from "react-router-dom";
+import MovingSectionAlter from "./movingTextAlter";
+import MovingSection from "./movingText";
+
 
 const Hero = () => {
   return (
     <section id="hero" className="bg-[#b5e3d8]">
+      <MovingSectionAlter />
       <div id="main-container" className="md:flex md:flex-row-reverse">
         <TextSection />
         <PictureSection />
@@ -31,7 +34,7 @@ const TextSection = () => {
       {/* <p className="text-center md:text-left">Lorem ipsum dolor sit amet</p> */}
       <Link
         to="productList"
-        className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border border-black"
+        className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border-2 border-white"
       >
         Pony Mart
       </Link>
@@ -43,7 +46,7 @@ const PictureSection = () => {
   return (
     <div
       id="picture-section"
-      className="md:w-1/2 border-r border-black h-[55vh] md:h-auto"
+      className="md:w-1/2 border-r border-white h-[55vh] md:h-auto"
     >
       <picture>
         <img

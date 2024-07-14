@@ -16,14 +16,14 @@ import ProductContextProvider from "../features/Adminfeatures/contexts/ProductsC
 import OrderContextProvider from "../features/Adminfeatures/contexts/OrdersContext";
 import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
 import AboutUs from "../pages/AboutUs.jsx";
-import Order from "../features/Adminfeatures/contexts/OrdersContext";
-
+import ScrollToTop from "../utils/scrollToTop.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
+        <ScrollToTop />
         <Container />
       </>
     ),
@@ -68,26 +68,29 @@ const router = createBrowserRouter([
         path: "AboutUs",
         element: <AboutUs />,
       },
+      {
+        path: "Random",
+        element: <randomPage />,
+      },
     ],
   },
   {
     path: "/admin",
     element: (
-      <AuthenticateAdmin>
-        <DashboardPage />
-      </AuthenticateAdmin>
+      <OrderContextProvider>
+        <ProductContextProvider>
+          <UsersContextProvider>
+            <AuthenticateAdmin>
+              <ScrollToTop />
+              <DashboardPage />
+            </AuthenticateAdmin>
+          </UsersContextProvider>
+        </ProductContextProvider>
+      </OrderContextProvider>
     ),
   },
 ]);
 
 export default function Router() {
-  return (
-    <OrderContextProvider>
-      <ProductContextProvider>
-        <UsersContextProvider>
-          <RouterProvider router={router} />
-        </UsersContextProvider>
-      </ProductContextProvider>
-    </OrderContextProvider>
-  );
+  return <RouterProvider router={router} />;
 }

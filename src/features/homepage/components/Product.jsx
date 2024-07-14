@@ -12,9 +12,9 @@ const Product = ({ imageUrl, hoverImageUrl, name, isRounded }) => {
       <img 
         src={isHovered ? hoverImageUrl : imageUrl} 
         alt={name} 
-        className={`w-full h-auto border-2 border-black ${isRounded ? 'rounded-full' : 'rounded-md'}`} 
+        className={`w-full h-auto border-2 border-white ${isRounded ? 'rounded-full' : 'rounded-full'}`} 
       />
-      <h2 className='text-center'>{name}</h2>
+      <h2 className='text-center p-5 text-[20px] text-black'>{name}</h2>
     </div>
   );
 };

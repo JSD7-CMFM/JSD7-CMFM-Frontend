@@ -34,7 +34,7 @@ const CartPage = () => {
   useEffect(() => {
     fetchCart();
   }, []);
-
+  console.log("Code: ", cart)
   if (!loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -72,9 +72,9 @@ const CartPage = () => {
 
   return (
     <div className="md:px-[100px]">
-      <TopCart />
+      <TopCart cart={cart} UpdateAmount={UpdateAmount} />
       <div className="flex flex-col sm:flex-col md:flex-row w-auto">
-        <div className="w-full md:w-2/3">
+        <div className="w-full md:w-2/3 pb-[500px]">
           <SelectCart
             cart={cart}
             UpdateAmount={UpdateAmount}
@@ -82,7 +82,7 @@ const CartPage = () => {
             fetchCart={fetchCart}
           />
         </div>
-        <div className="w-full md:w-1/2 bg-gray-100">
+        <div className="w-full md:w-1/2 bg-gray-100 ">
           <TotalCart
             cart={cart}
             totalPrice={totalPrice}

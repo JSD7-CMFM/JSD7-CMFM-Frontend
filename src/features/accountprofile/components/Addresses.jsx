@@ -3,15 +3,22 @@ import React from "react";
 const Addresses = ({ user, setActiveSection }) => {
   return (
     <div id="acc-address" className="px-7">
-      <div id="top-box" className="mb-3 border-b-2 pb-10 flex justify-between">
+      <div
+        id="top-box"
+        className="mb-3 border-b-2 pb-10 flex justify-between  bg-white rounded-xl p-10"
+      >
         <div id="address-section">
-          <h3 className="mb-3 font-medium uppercase">Address</h3>
-          <p>
-            {user.firstName} {user.lastName}
+          <h3 className="mb-3 font-semibold text-[20px] uppercase pt-10">
+            Address
+          </h3>
+          <p className="mb-4 pl-5">
+            TO: {user.firstName} {user.lastName}
           </p>
-          <p className="mb-4">
-            {user.address.address} {user.address.province}
-            {user.address.country} {user.address.zipcode}
+          <p className="mb-4  pl-5">
+            {user.address.address} Provice:{user.address.province}
+          </p>
+          <p className="mb-4 pl-5">
+            Country:{user.address.country} Zipcode:{user.address.zipcode}
           </p>
         </div>
       </div>

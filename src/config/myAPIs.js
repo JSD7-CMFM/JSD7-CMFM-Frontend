@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-  },
+  },  
 });
 
 axiosInstance.interceptors.request.use(
@@ -21,4 +21,5 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
 export default axiosInstance;

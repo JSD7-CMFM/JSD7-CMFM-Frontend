@@ -5,8 +5,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs.js";
 import { Pagination, Box, TextField } from "@mui/material";
-import { FaMagnifyingGlass } from "react-icons/fa6";
-import { IoMdClose } from "react-icons/io";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const ProductListDetail = () => {
@@ -66,15 +64,15 @@ const ProductListDetail = () => {
                   ...prevFilter,
                   search: event.target.value,
                 }));
-              }, 1500);
+              }, 5000);
             }}
           />
         </Box>
       </div>
-          <div className="grid grid-cols-4 gap-4 p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4">
       {products.map((product) => (
         <Link key={product._id} to={`/productinfo/${product._id}`}>
-          <div className="border border-gray-200 rounded-lg overflow-hidden relative group mb-4 pb-10 bg-white shadow-2xl w-[400px] h-[420px]">
+          <div className="border border-gray-200 rounded-lg overflow-hidden relative group mb-5 pb-5 bg-white shadow-2xl w-full md:w-[320px] h-[440px]">
             <div className="relative group">
               <img
                 src={product.product_img}

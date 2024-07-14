@@ -5,11 +5,11 @@ const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
 
-    const { token, id, firstName, email, cart, isAdmin } = response.data;
+    const { token, id, firstName, email, cart } = response.data;
     console.log("response: ", response.data);
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email, cart, isAdmin);
+      setInfo(id, firstName, email, cart);
     }
     return response;
   } catch (error) {
@@ -21,10 +21,10 @@ const Login = async (user) => {
 const Register = async (data) => {
   try {
     const response = await axiosInstance.post("/users/register", data);
-    const { token, id, firstName, email, cart, isAdmin } = response.data;
+    const { token, id, firstName, email, cart } = response.data;  
     if (response.data && token) {
       setToken(token);
-      setInfo(id, firstName, email, cart, isAdmin);
+      setInfo(id, firstName, email, cart);
       return response;
     }
   } catch (error) {

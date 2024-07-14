@@ -21,10 +21,10 @@ const AccountPageContainer = () => {
   };
 
   return (
-    <section id="my-acc" className="bg-[#F0EB76] px-3 pb-4 h-screen pt-[100px]">
+    <section id="my-acc" className="bg-[#dbd1f4] px-3 pb-4 h-screen pt-[100px]">
       <div
         id="acc-container"
-        className="md:pb-12 md:pt-[90px] md:flex md:justify-center md:px-9 border border-black rounded-xl bg-yellow-500"
+        className="md:pb-12 md:pt-[90px] md:flex md:justify-center md:px-9 border-4 border-white rounded-xl bg-[#c5f5d6]"
       >
         <div
           id="acc-nav"
@@ -64,7 +64,7 @@ const AccountPageContainer = () => {
         </div>
         <div
           id="acc-display"
-          className="bg-white border border-black rounded-xl min-h-[400px] md:h-[450px] p-8 md:w-[638px] overflow-y-scroll"
+          className="bg-blue-100 border border-black rounded-xl min-h-[400px] md:h-[450px] p-8 md:w-[638px] overflow-y-scroll"
         >
           {activeSection === "acc-info" && (
             <AccountDetails

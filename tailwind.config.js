@@ -12,12 +12,21 @@ export default {
             transform: "translateX(0)",
           },
           "100%": {
-            transform: "translateX(-100%)",
+            transform: "translateX(-50%)",
+          },
+        },
+        leftToRight: {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "100%": {
+            transform: "translateX(50%)",
           },
         },
       },
       animation: {
-        rightToLeft: "rightToLeft 10s linear infinite",
+        rightToLeft: "rightToLeft 30s linear infinite",
+        leftToRight: "leftToRight 30s linear infinite",
       },
     },
   },

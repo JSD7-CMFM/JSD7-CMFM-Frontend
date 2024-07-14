@@ -7,14 +7,14 @@ import {
   FaGlide,
 } from "react-icons/fa";
 
-const Sponser = () => {
+const shop = () => {
   return (
     <>
-      <div className="bg-[rgb(208,192,239)] p-10 border border-black border-t-0 ">
+      <div className="bg-[rgb(240,233,209)] p-10 border-2 border-white border ">
         <h1 className="text-black text-[48px] text-center justify-center py-6 uppercase">
           We're out here!
         </h1>
-        <div className="flex justify-center py-7 space-x-10 cursor: pointer;">
+        <div className="flex flex-wrap justify-center py-4 md:grid-cols-3 gap-x-10 md:gap-10 cursor-pointer">
             <a href="https://shopify.com" target="_blank" rel="noopener noreferrer">
                 <FaShopify size={70} style={{ color: "#fd9300" }} />
               </a>
@@ -25,17 +25,17 @@ const Sponser = () => {
                 <FaAmazon size={70} style={{ color: "#ace3e6" }} />
               </a>
               <a href="https://fortawesome.com" target="_blank" rel="noopener noreferrer">
-                <FaFortAwesome size={70} style={{ color: "#ffdd30" }} />
+                <FaFortAwesome size={70} style={{ color: "#bd783b" }} />
               </a>
               <a href="/" target="_blank" rel="noopener noreferrer">
                 <img src="/ponylogo.svg" style={{ width: '70px', height: 'auto' }} alt="Pony Logo" />
               </a>
               <a href="https://glide.com" target="_blank" rel="noopener noreferrer">
-                <FaGlide size={70} style={{ color: "#ea37de" }} />
+                <FaGlide size={70} style={{ color: "#ffa9f9" }} />
               </a>
         </div>
         <div className="flex justify-center py-6">
-          <button className="btn btn-s rounded-md btn-outline hover:bg-yellow-300 text-[16px] font-semibold space-y-2 text-black bg-slate-200 p-3">
+          <button className="py-[10px] px-6 mt-5 bg-[#ffe53d] hover:bg-[#eedc67] rounded-xl border-2 border-white w-[160px] font-semibold text-[18px]">
             FIND US IN STORES
           </button>
         </div>
@@ -44,4 +44,4 @@ const Sponser = () => {
   );
 };
 
-export default Sponser;
+export default shop;

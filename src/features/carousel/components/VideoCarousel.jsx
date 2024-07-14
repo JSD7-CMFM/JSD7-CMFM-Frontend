@@ -89,11 +89,10 @@ const VideoPlayer = () => {
   return (
     <div className="relative w-full h-screen">
       <ReactPlayer
-        url="/Rick Astley - Never Gonna Give You Up HD.mp4" // เปลี่ยนเป็นพาธไฟล์วิดีโอของคุณ
+        url="/Unbox Your Next Figure with POP NOW!.mp4" // เปลี่ยนเป็นพาธไฟล์วิดีโอของคุณ
         className="absolute top-0 left-0 w-full h-full"
         controls={true}
-        playing={true}
-        // muted={true}
+        playing={false}
         width="100%"
         height="100%"
       />

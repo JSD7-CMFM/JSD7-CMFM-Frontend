@@ -33,8 +33,8 @@ const MainImage = ({ products }) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center items-center md:w-1/2 md:h-auto md:m-4">
-      <div className="m-2">
+    <div className="w-[800px]">
+      <div className="justify-center  w-full md:h-auto md:m-10">
         <img
           className="md:w-5/6 md:h-5/6 object-cover border-black border md:rounded-2xl"
           src={products.product_img} // Assuming product_img exists in your product object

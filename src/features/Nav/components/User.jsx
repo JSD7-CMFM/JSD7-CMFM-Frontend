@@ -24,7 +24,7 @@ const User = () => {
         <div
           tabIndex="0"
           role="button"
-          className="btn btn-ghost avatar btn-circle border border-gray-800 bg-[#fffb7f]"
+          className="btn btn-ghost avatar btn-circle border border-gray-800 bg-[#5edfa3]"
         >
           <div className="indicator text-xl w-[1.5rem]">
             {getToken() ? (
@@ -38,7 +38,7 @@ const User = () => {
         <div
           tabIndex="0"
           role="button"
-          className="btn btn-ghost avatar btn-circle border border-gray-800 bg-[#fffb7f]"
+          className="btn btn-ghost avatar btn-circle border-2 border-white bg-[#ece0b7]"
         >
           <div className="indicator">
             <FaUser className="text-xl" />

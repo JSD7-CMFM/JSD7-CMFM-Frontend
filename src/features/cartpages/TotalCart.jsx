@@ -7,7 +7,7 @@ const TotalCart = ({ cart, totalPrice, checkoutHandler }) => {
     <div>
       <div className="">
         <div className="m-5 p-5 space-x-5 bg-gray-100  border-black">
-          <div className=" p-2 border border-black rounded-xl bg-white">
+          <div className=" p-2 border border-border-400 rounded-xl bg-white shadow-md">
             <h1 className="text-gray-700 font-san text-[24px] p-4 pt-[px] text-center font-bold uppercase">
               Subtotal
             </h1>

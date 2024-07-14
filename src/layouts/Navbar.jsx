@@ -49,7 +49,7 @@ const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <nav className="flex items-center justify-between p-4 border-2 bg-[#fff6d0] border-black rounded-2xl mx-4 my-2">
+      <nav className="flex items-center justify-between p-4 border-2 bg-[#fff6d0] border-white shadow-md  rounded-2xl mx-4 my-2">
         <div className="flex items-center xl:hidden">
           <MenuDropdown />
         </div>

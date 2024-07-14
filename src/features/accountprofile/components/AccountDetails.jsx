@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import appAPI from "../../../apis/users.js";
-import { getId, getToken } from "../../../utils/localStorage.js";
+import appAPI from "../../../apis/products.js";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
@@ -8,7 +7,6 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = getId();
         const response = await appAPI.getUser(userId);
         console.log("Response data:", response);
         setUser(response.data);

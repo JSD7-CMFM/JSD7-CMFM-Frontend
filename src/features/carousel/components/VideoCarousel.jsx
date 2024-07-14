@@ -82,8 +82,8 @@
 //   );
 // }
 
-import React from 'react';
-import ReactPlayer from 'react-player';
+import React from "react";
+import ReactPlayer from "react-player";
 
 const VideoPlayer = () => {
   return (

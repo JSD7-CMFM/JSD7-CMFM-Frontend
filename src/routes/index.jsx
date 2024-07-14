@@ -78,22 +78,20 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <AuthenticateAdmin>
-        <ScrollToTop />
-        <DashboardPage />
-      </AuthenticateAdmin>
+      <OrderContextProvider>
+        <ProductContextProvider>
+          <UsersContextProvider>
+            <AuthenticateAdmin>
+              <ScrollToTop />
+              <DashboardPage />
+            </AuthenticateAdmin>
+          </UsersContextProvider>
+        </ProductContextProvider>
+      </OrderContextProvider>
     ),
   },
 ]);
 
 export default function Router() {
-  return (
-    <OrderContextProvider>
-      <ProductContextProvider>
-        <UsersContextProvider>
-          <RouterProvider router={router} />
-        </UsersContextProvider>
-      </ProductContextProvider>
-    </OrderContextProvider>
-  );
+  return <RouterProvider router={router} />;
 }

@@ -55,6 +55,8 @@ const ProductCard = () => {
     setQuantities(newQuantities);
   };
 
+  
+
   return (
     <>
       <Link to="/productlist">

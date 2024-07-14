@@ -17,6 +17,7 @@ import OrderContextProvider from "../features/Adminfeatures/contexts/OrdersConte
 import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
 import AboutUs from "../pages/AboutUs.jsx";
 import Order from "../features/Adminfeatures/contexts/OrdersContext";
+import randomPage from "../pages/randomPage.jsx";
 
 
 const router = createBrowserRouter([
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "AboutUs",
         element: <AboutUs />,
+      },
+      {
+        path: "Random",
+        element: <randomPage />
       },
     ],
   },

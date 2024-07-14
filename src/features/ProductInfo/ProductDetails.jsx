@@ -8,9 +8,9 @@ import { createOrder, updateOrder } from "../../apis/orders.js";
 import { Modal, Box, Typography, Fade, Backdrop } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
-import { CgSpaceBetween } from "react-icons/cg";
-import { MdOutlineGamepad } from "react-icons/md";
+import { FaPlusCircle } from "react-icons/fa";
 import { MdGames } from "react-icons/md";
+import { FaMinusCircle } from "react-icons/fa";
 
 const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -80,16 +80,16 @@ const ProductDetails = ({ products }) => {
   const totalPrice2 = (quantity2 * products.price).toFixed(2);
 
   return (
-    <div className="flex justify-center items-center md:p-8 bg-gray-200 border-black border md:m-4 rounded-2xl">
-      <div className="px-2 py-3 w-full md:h-full">
+    <div className="flex justify-center items-center md:w-[700px] md:h-auto md:m-4  bg-white py-5 mr--10 rounded-3xl border  border-gray-400 shadow-xl">
+      <div className=" w-1/2 h-auto m-10  md:w-full">
         <div className=" text-3xl md:text-xl md:font-bold pb-3">
           <h1 className="text-[24px] font-semibold">{products.name}</h1>
         </div>
         <div className="pb-4">
-          <h1 className="text-[16px]">{products.description}</h1>
+          <h1 className="text-[20px]">{products.description}</h1>
         </div>
 
-        <div className="pb-2 text-sm font-medium">{/* <h2>SINGLE</h2> */}</div>
+        <div className="pb-2 text-[20px] font-medium justify-center">{/* <h2>SINGLE</h2> */}</div>
         <DetailItem
           imgSrc={products.product_img}
           type={products.type}
@@ -100,24 +100,24 @@ const ProductDetails = ({ products }) => {
           <div className="flex items-center">
             <button
               onClick={decrementQuantity2}
-              className="px-2 py-1 border border-black rounded-md"
+              className="hover:shadow-xl rounded-full"
             >
-              -
+            <FaMinusCircle   size="40" style={{ color: 'rgb(251, 100, 100) '}} />
             </button>
-            <span className="mx-4">{quantity2}</span>
+            <span className="mx-4 text-[30px]">{quantity2}</span>
             <button
               onClick={incrementQuantity2}
-              className="px-2 py-1 border border-black rounded-md"
+              className="hover:shadow-xl rounded-full"
             >
-              +
+              <FaPlusCircle size="40" style={{ color: 'rgb(77, 184, 88)' }} />
             </button>
           </div>
-          <div className="font-bold text-m">Total: ฿{totalPrice2}</div>
+          <div className="font-semibold text-[24px]">Total: ฿{totalPrice2}</div>
         </div>
-        <div>
+        <div className="flex justify-center">
           <form onSubmit={handleSubmit}>
             <button
-              className="btn btn-l rounded-xl btn-outline bg-blue-300 hover:bg-blue-200 text-[18px] space-y-2 text-black p-3 space-x-20"
+              className="btn btn-l rounded-xl btn-outline bg-blue-200 hover:shadow-md hover:bg-blue-200 text-[18px]  text-center text-black p-3 space-x-20"
               onClick={handleOpen} // Open modal on button click
             >
               Add to cart

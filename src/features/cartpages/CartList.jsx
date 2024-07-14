@@ -42,7 +42,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
         cart.map((product) => (
           <div key={product._id}>
             <div className="w-full rounded-md relative">
-              <div className="border-black border rounded-xl bg-white m-2 flex shadow-2xl">
+              <div className="border-gray-200 border rounded-xl bg-white m-2 p-2  flex shadow-2xl">
                 <button onClick={() => handleDelete(product.product_id)}>
                 {" "}
                 <FaTrash className="absolute top-2 right-5 " style={{ fontSize: "2rem", color: "pink" }}   />

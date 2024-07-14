@@ -7,8 +7,8 @@ import ProductCard from "../features/homepage/components/ProductCard.jsx";
 const Homepage = () => {
   return (
     <>
-      <Hero />
       <ProductCard />
+      <Hero />
       <ShowProduct />
     </>
   );

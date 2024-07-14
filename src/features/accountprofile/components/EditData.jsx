@@ -57,7 +57,7 @@ const Editdata = ({ setActiveSection, user }) => {
       try {
         const response = await users.editUser(user.data._id, dataObject);
         console.log(response);
-        if ((response.data.message = "Update successfully")) {
+        if (response.data.message === "Update successfully") {
           navigate("/Account");
           window.location.reload();
         }
@@ -70,7 +70,10 @@ const Editdata = ({ setActiveSection, user }) => {
   return (
     <div className="px-7">
       <div>
-        <button className="pb-5 font-bold text-[30px] text-yellow-800 " onClick={() => setActiveSection("acc-info")}>
+        <button
+          className="pb-5 font-bold text-[30px] text-yellow-800 "
+          onClick={() => setActiveSection("acc-info")}
+        >
           &lt;
         </button>
         <h1 className="text-xl">Edit Your Info</h1>
@@ -120,10 +123,14 @@ const Editdata = ({ setActiveSection, user }) => {
         <div className="flex mt-5">
           <div className="w-[120px] flex justify-inline mb-4">
             <label htmlFor="phoneNumber" className="min-">
-            Phone
+              Phone
             </label>
-            <div className="mt-1 mx-2"> <FaPhone /> </div>
-             <label htmlFor="phoneNumber" className="min-">:
+            <div className="mt-1 mx-2">
+              {" "}
+              <FaPhone />{" "}
+            </div>
+            <label htmlFor="phoneNumber" className="min-">
+              :
             </label>
           </div>
           <input

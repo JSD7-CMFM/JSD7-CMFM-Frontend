@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -50,8 +51,23 @@ function LoginForm() {
     setDisable(false);
   };
 
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+  const [profile, setProfile] = useState(null);
+
+  useEffect (() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "profile",
+      });
+    }
+    gapi.load("client:auth2", initClient);
+  })
   const handleGoogleSuccess = async (response) => {
-    console.log(response);
+    setProfile(response.profileObj);
+    console.log('success', response.profileObj
+    );
     // Implement login with Google response
   };
 
@@ -114,9 +130,13 @@ function LoginForm() {
           </Link>
         </div>
         <div className="mt-5">
-          <GoogleLogin
+        <GoogleLogin
+            clientId={clientId}
+            buttonText="Sign in with Google"
             onSuccess={handleGoogleSuccess}
-            onError={handleGoogleFailure}
+            onFailure={handleGoogleFailure}
+            cookiePolicy={"single_host_origin"}
+            isSignedIn={true}
           />
         </div>
       </form>

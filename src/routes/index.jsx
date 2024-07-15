@@ -17,17 +17,21 @@ import OrderContextProvider from "../features/Adminfeatures/contexts/OrdersConte
 import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
 import AboutUs from "../pages/AboutUs.jsx";
 import ScrollToTop from "../utils/scrollToTop.js";
-import RandomPage from "../pages/RandomPage.jsx";
+// import RandomPage from "../pages/RandomPage.jsx";
+
+
+const Root = () => (
+  <>
+    <ScrollToTop />
+    <Container />
+    <Outlet />
+  </>
+);
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <ScrollToTop />
-        <Container />
-      </>
-    ),
+    element: <Root />,
     children: [
       {
         path: "/",
@@ -42,37 +46,37 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "forget",
+        path: "/forget",
         element: <ForgetPassword />,
       },
       {
-        path: "productinfo/:id",
+        path: "/productinfo/:id",
         element: <ProductInfoPage />,
       },
       {
-        path: "productList",
+        path: "/productList",
         element: <ProductListPage />,
       },
       {
-        path: "cart",
+        path: "/cart",
         element: <CartPage />,
       },
       {
-        path: "checkout",
+        path: "/checkout",
         element: <CheckoutPage />,
       },
       {
-        path: "Account",
+        path: "/Account",
         element: <AccountPageContainer />,
       },
       {
-        path: "AboutUs",
+        path: "/AboutUs",
         element: <AboutUs />,
       },
-      {
-        path: "random",
-        element: <RandomPage />,
-      },
+      // {
+      //   path: "random",
+      //   element: <RandomPage />,
+      // },
     ],
   },
   {

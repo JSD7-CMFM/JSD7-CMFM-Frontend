@@ -49,7 +49,7 @@ const ProductListDetail = () => {
 
   return (
     <>
-      <div className="pt-[90px] flex justify-center">
+      <div className="pt-[90px] flex justify-center ">
         <Box sx={{ width: "500px" }} margin={5}>
           <TextField
             fullWidth
@@ -68,40 +68,40 @@ const ProductListDetail = () => {
           />
         </Box>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4">
-      {products.map((product) => (
-        <Link key={product._id} to={`/productinfo/${product._id}`}>
-          <div className="border border-gray-200 rounded-lg overflow-hidden relative group mb-5 pb-5 bg-white shadow-2xl w-full md:w-[320px] h-[440px]">
-            <div className="relative group">
-              <img
-                src={product.product_img}
-                alt={product.name}
-                className="w-full h-72 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-80"
-              />
-            </div>
-            <div className="p-4 bg-white">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {product.name}
-              </h3>
-              <p className="text-[16px] text-gray-700 mb-2 ">
-                {product.description}
-              </p>
-              <div className="flex items-center mb-2 absolute left-4 bottom-3">
-                <FaStar style={{ color: "#74C0FC" }} />
-                <FaStar style={{ color: "#74C0FC" }} />
-                <FaStar style={{ color: "#74C0FC" }} />
-                <FaStar style={{ color: "#74C0FC" }} />
-                <FaStar style={{ color: "#74C0FC" }} />
-                <span className="text-xs ml-1">(99)</span>
+      <div className="grid grid-cols-1 2xl:grid-cols-5 xl:grid-col-4 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4 mx-10">
+        {products.map((product) => (
+          <Link key={product._id} to={`/productinfo/${product._id}`}>
+            <div className="border border-gray-200 rounded-lg overflow-hidden relative group mb-5 pb-5 bg-white shadow-2xl w-full md:w-[320px] h-[440px]">
+              <div className="relative group">
+                <img
+                  src={product.product_img}
+                  alt={product.name}
+                  className="w-full h-72 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-80"
+                />
+              </div>
+              <div className="p-4 bg-white">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {product.name}
+                </h3>
+                <p className="text-[16px] text-gray-700 mb-2 ">
+                  {product.description}
+                </p>
+                <div className="flex items-center mb-2 absolute left-4 bottom-3">
+                  <FaStar style={{ color: "#74C0FC" }} />
+                  <FaStar style={{ color: "#74C0FC" }} />
+                  <FaStar style={{ color: "#74C0FC" }} />
+                  <FaStar style={{ color: "#74C0FC" }} />
+                  <FaStar style={{ color: "#74C0FC" }} />
+                  <span className="text-xs ml-1">(99)</span>
+                </div>
+              </div>
+              <div className="bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase absolute right-2 bottom-0 mb-4 ml-4">
+                More Detail
               </div>
             </div>
-            <div className="bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase absolute right-2 bottom-0 mb-4 ml-4">
-              More Detail
-            </div>
-          </div>
-        </Link>
-      ))}
-    </div>
+          </Link>
+        ))}
+      </div>
       <div className="flex justify-center m-3">
         <Pagination
           count={pages}

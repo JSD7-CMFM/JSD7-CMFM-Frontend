@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import OrderSummary from "../features/checkout/components/OrderSummary";
 import Checkout from "../features/checkout/components/Checkout ";
-import userApi from "../apis/users.js";
+import appUserAPI from "../apis/users.js";
 import { getOrderById, updateOrder } from "../apis/orders.js";
-import  sendMail  from "../apis/mail.js";
+import sendMail from "../apis/mail.js";
 import { getCartState, getId, setCartState } from "../utils/localStorage.js";
 import { useNavigate } from "react-router-dom";
 import ConfirmLeaveModal from "../features/checkout/components/ConfirmLeave.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
+import appProductAPI from "../apis/products.js";
 
 const CheckoutPage = () => {
   const [checkout, setCheckout] = useState(false);
@@ -32,11 +33,10 @@ const CheckoutPage = () => {
       }
       try {
         setLoading(false);
-        const responseUser = await userApi.getUser(userId);
+        const responseUser = await appUserAPI.getUser(userId);
         const responseOrder = await getOrderById(orderId);
         const products = responseOrder.data;
         const fetchedUser = responseUser.data;
-
         setUser(fetchedUser);
         setCheckout(products);
 
@@ -48,6 +48,7 @@ const CheckoutPage = () => {
         });
         setLoading(true);
         console.log(responseUser.data);
+        console.log(responseOrder.data);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -62,9 +63,17 @@ const CheckoutPage = () => {
 
   const onClickPayNow = async () => {
     try {
-      console.log(address);
-      console.log(typeof address);
       const responseOrder = await updateOrder(orderId, address, "success");
+      await Promise.all(
+        checkout.cart_products.map(async (product) => {
+          const quantity = { quantity: product.stock - product.amount };
+          await appProductAPI.editProduct(
+            product.product_id,
+            quantity,
+            "checkOut"
+          );
+        })
+      );
       await sendMail(orderId);
       if (rememberAddress) {
         try {

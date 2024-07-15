@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import appAPI from "../../apis/products.js";
 import { getId, getCartState } from "../../utils/localStorage.js";
 import { createOrder, updateOrder } from "../../apis/orders.js";
+import ModalRandomAddToCart from "./ModalRandomAddToCart.jsx";
 
 const Random = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const fetchData = async () => {
     const filters = {
@@ -100,12 +105,16 @@ const Random = () => {
             >
               Continue Random
             </button>
-            <button
-              onClick={() => addToCart(selectedProduct)}
-              className="p-2 bg-green-500 text-white rounded"
-            >
-              Add to Cart?
-            </button>
+            <form onSubmit={() => addToCart(selectedProduct)}>
+              <button
+                type="button"
+                onClick={handleOpen}
+                className="p-2 bg-green-500 text-white rounded"
+              >
+                Add to Cart?
+              </button>
+              <ModalRandomAddToCart open={open} handleClose={handleClose} />
+            </form>
           </div>
         </div>
       )}

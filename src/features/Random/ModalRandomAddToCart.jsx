@@ -7,7 +7,7 @@ import { MdGames } from "react-icons/md";
 import { FaUserAstronaut } from "react-icons/fa";
 import { getToken } from "../../utils/localStorage.js";
 
-const ModalAddToCart = ({ handleClose, open }) => {
+const ModalRandomAddToCart = ({ handleClose, open }) => {
   const Token = getToken();
   return (
     <Modal
@@ -25,10 +25,10 @@ const ModalAddToCart = ({ handleClose, open }) => {
         <Box
           sx={{
             width: 500,
-            maxWidth: "90%", // Responsive width
-            bgcolor: "#f2e4c9", // Light pastel color
+            maxWidth: "90%",
+            bgcolor: "#f2e4c9",
             borderRadius: 8,
-            boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)", // Soft shadow
+            boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
             p: 4,
             position: "absolute",
             top: "50%",
@@ -53,7 +53,7 @@ const ModalAddToCart = ({ handleClose, open }) => {
           >
             {Token ? (
               <div className="flex justify-between mx-10">
-                <Link to="/productlist">
+                <Link to="/random">
                   <button
                     className="btn btn-s rounded-xl btn-outline hover:bg-green-400 py-2 itemcenter text-[18px] text-black bg-green-500 p-3 "
                     sx={{
@@ -63,7 +63,7 @@ const ModalAddToCart = ({ handleClose, open }) => {
                       mr: 5,
                     }}
                   >
-                    Shop more
+                    Random More
                     <MdGames style={{ fontSize: "2rem" }} />
                   </button>
                 </Link>
@@ -109,7 +109,7 @@ const ModalAddToCart = ({ handleClose, open }) => {
               backgroundColor: "transparent",
               border: "none",
               fontSize: "1.5rem",
-              color: "#FF6347", // Red color for close button
+              color: "#FF6347",
             }}
           >
             <FaTimes />
@@ -120,4 +120,4 @@ const ModalAddToCart = ({ handleClose, open }) => {
   );
 };
 
-export default ModalAddToCart;
+export default ModalRandomAddToCart;

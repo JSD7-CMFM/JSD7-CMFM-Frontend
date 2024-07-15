@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { TbHorseToy } from "react-icons/tb";
 
 const ProductList = [
   {
@@ -41,7 +41,7 @@ const ProductList = [
       "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
     imageUrl2:
       "https://prod-eurasian-res.popmart.com/default/20240612_103708_563109____5_____1200x1200.jpg",
-  }
+  },
 ];
 
 const ProductCard = () => {
@@ -55,18 +55,25 @@ const ProductCard = () => {
     setQuantities(newQuantities);
   };
 
-  
-
   return (
     <>
       <Link to="/productlist">
         <div className="relative pt-[120px]">
-          <h1 className="pl-5 text-green text-[60px] font-bold shadow-xl">NEW ARRIVALS</h1>
-          <div className="flex w-[600px] h-auto animate-rightToLeft relative" >
-          <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_360649____5_____1200x1200.jpg" />
-          <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_704359____4_____1200x1200.jpg" />
-          <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_563249____6_____1200x1200.jpg" />
-        </div>
+          <div className="flex">
+            <h1 className="pl-5 text-[60px] font-bold text-[#f07287] ">
+              NEW ARRIVALS
+            </h1>
+            <TbHorseToy
+              size="80"
+              style={{ color: "#f07287" }}
+              className="animate-bounce"
+            />
+          </div>
+          <div className="flex w-[600px] h-auto animate-rightToLeft relative">
+            <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_360649____5_____1200x1200.jpg" />
+            <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_704359____4_____1200x1200.jpg" />
+            <img src="https://prod-thailand-res.popmart.com/default/20240710_104247_563249____6_____1200x1200.jpg" />
+          </div>
         </div>
         {/* <div className="grid grid-cols-4 gap-4 p-5 bg-white">
           {ProductList.map((product, index) => (

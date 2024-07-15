@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CartCard from "./CartCard";
 import CartList from "./CartList.jsx";
 
 const SelectCart = ({ cart, UpdateAmount, loading, fetchCart }) => {

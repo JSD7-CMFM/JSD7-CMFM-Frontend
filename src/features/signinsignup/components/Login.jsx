@@ -53,22 +53,16 @@ function LoginForm() {
 
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-  const [profile, setProfile] = useState(null);
-
-  useEffect (() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "profile",
-      });
-    }
-    gapi.load("client:auth2", initClient);
-  })
   const handleGoogleSuccess = async (response) => {
-    setProfile(response.profileObj);
-    console.log('success', response.profileObj
-    );
-    // Implement login with Google response
+    const token = response.tokenId;
+    // console.log(token);
+    try {
+      const result = await usersAPI.googleLogin({ token });
+      console.log("Google login success:", result.data);
+      navigate("/");
+    } catch (error) {
+      console.error("Google login failed:", error);
+    }
   };
 
   const handleGoogleFailure = (error) => {
@@ -130,7 +124,7 @@ function LoginForm() {
           </Link>
         </div>
         <div className="mt-5">
-        <GoogleLogin
+          <GoogleLogin
             clientId={clientId}
             buttonText="Sign in with Google"
             onSuccess={handleGoogleSuccess}

@@ -5,6 +5,7 @@ import Addresses from "../features/accountprofile/components/Addresses";
 import Editdata from "../features/accountprofile/components/EditData.jsx";
 import { useNavigate } from "react-router-dom";
 import EditAddress from "../features/accountprofile/components/EditAddress.jsx";
+import { GoogleLogout } from "react-google-login";
 
 const AccountPageContainer = () => {
   const [activeSection, setActiveSection] = useState("acc-info");
@@ -58,6 +59,9 @@ const AccountPageContainer = () => {
                 className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
               >
                 SIGN OUT
+              </p>
+              <p>
+                GOOGLE SIGN OUT
               </p>
             </div>
           </div>

@@ -129,7 +129,7 @@ const ProductDetails = ({ products }) => {
         <div className="flex justify-center">
           <form onSubmit={handleSubmit}>
             <button
-              className="btn btn-l rounded-xl btn-outline bg-blue-200 hover:shadow-md hover:bg-blue-200 text-[18px]  text-center text-black p-3 space-x-20"
+              className="btn btn-l rounded-xl btn-outline bg-blue-200 hover:shadow-md hover:bg-blue-200 text-[18px]  text-center text-black p-3 space-x-20 shadow-xl"
               onClick={handleOpen} // Open modal on button click
             >
               Add to cart

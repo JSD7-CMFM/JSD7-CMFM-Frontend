@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import MovingSectionAlter from "./movingTextAlter";
 import MovingSection from "./movingText";
 
-
 const Hero = () => {
   return (
     <section id="hero" className="bg-[#b5e3d8]">
@@ -31,7 +30,6 @@ const TextSection = () => {
         styles and price ranges, guaranteed authenticity and quality,
         user-friendly shopping experience, and efficient nationwide shipping.
       </p>
-      {/* <p className="text-center md:text-left">Lorem ipsum dolor sit amet</p> */}
       <Link
         to="productList"
         className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border-2 border-white"

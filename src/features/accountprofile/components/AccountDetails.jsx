@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import appAPI from "../../../apis/users.js";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getId } from "../../../utils/localStorage.js";
+import { toast } from "react-toastify";
 
 const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   const [user, setUser] = useState(null);
@@ -10,10 +11,9 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
     const fetchData = async () => {
       try {
         const response = await appAPI.getUser(userId);
-        console.log("Response data:", response);
         setUser(response.data);
       } catch (error) {
-        console.error("Error fetching user:", error);
+        toast.error("Error fetching user:", error);
       }
     };
 

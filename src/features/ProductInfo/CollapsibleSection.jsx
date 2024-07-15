@@ -6,34 +6,6 @@ import { TbHandClick } from "react-icons/tb";
 
 const CollapsibleSection = ({ products }) => {
   console.log(products);
-  // const { id } = useParams();
-  // const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [product, setProduct] = useState(null); // State to hold the selected product
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axiosInstance.get('/products');
-  //       setProducts(response.data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching products:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []); // Empty dependency array ensures useEffect runs only on component mount
-
-  // useEffect(() => {
-  //   // Find the product by id once products are fetched
-  //   const selectedProduct = products.find((prod) => prod._id === id);
-  //   setProduct(selectedProduct); // Set the product state
-  // }, [products, id]); // Update whenever products or id changes
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
   if (!products) {
     return <div>Product not found</div>;
   }
@@ -46,12 +18,22 @@ const CollapsibleSection = ({ products }) => {
           <CollapsibleItem
             key={`${products?._id}-infoImage1`}
             imgSrc={products?.productinfo?.info2} // Assuming productinfo and info2 exist
-             title={<><span>PRODUCT SHOW </span><TbHandClick /></>}
+            title={
+              <>
+                <span>PRODUCT SHOW </span>
+                <TbHandClick />
+              </>
+            }
           />
           <CollapsibleItem
             key={`${products?._id}-infoImage2`}
             imgSrc={products?.productinfo?.info1} // Assuming productinfo and info1 exist
-            title={<><span>GAME RULES   </span><TbHandClick /></>}
+            title={
+              <>
+                <span>GAME RULES </span>
+                <TbHandClick />
+              </>
+            }
           />
         </>
       )}

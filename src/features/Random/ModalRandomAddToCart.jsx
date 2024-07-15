@@ -56,6 +56,7 @@ const ModalRandomAddToCart = ({ handleClose, open }) => {
                 <Link to="/random">
                   <button
                     className="btn btn-s rounded-xl btn-outline hover:bg-green-400 py-2 itemcenter text-[18px] text-black bg-green-500 p-3 "
+                    onClick={handleClose}
                     sx={{
                       width: "45%",
                       fontSize: "1.2rem",

@@ -142,7 +142,7 @@ const Random = () => {
                   getRandomProduct();
                   setIsFlipped(false);
                 }}
-                className="p-3  text-black rounded-2xl border-black border"
+                className="p-3  text-black rounded-2xl border-black border bg-blue-200"
               >
                 จุ่มต่อมั้ยจ๊ะ
               </button>
@@ -153,7 +153,7 @@ const Random = () => {
                     handleOpen();
                     addToCart(selectedProduct);
                   }}
-                  className="p-3  text-black rounded-2xl border-black border"
+                  className="p-3  text-black rounded-2xl border-black border bg-green-100"
                 >
                   ซื้อเลยสิจ๊ะ
                 </button>

@@ -61,12 +61,6 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                     style={{ fontSize: "2rem", color: "pink" }}
                   />
                 </button>
-                  {" "}
-                  <RiDeleteBack2Fill
-                    className="absolute top-2 right-5 "
-                    style={{ fontSize: "2rem", color: "pink" }}
-                  />
-                </button>
                 <div className="w-full p-1 flex-col relative group">
                   <img
                     src={product.product_img}
@@ -100,7 +94,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                   <div>
                     <div className="flex-start">
                       <div className="flex justify-start text-left pl-5 py-5">
-                        <h2 className="text-left">Quanity : </h2>
+                        <h2 className="text-left">Quantity : </h2>
                         <input
                           className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
                           type="number"
@@ -111,7 +105,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                             UpdateAmount(product.product_id, e.target.value)
                           }
                         />
-                        <button className="ml-5 text-[14px]">
+                        <button className="ml-5 ">
                           Stock: {product.stock}
                         </button>
                       </div>

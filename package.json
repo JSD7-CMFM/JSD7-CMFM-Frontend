@@ -16,6 +16,7 @@
         "axios": "^1.7.2",
         "chart.js": "^4.4.3",
         "react": "^18.2.0",
+        "react-card-flip": "^1.2.3",
         "react-chartjs-2": "^5.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^5.2.1",

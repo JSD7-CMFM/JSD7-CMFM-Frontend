@@ -3,6 +3,7 @@ import appAPI from "../../apis/products.js";
 import { getId, getCartState } from "../../utils/localStorage.js";
 import { createOrder, updateOrder } from "../../apis/orders.js";
 import ModalRandomAddToCart from "./ModalRandomAddToCart.jsx";
+import ReactCardFlip from "react-card-flip";
 
 const Random = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -44,6 +45,13 @@ const Random = () => {
     }, 2000);
   };
 
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsFlipped(!isFlipped);
+  };
+
   const addToCart = async (product) => {
     const userId = getId();
     const orderId = getCartState();
@@ -83,47 +91,73 @@ const Random = () => {
   };
 
   return (
-    <div className="w-screen h-screen pt-[120px]">
-      <h1>Random</h1>
-      {!selectedProduct ? (
-        <button
-          onClick={getRandomProduct}
-          className="p-2 bg-blue-500 text-white rounded"
-        >
-          Get Random Product
-        </button>
-      ) : (
-        <div className="mt-4">
-          <img
-            src={selectedProduct.product_img}
-            alt={selectedProduct.name}
-            className="w-32 h-32"
-          />
-          <p>{selectedProduct.name}</p>
-          <div className="flex space-x-4 mt-4">
-            <button
-              onClick={getRandomProduct}
-              className="p-2 bg-blue-500 text-white rounded"
-            >
-              Continue Random
-            </button>
-            <form onSubmit={(e) => e.preventDefault()}>
+    <div className="flex items-center justify-center min-h-screen bg-[rgb(242,198,206)] ">
+      <div className="w-full max-w-3xl p-4 ">
+        <h1 className="text-3xl font-bold mb-4">Random</h1>
+        {!selectedProduct ? (
+          <button
+            onClick={getRandomProduct}
+            className="p-2 bg-blue-500 text-white rounded"
+          >
+            Get Random Product
+          </button>
+        ) : (
+          <div className="mt-4 ">
+            <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+              <div className="flex justify-center">
+                <button onClick={handleClick} className="justify-center">
+                  <div>Open Your Card</div>
+                  <div>
+                    <img
+                      src="/Card.jpg"
+                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black"
+                    />
+                  </div>
+                </button>
+              </div>
+              <div className="flex justify-center">
+                <div className=" bg-red justify-center">
+                  <button onClick={handleClick}>
+                    <img
+                      src={selectedProduct.product_img}
+                      alt={selectedProduct.name}
+                      className="w-[350px] h-[400px]  bg-white m-5  rounded-xl justify-center border border-black "
+                    />
+                    <p>{selectedProduct.name}</p>
+                  </button>
+                </div>
+              </div>
+            </ReactCardFlip>
+            <div className="flex space-x-4 mt-4">
               <button
-                type="button"
                 onClick={() => {
-                  handleOpen();
-                  addToCart(selectedProduct);
+                  getRandomProduct();
+                  setIsFlipped(false);
                 }}
-                className="p-2 bg-green-500 text-white rounded"
+                className="p-2 bg-blue-500 text-white rounded"
               >
-                Add to Cart?
+                Continue Random
               </button>
-              <ModalRandomAddToCart open={open} handleClose={handleClose} />
-            </form>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleOpen();
+                    addToCart(selectedProduct);
+                  }}
+                  className="p-2 bg-green-500 text-white rounded"
+                >
+                  Add to Cart?
+                </button>
+                <ModalRandomAddToCart open={open} handleClose={handleClose} />
+              </form>
+            </div>
           </div>
-        </div>
-      )}
-      {isAnimating && <div className="animate-pulse mt-4">Randomizing...</div>}
+        )}
+        {isAnimating && (
+          <div className="animate-pulse mt-4">Randomizing...</div>
+        )}
+      </div>
     </div>
   );
 };

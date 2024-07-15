@@ -46,7 +46,6 @@ const ProductListDetail = () => {
       </div>
     );
   }
-  console.log(products);
 
   return (
     <>

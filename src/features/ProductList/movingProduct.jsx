@@ -98,12 +98,9 @@ const RandomProductPage = () => {
                 <span className="text-xs ml-1">(99)</span>
               </div>
             </div>
-            <Link
-              to={`/productinfo/${product._id}`}
-              className="bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase absolute right-2 bottom-0 mb-4 ml-4"
-            >
+            <div className="bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase absolute right-2 bottom-0 mb-4 ml-4">
               More Detail
-            </Link>
+            </div>
           </div>
         </Link>
       ))}

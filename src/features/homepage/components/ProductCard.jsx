@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { FaStar, FaTrash } from "react-icons/fa";
+import React from "react";
+// import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router-dom";
 import { TbHorseToy } from "react-icons/tb";
 
@@ -44,10 +45,58 @@ const ProductList = [
   },
 ];
 
+// import { FaStar, FaTrash } from "react-icons/fa";
+
+// const ProductList = [
+//   {
+//     id: 1,
+//     name: "DIMOO",
+//     price: 15,
+//     description: "DIMOO By Your Side Series Figures",
+//     imageUrl:
+//       "https://prod-eurasian-res.popmart.com/default/20240612_102205_085361____4_____1200x1200.jpg",
+//     imageUrl2:
+//       "https://prod-eurasian-res.popmart.com/default/20240612_102205_584771____9_____1200x1200.jpg",
+//   },
+//   {
+//     id: 2,
+//     name: "SpongeBob",
+//     price: 25,
+//     description: "SpongeBob SquarePants Daily Quirks Series Figures",
+//     imageUrl:
+//       "https://prod-eurasian-res.popmart.com/default/20240612_102623_477916____2_____1200x1200.jpg",
+//     imageUrl2:
+//       "https://prod-eurasian-res.popmart.com/default/20240612_102623_236417____6_____1200x1200.jpg",
+//   },
+//   {
+//     id: 3,
+//     name: "CRYBABY",
+//     price: 45,
+//     description: "CRYBABY x PONYMART ",
+//     imageUrl: "/ProductPhotos/CRYBABY1.jpeg",
+//     imageUrl2: "/ProductPhotos/CRYBABY2.jpeg",
+//   },
+//   {
+//     id: 4,
+//     name: "DIMOO x Dumbo",
+//     price: 35,
+//     description: "DIMOO x Dumbo Action Figure",
+//     imageUrl:
+//       "https://prod-eurasian-res.popmart.com/default/20240612_103708_211187____7_____1200x1200.jpg",
+//     imageUrl2:
+//       "https://prod-eurasian-res.popmart.com/default/20240612_103708_563109____5_____1200x1200.jpg",
+//   }
+// ];
+
+const images = [
+  "https://prod-thailand-res.popmart.com/default/20240710_104247_360649____5_____1200x1200.jpg",
+  "https://prod-thailand-res.popmart.com/default/20240710_104247_704359____4_____1200x1200.jpg",
+  "https://prod-thailand-res.popmart.com/default/20240710_104247_563249____6_____1200x1200.jpg",
+];
 const ProductCard = () => {
-  const [quantities, setQuantities] = useState(
-    Array(ProductList.length).fill(0)
-  );
+  // const [quantities, setQuantities] = useState(
+  //   Array(ProductList.length).fill(0)
+  // );
 
   const handleAddToCart = (index) => {
     const newQuantities = [...quantities];
@@ -57,6 +106,7 @@ const ProductCard = () => {
 
   return (
     <>
+      <div className="relative pt-[120px] overflow-hidden">
       <Link to="/productlist">
         <div className="relative pt-[120px]">
           <div className="flex">
@@ -118,7 +168,6 @@ const ProductCard = () => {
             </div>
           ))}
         </div> */}
-      </Link>
     </>
   );
 };

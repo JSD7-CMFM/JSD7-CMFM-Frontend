@@ -7,16 +7,19 @@ import {
   getToken,
   removeToken,
 } from "../../../utils/localStorage.js";
+import { GoogleLogout } from "react-google-login";
 
 const User = () => {
   useEffect(() => {}, []);
   const firstName = getFirstName();
 
-  const onLogout = () => {
+  const handleSignout = () => {
     removeToken();
     window.location.reload();
     useNavigate("/");
   };
+
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
   return (
     <div className="dropdown dropdown-end">
@@ -56,9 +59,22 @@ const User = () => {
               <Link to="/account" className="justify-center">
                 My Account
               </Link>
-              <button className="justify-center" onClick={onLogout}>
+              <GoogleLogout
+                icon={false}
+                clientId={clientId}
+                onLogoutSuccess={handleSignout}
+                render={(renderProps) => (
+                  <button
+                    className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
+                    onClick={renderProps.onClick}
+                  >
+                    Sign Out
+                  </button>
+                )}
+              ></GoogleLogout>
+              {/* <button className="justify-center" onClick={onLogout}>
                 Sign out
-              </button>
+              </button> */}
             </>
           ) : (
             <>

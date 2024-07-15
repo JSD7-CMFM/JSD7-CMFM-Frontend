@@ -21,6 +21,8 @@ const AccountPageContainer = () => {
     setActiveSection(sectionId);
   };
 
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
   return (
     <section id="my-acc" className="bg-[#dbd1f4] px-3 pb-4 h-screen pt-[100px]">
       <div
@@ -54,15 +56,25 @@ const AccountPageContainer = () => {
               >
                 ADDRESSES
               </p>
-              <p
-                onClick={handleSignout}
-                className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
-              >
-                SIGN OUT
-              </p>
-              <p>
+              <GoogleLogout
+                icon={false}
+                clientId={clientId}
+                onLogoutSuccess={handleSignout}
+                render={(renderProps) => (
+                  <button
+                    className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
+                    onClick={renderProps.onClick}
+                  >
+                    Sign Out
+                  </button>
+                )}
+              ></GoogleLogout>
+              {/* <p className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11">
+                  SIGN OUT
+                </p> */}
+              {/* <GoogleLogout clientId={clientId} onLogoutSuccess={handleSignout}>
                 GOOGLE SIGN OUT
-              </p>
+              </GoogleLogout> */}
             </div>
           </div>
         </div>

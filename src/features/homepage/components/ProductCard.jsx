@@ -21,7 +21,7 @@ const ProductCard = () => {
             <TbHorseToy
               size={80}
               style={{ color: "#F07287" }}
-              className="animate-bounce"
+              className="animate-bounce ml-5"
             />
           </div>
         </Link>

@@ -45,7 +45,7 @@ const ProductListDetail = () => {
 
   return (
     <>
-      <div className="pt-[90px] flex justify-center">
+      <div className="pt-[90px] flex justify-center ">
         <Box sx={{ width: "500px" }} margin={5}>
           <TextField
             fullWidth
@@ -64,7 +64,7 @@ const ProductListDetail = () => {
           />
         </Box>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4">
+      <div className="grid grid-cols-1 2xl:grid-cols-5 xl:grid-col-4 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4 mx-10">
         {products.map((product) => (
           <Link key={product._id} to={`/productinfo/${product._id}`}>
             <div className="border border-gray-200 rounded-lg overflow-hidden relative group mb-5 pb-5 bg-white shadow-2xl w-full md:w-[320px] h-[440px]">

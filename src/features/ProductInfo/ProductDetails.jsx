@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
 import { getCartState, getId } from "../../utils/localStorage.js";
 import { createOrder, updateOrder } from "../../apis/orders.js";
-import { Modal, Box, Typography, Fade, Backdrop } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
 import { MdGames } from "react-icons/md";
 import { FaMinusCircle } from "react-icons/fa";
+import ModalAddToCart from "./ModalAddToCart.jsx";
 
 const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const ProductDetails = ({ products }) => {
     event.preventDefault();
     if (!products) {
       console.error("product is null");
-      setLoading(false)
+      setLoading(false);
       return;
     }
 
@@ -39,7 +39,7 @@ const ProductDetails = ({ products }) => {
         description: products.description,
         price: products.price,
         product_img: products.product_img,
-        type: products.type
+        type: products.type,
       };
 
       const orderId = getCartState();
@@ -96,7 +96,9 @@ const ProductDetails = ({ products }) => {
           <h1 className="text-[20px]">{products.description}</h1>
         </div>
 
-        <div className="pb-2 text-[20px] font-medium justify-center">{/* <h2>SINGLE</h2> */}</div>
+        <div className="pb-2 text-[20px] font-medium justify-center">
+          {/* <h2>SINGLE</h2> */}
+        </div>
         <DetailItem
           imgSrc={products.product_img}
           type={products.type}
@@ -109,14 +111,17 @@ const ProductDetails = ({ products }) => {
               onClick={decrementQuantity2}
               className="hover:shadow-xl rounded-full"
             >
-            <FaMinusCircle   size="40" style={{ color: 'rgb(251, 100, 100) '}} />
+              <FaMinusCircle
+                size="40"
+                style={{ color: "rgb(251, 100, 100) " }}
+              />
             </button>
             <span className="mx-4 text-[30px]">{quantity2}</span>
             <button
               onClick={incrementQuantity2}
               className="hover:shadow-xl rounded-full"
             >
-              <FaPlusCircle size="40" style={{ color: 'rgb(77, 184, 88)' }} />
+              <FaPlusCircle size="40" style={{ color: "rgb(77, 184, 88)" }} />
             </button>
           </div>
           <div className="font-semibold text-[24px]">Total: ฿{totalPrice2}</div>
@@ -129,96 +134,7 @@ const ProductDetails = ({ products }) => {
             >
               Add to cart
             </button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500,
-              }}
-            >
-              <Fade in={open}>
-                <Box
-                  sx={{
-                    width: 500,
-                    maxWidth: "90%", // Responsive width
-                    bgcolor: "#f2e4c9", // Light pastel color
-                    borderRadius: 8,
-                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)", // Soft shadow
-                    p: 4,
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                >
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h5"
-                    component="h3"
-                    sx={{ textAlign: "center", mb: 2, p: 5 }}
-                  >
-                    Item has been added to cart
-                  </Typography>
-                  <div
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      mt: 4,
-                    }}
-                  >
-                    <div className="flex justify-between mx-10">
-                      <Link to="/productlist">
-                        <button
-                          className="btn btn-s rounded-xl btn-outline hover:bg-pink-300 text-[18px] text-black bg-green-500 p-3 "
-                          sx={{
-                            width: "45%",
-                            fontSize: "1.2rem",
-                            pl: 20,
-                            mr: 5,
-                          }}
-                        >
-                          Shop more
-                          <MdGames style={{ fontSize: "2rem" }} />
-                        </button>
-                      </Link>
-                      <Link to="/cart">
-                        <button
-                          className="btn btn-s rounded-xl btn-outline hover:bg-orange-400 text-[18px] text-black bg-red-500 p-3"
-                          sx={{
-                            width: "45%",
-                            fontSize: "1.2rem",
-                            pr: 20,
-                            ml: 5,
-                          }}
-                        >
-                          View Cart
-                          <MdGames style={{ fontSize: "2rem" }} />
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleClose}
-                    style={{
-                      position: "absolute",
-                      top: 10,
-                      right: 10,
-                      cursor: "pointer",
-                      backgroundColor: "transparent",
-                      border: "none",
-                      fontSize: "1.5rem",
-                      color: "#FF6347", // Red color for close button
-                    }}
-                  >
-                    <FaTimes />
-                  </button>
-                </Box>
-              </Fade>
-            </Modal>
+            <ModalAddToCart open={open} handleClose={handleClose} />
           </form>
         </div>
       </div>

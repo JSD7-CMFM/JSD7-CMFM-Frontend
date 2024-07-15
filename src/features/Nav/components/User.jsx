@@ -7,6 +7,7 @@ import {
   getToken,
   removeToken,
 } from "../../../utils/localStorage.js";
+import { toast } from "react-toastify";
 
 const User = () => {
   useEffect(() => {}, []);
@@ -14,6 +15,7 @@ const User = () => {
 
   const onLogout = () => {
     removeToken();
+    toast.info("Signed Out Succesfully");
     window.location.reload();
     useNavigate("/");
   };

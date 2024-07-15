@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import users from "../../../apis/users.js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditAddress = ({ setActiveSection, user }) => {
   const [address, setAddress] = useState(user.address.address);
@@ -21,12 +22,14 @@ const EditAddress = ({ setActiveSection, user }) => {
       console.log(response);
 
       if (response.data.message === "Update successful") {
+        toast.success("Update Address successfully");
         navigate("/Account");
         setActiveSection("acc-address");
         window.location.reload();
       }
     } catch (error) {
-      console.error("Error updating address:", error);
+      toast.error("Error updating address");
+      toast.error(error.response.data.message);
     }
   };
 

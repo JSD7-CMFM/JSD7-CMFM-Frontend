@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import users from "../../../apis/users.js";
 import { useNavigate } from "react-router-dom";
 import { FaPhone } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Editdata = ({ setActiveSection, user }) => {
   const [firstName, setFirstName] = useState(user.data.firstName);
@@ -58,11 +59,13 @@ const Editdata = ({ setActiveSection, user }) => {
         const response = await users.editUser(user.data._id, dataObject);
         console.log(response);
         if (response.data.message === "Update successfully") {
+          toast.success("Update successfully");
           navigate("/Account");
           window.location.reload();
         }
       } catch (error) {
-        console.error("Error updating user:", error.response.data.message);
+        toast.error("Error updating data");
+        toast.error(error.response.data.message);
       }
     }
   };

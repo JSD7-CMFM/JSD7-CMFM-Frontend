@@ -40,6 +40,7 @@ const ProductDetails = ({ products }) => {
         price: products.price,
         product_img: products.product_img,
         type: products.type,
+        stock: products.quantity,
       };
 
       const orderId = getCartState();

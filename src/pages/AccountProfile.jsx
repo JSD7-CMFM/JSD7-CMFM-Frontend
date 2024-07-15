@@ -57,7 +57,7 @@ const AccountPageContainer = () => {
                 onClick={handleSignout}
                 className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
               >
-                LOGOUT
+                SIGN OUT
               </p>
             </div>
           </div>

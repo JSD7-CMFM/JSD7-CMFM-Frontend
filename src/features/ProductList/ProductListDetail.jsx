@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { FaStar } from "react-icons/fa6";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../config/myAPIs.js";
+import appAPI from "../../apis/products.js";
 import { Pagination, Box, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -22,11 +22,7 @@ const ProductListDetail = () => {
     const fetchData = async () => {
       try {
         setLoading(false);
-        const res = await axiosInstance.get("/products", {
-          params: {
-            ...filters,
-          },
-        });
+        const res = await appAPI.fetchProducts(filters);
         const { response, totalPage } = res.data;
         setProducts(response);
         setPages(totalPage);

@@ -7,6 +7,7 @@ import { getCartState } from "../utils/localStorage.js";
 import { updateOrder } from "../apis/orders.js";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
@@ -26,7 +27,8 @@ const CartPage = () => {
       setCart(products);
       setLoading(true);
     } catch (error) {
-      console.error("Error fetching cart:", error);
+      toast.error("Error fetching cart");
+      toast.error(error.response.data.message);
       setLoading(true);
     }
   };
@@ -34,7 +36,7 @@ const CartPage = () => {
   useEffect(() => {
     fetchCart();
   }, []);
-  console.log("Code: ", cart)
+  console.log("Code: ", cart);
   if (!loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -63,11 +65,14 @@ const CartPage = () => {
       cart_products: cart,
       total_price: totalPrice,
     };
-    const response = await updateOrder(orderId, order, "checkout");
-    if (response) {
-      navigate("/checkout");
+    try {
+      const response = await updateOrder(orderId, order, "checkout");
+      if (response) {
+        navigate("/checkout");
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
-    return response;
   };
 
   return (

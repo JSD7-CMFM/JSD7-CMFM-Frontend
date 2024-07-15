@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import usersAPI from "../../../apis/users";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignupForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -78,9 +79,16 @@ const SignupForm = () => {
         password,
         phoneNumber,
       };
-      const response = await usersAPI.Register(dataObject);
-      console.log("response signup", response);
-      navigate("/");
+      try {
+        const response = await usersAPI.Register(dataObject);
+        console.log("response signup", response);
+        toast.success("Registration successful");
+        navigate("/");
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    } else {
+      toast.error("An error occurred during registration. Please try again.");
     }
   };
 

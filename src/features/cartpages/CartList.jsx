@@ -7,6 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { updateOrder } from "../../apis/orders.js";
 import { RiShoppingBag4Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
   const handleDelete = async (id) => {
@@ -15,8 +16,12 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
       const updatedCart = cart.filter((product) => product.product_id === id);
       const response = await updateOrder(cartId, updatedCart, "delete");
       fetchCart();
+      if (response) {
+        toast.success("Product deleted successfully");
+      }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error deleting product");
+      toast.error(error.response.data.message);
     }
   };
 

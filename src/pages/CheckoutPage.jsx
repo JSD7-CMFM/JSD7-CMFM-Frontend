@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmLeaveModal from "../features/checkout/components/ConfirmLeave.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import appProductAPI from "../apis/products.js";
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
   const [checkout, setCheckout] = useState(false);
@@ -39,7 +40,6 @@ const CheckoutPage = () => {
         const fetchedUser = responseUser.data;
         setUser(fetchedUser);
         setCheckout(products);
-
         setAddress({
           address: fetchedUser.address?.address || "",
           province: fetchedUser.address?.province || "",
@@ -47,10 +47,8 @@ const CheckoutPage = () => {
           zipcode: fetchedUser.address?.zipcode || "",
         });
         setLoading(true);
-        console.log(responseUser.data);
-        console.log(responseOrder.data);
       } catch (error) {
-        console.error("Error fetching user:", error);
+        toast.error("Error fetching user:", error);
       }
     };
 
@@ -83,14 +81,17 @@ const CheckoutPage = () => {
             "update_address"
           );
         } catch (error) {
+          toast.error("Error updating address:", error);
           throw error;
         }
       }
       if (responseOrder) {
+        toast.success("Order created successfully");
         setCartState("No_cart");
         navigate("/cart");
       }
     } catch (error) {
+      toast.error("Error creating order:", error);
       throw error;
     }
   };

@@ -11,6 +11,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import { MdGames } from "react-icons/md";
 import { FaMinusCircle } from "react-icons/fa";
 import ModalAddToCart from "./ModalAddToCart.jsx";
+import { toast } from "react-toastify";
 
 const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -30,7 +31,6 @@ const ProductDetails = ({ products }) => {
 
     try {
       const userId = getId();
-      // Create the new cart product object
       const newCartProduct = {
         product_id: products._id,
         amount: quantity2,
@@ -44,25 +44,24 @@ const ProductDetails = ({ products }) => {
       };
 
       const orderId = getCartState();
-      console.log("orderId:", orderId);
       if (orderId === "No_cart") {
         const response = await createOrder({
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        console.log("Order created successfully:", response.data);
+        toast.success("Order created successfully");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        console.log("Order update successfully:", response.data);
+        toast.success("Order updated successfully");
       }
     } catch (error) {
-      console.error("Error updating order:", error);
+      toast.error("Error adding product to cart");
       if (error.response) {
-        console.error("Server responded with:", error.response.data);
+        toast.error(error.response.data.message);
       }
     }
   };
@@ -90,7 +89,7 @@ const ProductDetails = ({ products }) => {
   return (
     <div className="flex justify-center items-center md:w-[700px] md:h-auto md:m-4  bg-white py-5 mr--10 rounded-3xl border  border-gray-400 shadow-xl">
       <div className=" w-1/2 h-auto m-10  md:w-full">
-        <div className=" text-3xl md:text-xl md:font-bold pb-3">
+        <div className=" text-3xl md:text-xl md:font-bold pb-3 ">
           <h1 className="text-[24px] font-semibold">{products.name}</h1>
         </div>
         <div className="pb-4">

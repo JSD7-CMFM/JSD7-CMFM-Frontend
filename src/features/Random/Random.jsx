@@ -4,6 +4,7 @@ import { getId, getCartState } from "../../utils/localStorage.js";
 import { createOrder, updateOrder } from "../../apis/orders.js";
 import ModalRandomAddToCart from "./ModalRandomAddToCart.jsx";
 import ReactCardFlip from "react-card-flip";
+import { toast } from "react-toastify";
 
 const Random = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -67,26 +68,25 @@ const Random = () => {
       type: product.type,
       stock: product.quantity,
     };
-    console.log("newCartProduct:", newCartProduct);
     try {
       if (orderId === "No_cart") {
         const response = await createOrder({
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        console.log("Order created successfully");
+        toast.success("Order created successfully");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        console.log("Order update successfully");
+        toast.success("Order updated successfully");
       }
     } catch (error) {
-      console.error("Error updating order:", error);
+      toast.error("Error adding product to cart");
       if (error.response) {
-        console.error("Server responded with:", error.response.data);
+        toast.error(error.response.data.message);
       }
     }
   };

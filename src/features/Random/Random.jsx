@@ -10,6 +10,7 @@ const Random = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [open, setOpen] = useState(false);
+  const [randomMeme, setRandomMeme] = useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -34,8 +35,6 @@ const Random = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  const getRandomCard = () => {};
 
   const getRandomProduct = () => {
     if (filteredProducts.length === 0) return;
@@ -92,8 +91,46 @@ const Random = () => {
     }
   };
 
+  const imageUrls = [
+    "/Random/Random1.jpg",
+    "/Random/Random2.jpg",
+    "/Random/Random3.jpg",
+    "/Random/Random4.jpg",
+    "/Random/Random5.jpg",
+    "/Random/Random6.jpg",
+    "/Random/Random7.jpg",
+    "/Random/Random8.jpg",
+    "/Random/Random9.jpg",
+    "/Random/Random10.jpg",
+    "/Random/Random11.jpg",
+    "/Random/Random12.jpg",
+    "/Random/Random13.jpg",
+    "/Random/Random14.jpg",
+    "/Random/Random15.jpg",
+    "/Random/Random16.jpg",
+    "/Random/Random17.jpg",
+    "/Random/Random18.jpg",
+    "/Random/Random19.jpg",
+    "/Random/Random20.jpg",
+    "/Random/Random21.jpg",
+    "/Random/Random22.jpg",
+    "/Random/Random23.jpg",
+    "/Random/Random24.jpg",
+    "/Random/Random25.jpg",
+    "/Random/Random26.jpg",
+    "/Random/Random27.jpg",
+  ];
+  const getRandomMeme = () => {
+    const randomIndex = Math.floor(Math.random() * imageUrls.length);
+    setRandomMeme(imageUrls[randomIndex]);
+  };
+
+  useEffect(() => {
+    getRandomMeme();
+  }, []);
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[rgb(242,198,206)] ">
+    <div className="flex items-center justify-center min-h-screen bg-custom-background">
       <div className="w-full max-w-3xl p-4 bg-white rounded-xl shadow-2xl flex">
         <h1 className="text-3xl font-bold mb-10 p-5">เอากี่จุ่มดีจ๊ะ </h1>
         {!selectedProduct ? (
@@ -117,7 +154,7 @@ const Random = () => {
                   <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
                   <div>
                     <img
-                      src="Dogcard.jpg"
+                      src={randomMeme}
                       className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black shadow-2xl"
                     />
                   </div>
@@ -141,6 +178,7 @@ const Random = () => {
                 onClick={() => {
                   getRandomProduct();
                   setIsFlipped(false);
+                  getRandomMeme();
                 }}
                 className="p-3  text-black rounded-2xl border-black border bg-blue-200"
               >

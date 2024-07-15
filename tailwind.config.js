@@ -28,6 +28,9 @@ export default {
         rightToLeft: "rightToLeft 30s linear infinite",
         leftToRight: "leftToRight 30s linear infinite",
       },
+      backgroundImage: {
+        'custom-background': "url('/Shiba.jpg')",
+      },
     },
   },
   plugins: [require("daisyui")],

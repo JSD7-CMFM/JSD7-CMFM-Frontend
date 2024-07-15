@@ -17,20 +17,22 @@ const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
   const [quantity2, setQuantity2] = useState(1);
   const [open, setOpen] = useState(false);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!products) {
-      console.error("product is null");
+      toast.error("Product not found");
       setLoading(false);
       return;
     }
-
     try {
       const userId = getId();
+      if (!userId) {
+        toast.error("Please login first");
+        return;
+      }
       const newCartProduct = {
         product_id: products._id,
         amount: quantity2,
@@ -49,17 +51,16 @@ const ProductDetails = ({ products }) => {
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        toast.success("Order created successfully");
+        toast.success("Added to cart");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        toast.success("Order updated successfully");
+        toast.success("Added to cart");
       }
     } catch (error) {
-      toast.error("Error adding product to cart");
       if (error.response) {
         toast.error(error.response.data.message);
       }

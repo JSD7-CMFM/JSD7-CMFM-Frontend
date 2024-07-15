@@ -90,36 +90,16 @@ const Random = () => {
       }
     }
   };
+  const generateImageUrls = () => {
+    const urls = [];
+    for (let i = 1; i <= 27; i++) {
+      urls.push(`/Random/Random${i}.jpg`);
+    }
+    return urls;
+  };
 
-  const imageUrls = [
-    "/Random/Random1.jpg",
-    "/Random/Random2.jpg",
-    "/Random/Random3.jpg",
-    "/Random/Random4.jpg",
-    "/Random/Random5.jpg",
-    "/Random/Random6.jpg",
-    "/Random/Random7.jpg",
-    "/Random/Random8.jpg",
-    "/Random/Random9.jpg",
-    "/Random/Random10.jpg",
-    "/Random/Random11.jpg",
-    "/Random/Random12.jpg",
-    "/Random/Random13.jpg",
-    "/Random/Random14.jpg",
-    "/Random/Random15.jpg",
-    "/Random/Random16.jpg",
-    "/Random/Random17.jpg",
-    "/Random/Random18.jpg",
-    "/Random/Random19.jpg",
-    "/Random/Random20.jpg",
-    "/Random/Random21.jpg",
-    "/Random/Random22.jpg",
-    "/Random/Random23.jpg",
-    "/Random/Random24.jpg",
-    "/Random/Random25.jpg",
-    "/Random/Random26.jpg",
-    "/Random/Random27.jpg",
-  ];
+  const imageUrls = generateImageUrls();
+
   const getRandomMeme = () => {
     const randomIndex = Math.floor(Math.random() * imageUrls.length);
     setRandomMeme(imageUrls[randomIndex]);

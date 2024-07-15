@@ -45,10 +45,7 @@ const MovingSectionAlter = () => {
       id="moving-container"
       className="bg-[#f7b7ed] overflow-hidden border-white border"
     >
-      <div
-        id="moving-section"
-        className="flex justify-end animate-leftToRight"
-      >
+      <div id="moving-section" className="flex justify-end animate-leftToRight">
         <MovingContent />
         <MovingContent />
         <MovingContent />

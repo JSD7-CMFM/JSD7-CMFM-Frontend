@@ -11,13 +11,40 @@ import { toast } from "react-toastify";
 const ProductListDetail = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
   const [filters, setFilters] = useState({
     search: "",
     page: 1,
     limit: 12,
+    type: "All",
   });
 
   const [pages, setPages] = useState();
+
+  const handleTypeChange = (type) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      type: type,
+      page: 1,
+    }));
+  };
+
+  const handleSearch = () => {
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      search: searchText,
+    }));
+  };
+
+  const handleReset = () => {
+    setSearchText("");
+    setFilters({
+      search: "",
+      page: 1,
+      limit: 12,
+      type: "All",
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +61,7 @@ const ProductListDetail = () => {
     };
 
     fetchData();
-  }, [filters.page, filters.search]); // Empty dependency array ensures useEffect runs only on component mount
+  }, [filters.page, filters.search, filters.type]);
 
   if (!loading) {
     return (
@@ -46,24 +73,51 @@ const ProductListDetail = () => {
 
   return (
     <>
-      <div className="pt-[90px] flex justify-center ">
-        <Box sx={{ width: "500px" }} margin={5}>
+      <div className="pt-[90px] flex justify-center relative">
+        <Box sx={{ width: "500px" }} margin={2}>
           <TextField
             fullWidth
             sx={{ backgroundColor: "white", borderRadius: "10px" }}
             color="primary"
             name="search"
             placeholder="search"
-            onChange={(event) => {
-              setTimeout(() => {
-                setFilters((prevFilter) => ({
-                  ...prevFilter,
-                  search: event.target.value,
-                }));
-              }, 5000);
-            }}
+            onChange={(event) => setSearchText(event.target.value)}
           />
         </Box>
+        <div className="flex justify-between items-center relative">
+          <div>
+            <button
+              onClick={handleSearch}
+              className="border border-gray-400 bg-slate-400 rounded-lg px-4 py-2 hover:bg-blue-600 hover:text-white"
+            >
+              Search
+            </button>
+            <button onClick={handleReset} className="ml-2 hover:text-red-600">
+              Reset
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-center items-center absolute right-20 top-[120px]">
+          <h1>Filter:</h1>
+          <button
+            className="px-2 hover:opacity-40"
+            onClick={() => handleTypeChange("All")}
+          >
+            All
+          </button>
+          <button
+            className="px-2 border-x-2 hover:opacity-40"
+            onClick={() => handleTypeChange("Box")}
+          >
+            Box
+          </button>
+          <button
+            className="px-2 hover:opacity-40"
+            onClick={() => handleTypeChange("Single")}
+          >
+            Single
+          </button>
+        </div>
       </div>
       <div className="grid grid-cols-1 2xl:grid-cols-5 xl:grid-col-4 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4 mx-10">
         {products.map((product) => (

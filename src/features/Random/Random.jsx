@@ -69,19 +69,23 @@ const Random = () => {
       stock: product.quantity,
     };
     try {
+      if (!userId) {
+        toast.error("Please login first");
+        return;
+      }
       if (orderId === "No_cart") {
         const response = await createOrder({
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        toast.success("Order created successfully");
+        toast.success("Added to cart");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        toast.success("Order updated successfully");
+        toast.success("Added to cart");
       }
     } catch (error) {
       toast.error("Error adding product to cart");

@@ -17,10 +17,10 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
       const response = await updateOrder(cartId, updatedCart, "delete");
       fetchCart();
       if (response) {
-        toast.success("Product deleted successfully");
+        toast.success("Product deleted from cart");
       }
     } catch (error) {
-      toast.error("Error deleting product");
+      toast.error("Error deleting product from cart");
       toast.error(error.response.data.message);
     }
   };

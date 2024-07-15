@@ -12,18 +12,18 @@ const CollapsibleItem = ({ imgSrc, title }) => {
         checked={isChecked}
         onChange={() => setIsChecked(!isChecked)} // Toggle isChecked state
       />
-      <div className="collapse-title text-xl font-medium flex justify-center items-start cursor-pointer pb-10">
+      <div className="collapse-title text-xl font-medium flex justify-center items-start cursor-pointer">
         {title}
       </div>
       <div
-        className={`collapse-content flex justify-center items-center w-[760px] h-[850px]  ${
-          isChecked ? "block" : "hidden" // Conditionally show/hide based on isChecked
+        className={`collapse-content flex justify-center  w-[760px] h-[500px] overflow-scroll  ${
+          isChecked ? "block" : "hidden"
         }`}
       >
         <img
           src={imgSrc}
           alt="Collapsible content"
-          className="w-full md:w-3/4"
+          className="w-full md:w-3/4 h-fit"
         />
       </div>
     </div>

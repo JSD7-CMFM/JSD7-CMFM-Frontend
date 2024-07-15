@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { getToken } from "../../../utils/localStorage.js";
 
 const NavLinks = () => {
+  const token = getToken();
   return (
     <ul className="hidden xl:flex space-x-4">
       <li>
@@ -24,6 +26,13 @@ const NavLinks = () => {
           ABOUT US
         </Link>
       </li>
+      {token ? (
+        <li>
+          <Link to="AboutUs" className="btn btn-ghost text-xl">
+            MY ACCOUNT
+          </Link>
+        </li>
+      ) : null}
     </ul>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
+import { GoogleLogin } from '@react-oauth/google';
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -47,6 +48,15 @@ function LoginForm() {
       setLoginError("An error occurred during login. Please try again.");
     }
     setDisable(false);
+  };
+
+  const handleGoogleSuccess = async (response) => {
+    console.log(response);
+    // Implement login with Google response
+  };
+
+  const handleGoogleFailure = (error) => {
+    console.error("Google login failed:", error);
   };
 
   return (
@@ -103,8 +113,15 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
+        <div className="mt-5">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleFailure}
+          />
+        </div>
       </form>
     </div>
   );
 }
+
 export default LoginForm;

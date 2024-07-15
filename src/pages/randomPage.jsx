@@ -1,9 +1,8 @@
 import React from "react";
-import RandomProductPage from "../features/ProductList/movingProduct.jsx";
-
+import Random from "../features/Random/Random.jsx";
 
 const randomPage = () => {
-  return <RandomProductPage />;
+  return <Random />;
 };
 
 export default randomPage;

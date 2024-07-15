@@ -5,6 +5,7 @@ import { getCartState } from "../../utils/localStorage.js";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateOrder } from "../../apis/orders.js";
+import { RiShoppingBag4Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
@@ -30,13 +31,23 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
   return (
     <div>
       {cart.length === 0 && getCartState() !== "No_cart" ? (
-        <div className="pt-5">
-          No product in cart, wanna see our TOYS?!!
-          <Link to="/productList">
-            <button className="ml-4 p-2 bg-blue-300 text-white rounded">
-              Go to Product List
-            </button>
-          </Link>
+        <div className="pt-5 p-4 ">
+          <div className="flex items-center">
+            <h1 className="text-[20px] item center">
+              Add something to make me happy !!
+            </h1>
+            <Link to="/productList">
+              <button className="ml-4 p-3 font-semibold rounded-xl border shadow-sm bg-gray-200">
+                <div className="flex text-black text-[22px] items-center w-auto h-auto ">
+                  <h1>Buy Now</h1>
+                  <RiShoppingBag4Fill size="40" style={{ color: "skyblue" }} />
+                </div>
+              </button>
+            </Link>
+          </div>
+          <div className="flex justify-center ">
+            <img src="/Empty_cart.png" className="flex justify-center w-full" />
+          </div>
         </div>
       ) : (
         cart.map((product) => (
@@ -83,7 +94,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                   <div>
                     <div className="flex-start">
                       <div className="flex justify-start text-left pl-5 py-5">
-                        <h2 className="text-left">Quanity : </h2>
+                        <h2 className="text-left">Quantity : </h2>
                         <input
                           className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
                           type="number"
@@ -94,7 +105,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                             UpdateAmount(product.product_id, e.target.value)
                           }
                         />
-                        <button className="ml-5 text-[14px]">
+                        <button className="ml-5 ">
                           Stock: {product.stock}
                         </button>
                       </div>

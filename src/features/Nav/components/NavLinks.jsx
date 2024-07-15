@@ -16,7 +16,7 @@ const NavLinks = () => {
       </li>
       <li>
         <Link to="random" className="btn btn-ghost text-xl">
-          RANDOM
+          LUCKY DRAW
         </Link>
       </li>
       <li>

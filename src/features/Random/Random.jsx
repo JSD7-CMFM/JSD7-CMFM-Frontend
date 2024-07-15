@@ -36,6 +36,8 @@ const Random = () => {
     fetchData();
   }, []);
 
+  const getRandomCard = () => {};
+
   const getRandomProduct = () => {
     if (filteredProducts.length === 0) return;
     setIsAnimating(true);
@@ -92,25 +94,31 @@ const Random = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[rgb(242,198,206)] ">
-      <div className="w-full max-w-3xl p-4 ">
-        <h1 className="text-3xl font-bold mb-4">Random</h1>
+      <div className="w-full max-w-3xl p-4 bg-white rounded-xl shadow-2xl flex">
+        <h1 className="text-3xl font-bold mb-10 p-5">เอากี่จุ่มดีจ๊ะ </h1>
         {!selectedProduct ? (
           <button
             onClick={getRandomProduct}
-            className="p-2 bg-blue-500 text-white rounded"
+            className="p-2 text-white rounded justify-center"
           >
-            Get Random Product
+            <div className=" justify-center">
+              <img
+                src="Dogcard.jpg"
+                className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black justify-center"
+              />
+              <h1 className="text-black text-[30px]">จุ่มเลยจิ</h1>
+            </div>
           </button>
         ) : (
           <div className="mt-4 ">
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
               <div className="flex justify-center">
                 <button onClick={handleClick} className="justify-center">
-                  <div>Open Your Card</div>
+                  <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
                   <div>
                     <img
-                      src="/Card.jpg"
-                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black"
+                      src="Dogcard.jpg"
+                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black shadow-2xl"
                     />
                   </div>
                 </button>
@@ -128,15 +136,15 @@ const Random = () => {
                 </div>
               </div>
             </ReactCardFlip>
-            <div className="flex space-x-4 mt-4">
+            <div className="flex space-x-4 mt-4 justify-center">
               <button
                 onClick={() => {
                   getRandomProduct();
                   setIsFlipped(false);
                 }}
-                className="p-2 bg-blue-500 text-white rounded"
+                className="p-3  text-black rounded-2xl border-black border bg-blue-200"
               >
-                Continue Random
+                จุ่มต่อมั้ยจ๊ะ
               </button>
               <form onSubmit={(e) => e.preventDefault()}>
                 <button
@@ -145,9 +153,9 @@ const Random = () => {
                     handleOpen();
                     addToCart(selectedProduct);
                   }}
-                  className="p-2 bg-green-500 text-white rounded"
+                  className="p-3  text-black rounded-2xl border-black border bg-green-100"
                 >
-                  Add to Cart?
+                  ซื้อเลยสิจ๊ะ
                 </button>
                 <ModalRandomAddToCart open={open} handleClose={handleClose} />
               </form>
@@ -155,7 +163,7 @@ const Random = () => {
           </div>
         )}
         {isAnimating && (
-          <div className="animate-pulse mt-4">Randomizing...</div>
+          <div className="animate-pulse mt-4">หาของแปปนะจ๊ะ...</div>
         )}
       </div>
     </div>

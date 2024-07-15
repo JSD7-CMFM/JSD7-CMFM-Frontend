@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CollapsibleItem from "../../features/ProductInfo/collapsibleItem";
-import { useParams } from "react-router-dom";
-import axiosInstance from "../../config/myAPIs.js";
 import { TbHandClick } from "react-icons/tb";
 
 const CollapsibleSection = ({ products }) => {
-  console.log(products);
   if (!products) {
     return <div>Product not found</div>;
   }
@@ -17,7 +14,7 @@ const CollapsibleSection = ({ products }) => {
         <>
           <CollapsibleItem
             key={`${products?._id}-infoImage1`}
-            imgSrc={products?.productinfo?.info2} // Assuming productinfo and info2 exist
+            imgSrc={products?.productinfo?.info2}
             title={
               <>
                 <span>PRODUCT SHOW </span>
@@ -27,7 +24,7 @@ const CollapsibleSection = ({ products }) => {
           />
           <CollapsibleItem
             key={`${products?._id}-infoImage2`}
-            imgSrc={products?.productinfo?.info1} // Assuming productinfo and info1 exist
+            imgSrc={products?.productinfo?.info1}
             title={
               <>
                 <span>GAME RULES </span>
@@ -37,16 +34,6 @@ const CollapsibleSection = ({ products }) => {
           />
         </>
       )}
-      {/* <CollapsibleItem
-        key={`${products._id}-infoImage1`}
-        imgSrc={products?.productinfo.info2 || ""} // Assuming productinfo and info2 exist
-        title="PRODUCT SHOW"
-      />
-      <CollapsibleItem
-        key={`${products._id}-infoImage2`}
-        imgSrc={products?.productinfo.info1 || ""} // Assuming productinfo and info1 exist
-        title="GAME RULES"
-      /> */}
     </div>
   );
 };

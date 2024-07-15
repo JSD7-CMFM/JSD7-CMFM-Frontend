@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const MainImage = ({ products }) => {
   if (!products) {
     return <div>Product not found</div>;
   }
-
   return (
     <div className="w-[800px]">
       <div className="justify-center  w-full md:h-auto md:m-10">

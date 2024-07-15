@@ -13,11 +13,11 @@ const User = () => {
   useEffect(() => {}, []);
   const firstName = getFirstName();
 
+  const navigate = useNavigate();
   const onLogout = () => {
     removeToken();
     toast.info("Signed Out Succesfully");
     window.location.reload();
-    useNavigate("/");
   };
 
   return (
@@ -58,9 +58,9 @@ const User = () => {
               <Link to="/account" className="justify-center">
                 My Account
               </Link>
-              <button className="justify-center" onClick={onLogout}>
+              <div className="justify-center" onClick={onLogout}>
                 Sign out
-              </button>
+              </div>
             </>
           ) : (
             <>

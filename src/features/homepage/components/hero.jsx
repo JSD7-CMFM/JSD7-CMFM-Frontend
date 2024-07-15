@@ -30,12 +30,20 @@ const TextSection = () => {
         styles and price ranges, guaranteed authenticity and quality,
         user-friendly shopping experience, and efficient nationwide shipping.
       </p>
-      <Link
-        to="productList"
-        className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border-2 border-white"
-      >
-        Pony Mart
-      </Link>
+      <div className="flex">
+        <Link
+          to="productList"
+          className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border-2 border-white mr-8"
+        >
+          More Products
+        </Link>
+        <Link
+          to="random"
+          className="py-[10px] px-6 mt-5 bg-white hover:bg-[#F0EB76] rounded-lg border-2 border-white"
+        >
+          Lucky Draw
+        </Link>
+      </div>
     </div>
   );
 };

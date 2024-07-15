@@ -20,23 +20,28 @@ const fetchProducts2 = async () => {
     throw error; // Re-throw the error to handle it somewhere else
   }
 };
-const fetchProducts = async () => {
+const fetchProducts = async (filters) => {
   try {
-    const response = await axiosInstance.get("/products"); // Assuming the API returns JSON data
-    return response.data; // Return the data if needed
+    const response = await axiosInstance.get("/products", {
+      params: {
+        ...filters,
+      },
+    });
+    return response; // Return the data if needed
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error; // Re-throw the error to handle it somewhere else
   }
 };
 
-const getAllProducts = async () => await axiosInstance.get("/products", {
-  params: {
-    search: "",
-    page: 1,
-    limit: 36,
-  }
-});
+const getAllProducts = async () =>
+  await axiosInstance.get("/products", {
+    params: {
+      search: "",
+      page: 1,
+      limit: 36,
+    },
+  });
 
 const addProduct = async (data) => {
   const config = {

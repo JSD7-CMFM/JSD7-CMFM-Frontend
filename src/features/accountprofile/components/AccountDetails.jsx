@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import appAPI from "../../../apis/products.js";
+import appAPI from "../../../apis/users.js";
 import CircularProgress from "@mui/material/CircularProgress";
+import { getId } from "../../../utils/localStorage.js";
 
 const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
   const [user, setUser] = useState(null);
+  const userId = getId();
   useEffect(() => {
     const fetchData = async () => {
       try {

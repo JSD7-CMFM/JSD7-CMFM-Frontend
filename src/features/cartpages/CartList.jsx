@@ -24,6 +24,25 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
       toast.error(error.response.data.message);
     }
   };
+  const handleInput = (id, value, stock) => {
+    if (value > stock) {
+      value = stock;
+    } else if (value < 1) {
+      value = 1;
+    }
+    UpdateAmount(id, value);
+  };
+  const incrementQuantity = (id, currentQuantity, stock) => {
+    if (currentQuantity < stock) {
+      UpdateAmount(id, currentQuantity + 1);
+    }
+  };
+
+  const decrementQuantity = (id, currentQuantity) => {
+    if (currentQuantity > 1) {
+      UpdateAmount(id, currentQuantity - 1);
+    }
+  };
 
   if (!loading) {
     return (
@@ -99,21 +118,57 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                   <div>
                     <div className="flex-start">
                       <div className="flex justify-start text-left pl-5 py-5">
-                        <h2 className="text-left">Quantity : </h2>
+                        <h2 className="text-left flex items-center mr-5">
+                          Quantity :{" "}
+                        </h2>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            decrementQuantity(
+                              product.product_id,
+                              product.amount
+                            )
+                          }
+                          className="decrement-btn p-2 bg-red-200 font-bold text-xl border border-black rounded"
+                        >
+                          -
+                        </button>
                         <input
-                          className="text-black text-center w-[50px] border border-black rounded bg-blue-100 "
-                          type="number"
-                          max={product.stock}
-                          min={1}
-                          value={product.amount || null}
+                          className="text-black text-center w-[50px]  bg-white"
+                          type="text"
+                          value={product.amount || ""}
                           onChange={(e) =>
-                            UpdateAmount(product.product_id, e.target.value)
+                            handleInput(
+                              product.product_id,
+                              Number(e.target.value),
+                              product.stock
+                            )
+                          }
+                          onBlur={(e) =>
+                            handleInput(
+                              product.product_id,
+                              Number(e.target.value),
+                              product.stock
+                            )
                           }
                         />
-                        <button className="ml-5 ">
-                          Stock: {product.stock}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            incrementQuantity(
+                              product.product_id,
+                              product.amount,
+                              product.stock
+                            )
+                          }
+                          className="increment-btn p-2 bg-green-200 font-bold text-xl border border-black rounded"
+                        >
+                          +
                         </button>
                       </div>
+                      <button className="ml-5 text-center">
+                        Stock: {product.stock - product.amount}
+                      </button>
                     </div>
                   </div>
                   <div className="m-4 p-1 flex justify-between w-[100px]">

@@ -56,7 +56,9 @@ const Random = () => {
       price: product.price,
       product_img: product.product_img,
       type: product.type,
+      stock: product.quantity,
     };
+    console.log("newCartProduct:", newCartProduct);
     try {
       if (orderId === "No_cart") {
         const response = await createOrder({
@@ -105,10 +107,13 @@ const Random = () => {
             >
               Continue Random
             </button>
-            <form onSubmit={() => addToCart(selectedProduct)}>
+            <form onSubmit={(e) => e.preventDefault()}>
               <button
                 type="button"
-                onClick={handleOpen}
+                onClick={() => {
+                  handleOpen();
+                  addToCart(selectedProduct);
+                }}
                 className="p-2 bg-green-500 text-white rounded"
               >
                 Add to Cart?

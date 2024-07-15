@@ -90,7 +90,7 @@ const ProductDetails = ({ products }) => {
   return (
     <div className="flex justify-center items-center md:w-[700px] md:h-auto md:m-4  bg-white py-5 mr--10 rounded-3xl border  border-gray-400 shadow-xl">
       <div className=" w-1/2 h-auto m-10  md:w-full">
-        <div className=" text-3xl md:text-xl md:font-bold pb-3">
+        <div className=" text-3xl md:text-xl md:font-bold pb-3 ">
           <h1 className="text-[24px] font-semibold">{products.name}</h1>
         </div>
         <div className="pb-4">

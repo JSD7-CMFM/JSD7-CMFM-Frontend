@@ -1,33 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axiosInstance from "../../config/myAPIs";
-import { useParams } from "react-router-dom";
+import React from "react";
 
 const MainImage = ({ products }) => {
-  // const { id } = useParams();
-  // const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axiosInstance.get("/products");
-  //       setProducts(response.data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching products:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []); // Empty dependency array ensures useEffect runs only on component mount
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // // Find the product by id
-  // const product = products.find((product) => product._id === id);
-
   if (!products) {
     return <div>Product not found</div>;
   }

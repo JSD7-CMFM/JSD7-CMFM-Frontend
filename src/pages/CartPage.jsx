@@ -12,9 +12,10 @@ import { updateOrder } from "../apis/orders.js";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-toastify";
+import { useCart } from "../hooks/CartContext.jsx";
 
 const CartPage = () => {
-  const [cart, setCart] = useState([]);
+  const { cart, setCart } = useCart();
   const [loading, setLoading] = useState(false);
   const orderId = getCartState();
   const navigate = useNavigate();

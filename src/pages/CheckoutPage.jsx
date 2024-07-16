@@ -10,8 +10,10 @@ import ConfirmLeaveModal from "../features/checkout/components/ConfirmLeave.jsx"
 import CircularProgress from "@mui/material/CircularProgress";
 import appProductAPI from "../apis/products.js";
 import { toast } from "react-toastify";
+import { useCart } from "../hooks/CartContext.jsx";
 
 const CheckoutPage = () => {
+  const { fetchCart } = useCart();
   const [checkout, setCheckout] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -92,6 +94,7 @@ const CheckoutPage = () => {
       if (responseOrder) {
         toast.success("Order created successfully");
         setCartState("No_cart");
+        fetchCart();
         navigate("/cart");
       }
     } catch (error) {

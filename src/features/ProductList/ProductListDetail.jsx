@@ -1,14 +1,28 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa6";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import appAPI from "../../apis/products.js";
-import { Pagination, Box, TextField } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Pagination, Box, TextField, CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 
 const ProductListDetail = () => {
+  const getInitialLimit = () => {
+    const width = window.innerWidth;
+    if (width <= 768) {
+      return 4;
+    } else if (width <= 1024) {
+      return 9;
+    } else if (width <= 1280) {
+      return 8;
+    } else if (width <= 1540) {
+      return 8;
+    } else if (width <= 1920) {
+      return 10;
+    } else {
+      return 10;
+    }
+  };
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
@@ -16,10 +30,9 @@ const ProductListDetail = () => {
   const [filters, setFilters] = useState({
     search: "",
     page: 1,
-    limit: 12,
+    limit: getInitialLimit(),
     type: "All",
   });
-
   const [pages, setPages] = useState();
 
   const handleTypeChange = (type) => {
@@ -43,7 +56,7 @@ const ProductListDetail = () => {
     setFilters({
       search: "",
       page: 1,
-      limit: 12,
+      limit: getInitialLimit(),
       type: "All",
     });
   };
@@ -51,37 +64,35 @@ const ProductListDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(false);
+        setLoading(true);
         const res = await appAPI.fetchProducts(filters);
         const { response, totalPage } = res.data;
         setProducts(response);
         setPages(totalPage);
-        setLoading(true);
+        setLoading(false);
       } catch (error) {
         toast.error("Error fetching products:", error);
       }
     };
 
     fetchData();
-  }, [filters.page, filters.search, filters.type]);
+  }, [filters.page, filters.search, filters.type, filters.limit]);
 
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth;
       setFilters((prevFilters) => ({
         ...prevFilters,
-        limit: width >= 1000 ? 10 : 12,
+        limit: getInitialLimit(),
       }));
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  if (!loading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <CircularProgress />

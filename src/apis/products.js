@@ -53,8 +53,12 @@ const addProduct = async (data) => {
 const deleteProduct = async (id) =>
   await axiosInstance.delete(`/products/${id}`);
 
-const editProduct = async (id, data) =>
-  await axiosInstance.patch(`/products/${id}`, data);
+const editProduct = async (id, data, source) => {
+  const config = {
+    headers: { Source: source },
+  };
+  await axiosInstance.patch(`/products/${id}`, data, config);
+};
 
 export default {
   fetchProducts,

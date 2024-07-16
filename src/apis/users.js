@@ -19,9 +19,10 @@ const Login = async (user) => {
 
 const googleLogin = async (data) => {
   try {
-    const response = await axiosInstance.post("/auth/google", data);
-
+    // console.log(data);
+    const response = await axiosInstance.post("/users/auth/google", data);
     const { token, id, firstName, email, cart } = response.data;
+
     if (response.data && token) {
       setToken(token);
       setInfo(id, firstName, email, cart);

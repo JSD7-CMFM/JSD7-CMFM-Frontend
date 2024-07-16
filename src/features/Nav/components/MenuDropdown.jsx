@@ -31,7 +31,7 @@ const MenuDropdown = () => {
           <Link to="productList">PRODUCTLIST</Link>
         </li>
         <li>
-          <Link to="Random">RANDOM</Link>
+          <Link to="Random">LUCKY DRAW</Link>
         </li>
         <li>
           <Link to="AboutUs">ABOUT US</Link>

@@ -1,47 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Assuming you are using React Router for routing
-import axiosInstance from "../../config/myAPIs.js"; // Import your axios instance
+import React from "react";
 
-const DetailItem = ({ imgSrc, type, description, category }) => {
-  // const { id } = useParams(); // Get the id from URL params
-
-  // const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [product, setProduct] = useState(null); // State to hold the selected product
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axiosInstance.get('/products');
-  //       setProducts(response.data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching products:', error);
-  //       // Handle error state here (e.g., set loading to false, show error message)
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []); // Empty dependency array ensures useEffect runs only on component mount
-
-  // useEffect(() => {
-  //   // Find the product by id once products are fetched
-  //   if (products.length > 0) {
-  //     const selectedProduct = products.find((prod) => prod._id === id);
-  //     setProduct(selectedProduct); // Set the product state
-  //   }
-  // }, [products, id]); // Update whenever products or id changes
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
+const DetailItem = ({ imgSrc, type, description, category, price }) => {
   if (!imgSrc) {
     return <div>Product not found</div>;
   }
 
   return (
-    <div className="flex pb-4 md:text-xl  p-2 rounded-2xl bg-[rgb(45,204,240)] bg-opacity-30 border-2 drop-shadow-lg">
+    <div className="w-full flex pb-4 md:text-xl  p-2 rounded-2xl bg-[rgb(45,204,240)] bg-opacity-30 border-2 drop-shadow-lg">
       <div className="w-50 md:w-32 rounded-2xl pl-4">
         <img
           className="w-full h-full object-cover rounded-2xl "
@@ -56,6 +21,11 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
         </div>
         <div className="badge text-black mt-2 ml-2 md:p-3 text-[16px] font  bg-green-300">
           {category}
+        </div>
+        <div className="flex justify-between">
+          <div className="text-xl font-bold text-black md:text-[16px] mt-5 md:p-4 rounded-xl bg-slate-50">
+            ฿ {price} / box
+          </div>
         </div>
       </div>
     </div>

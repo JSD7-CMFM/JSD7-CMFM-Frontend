@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -40,19 +41,38 @@ function LoginForm() {
     try {
       const response = await usersAPI.Login(user);
       if (response && email === response.data.email) {
+        toast.success("Sign In Succesful!");
         navigate("/");
       } else {
+        toast.error("Invalid email or password.");
         setLoginError("Invalid email or password.");
       }
     } catch (error) {
+      toast.error("Invalid email or password.");
       setLoginError("An error occurred during login. Please try again.");
     }
     setDisable(false);
   };
 
+  // const handleGoogleSuccess = useGoogleLogin({
+  //   onSuccess: (response) => {
+  //     console.log(response);
+  //     // handleGoogleSuccess(response);
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     // handleGoogleFailure(error);
+  //   },
+  // })
   const handleGoogleSuccess = async (response) => {
-    console.log(response);
-    // Implement login with Google response
+    const token = response.credential;
+    try {
+      const result = await usersAPI.googleLogin({ token });
+      console.log("Google login success:", result.data);
+      navigate("/");
+    } catch (error) {
+      console.error("Google login failed:", error);
+    }
   };
 
   const handleGoogleFailure = (error) => {
@@ -113,11 +133,19 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
-        <div className="mt-5">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleFailure}
+        <div className="mt-5 flex justify-center">
+          <GoogleLogin 
+          onSuccess={handleGoogleSuccess}
+          onFailure={handleGoogleFailure}
+          
           />
+          {/* <GoogleLogin
+            buttonText="Sign in with Google"
+            onSuccess={handleGoogleSuccess}
+            onFailure={handleGoogleFailure}
+            cookiePolicy={"single_host_origin"}
+            isSignedIn={true}
+          /> */}
         </div>
       </form>
     </div>

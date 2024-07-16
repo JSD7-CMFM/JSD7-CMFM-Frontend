@@ -16,11 +16,8 @@ const InfoSection = () => {
           supporting creative artists and designers.
         </p>
       </div>
-      <Link to="productList" className="flex justify-center">
-        <button
-          to="productList"
-          className="border-2 border-gray-300 w-full md:w-1/2 lg:w-1/4 rounded-xl py-4 bg-white font-semibold text-lg md:text-xl hover:bg-[#F0EB76]"
-        >
+      <Link to="AboutUs" className="flex justify-center">
+        <button className="border-2 border-gray-300 w-full md:w-1/2 lg:w-1/4 rounded-xl py-4 bg-white font-semibold text-lg md:text-xl hover:bg-[#F0EB76]">
           LEARN MORE
         </button>
       </Link>

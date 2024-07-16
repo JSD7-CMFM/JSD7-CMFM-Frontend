@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
 import { GoogleLogin } from "react-google-login";
-import { gapi } from "gapi-script";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -41,11 +41,14 @@ function LoginForm() {
     try {
       const response = await usersAPI.Login(user);
       if (response && email === response.data.email) {
+        toast.success("Sign In Succesful!");
         navigate("/");
       } else {
+        toast.error("Invalid email or password.");
         setLoginError("Invalid email or password.");
       }
     } catch (error) {
+      toast.error("Invalid email or password.");
       setLoginError("An error occurred during login. Please try again.");
     }
     setDisable(false);
@@ -123,7 +126,7 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <GoogleLogin
           className="flex justify-center"
             clientId={clientId}
@@ -133,7 +136,7 @@ function LoginForm() {
             cookiePolicy={"single_host_origin"}
             isSignedIn={true}
           />
-        </div>
+        </div> */}
       </form>
     </div>
   );

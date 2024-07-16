@@ -18,13 +18,12 @@ import AuthenticateAdmin from "../features/AuthAdmin/AuthAdmin";
 import AboutUs from "../pages/AboutUs.jsx";
 import ScrollToTop from "../utils/scrollToTop.js";
 import RandomPage from "../pages/RandomPage.jsx";
-
+import AuthenticateUser from "../features/AuthUser/AuthUser.jsx";
 
 const Root = () => (
   <>
     <ScrollToTop />
     <Container />
-    <Outlet />
   </>
 );
 
@@ -62,12 +61,20 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
-        path: "/checkout",
-        element: <CheckoutPage />,
+        path: "checkout",
+        element: (
+          <AuthenticateUser>
+            <CheckoutPage />
+          </AuthenticateUser>
+        ),
       },
       {
-        path: "/Account",
-        element: <AccountPageContainer />,
+        path: "Account",
+        element: (
+          <AuthenticateUser>
+            <AccountPageContainer />
+          </AuthenticateUser>
+        ),
       },
       {
         path: "/AboutUs",

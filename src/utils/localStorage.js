@@ -1,10 +1,15 @@
 const decodeJWT = (token) => {
   try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
     return JSON.parse(jsonPayload);
   } catch (error) {
     console.error("Invalid token:", error);
@@ -22,6 +27,11 @@ export const setInfo = (id, firstName, email, cart) => {
   localStorage.setItem("email", email);
   localStorage.setItem("cart", cart);
 };
+
+export const setCartQuantity = (quantity) =>
+  localStorage.setItem("cartQuantity", quantity);
+
+export const getCartQuantity = () => localStorage.getItem("cartQuantity");
 
 export const getToken = () => localStorage.getItem(ACCESS_TOKEN);
 export const getEmail = () => localStorage.getItem("email");
@@ -46,7 +56,9 @@ export const getIsAdmin = () => {
 
 export const setCartState = (cart) => localStorage.setItem("cart", cart);
 export const getCartState = () => localStorage.getItem("cart");
-
+export const clearCartState = () => {
+  localStorage.removeItem("cartState");
+};
 export const removeToken = () => {
   localStorage.clear();
 };

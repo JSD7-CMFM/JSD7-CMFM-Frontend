@@ -6,6 +6,7 @@ import Editdata from "../features/accountprofile/components/EditData.jsx";
 import { useNavigate } from "react-router-dom";
 import EditAddress from "../features/accountprofile/components/EditAddress.jsx";
 import { GoogleLogout } from "react-google-login";
+import { toast } from "react-toastify";
 
 const AccountPageContainer = () => {
   const [activeSection, setActiveSection] = useState("acc-info");
@@ -14,8 +15,8 @@ const AccountPageContainer = () => {
 
   const handleSignout = () => {
     localStorage.clear();
+    toast.info("Signed Out Successfully");
     navigate("/");
-    window.location.reload();
   };
   const showSection = (sectionId) => {
     setActiveSection(sectionId);

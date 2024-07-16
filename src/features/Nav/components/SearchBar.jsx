@@ -1,10 +1,11 @@
 import React from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
   return (
-    <div className="relative flex-1 md:flex-none">
+    <Link to="productList" className="relative flex-1 md:flex-none">
       <input
         type="text"
         placeholder="Search"
@@ -22,7 +23,7 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
         className="absolute right-2 top-1/2 transform -translate-y-1/2 text-slate-400 cursor-pointer hover:text-black"
         onClick={handleSearch}
       />
-    </div>
+    </Link>
   );
 };
 

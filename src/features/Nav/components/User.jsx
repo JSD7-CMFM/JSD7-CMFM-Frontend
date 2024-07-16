@@ -7,16 +7,18 @@ import {
   getToken,
   removeToken,
 } from "../../../utils/localStorage.js";
+import { toast } from "react-toastify";
 import { GoogleLogout } from "react-google-login";
 
 const User = () => {
   useEffect(() => {}, []);
   const firstName = getFirstName();
 
+  const navigate = useNavigate();
   const handleSignout = () => {
-    removeToken();
-    window.location.reload();
-    useNavigate("/");
+    localStorage.clear();
+    toast.info("Signed Out Successfully");
+    navigate("/");
   };
 
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -72,9 +74,6 @@ const User = () => {
                   </button>
                 )}
               ></GoogleLogout>
-              {/* <button className="justify-center" onClick={onLogout}>
-                Sign out
-              </button> */}
             </>
           ) : (
             <>

@@ -13,7 +13,7 @@ const ToastOptions = {
   rtl: false,
   pauseOnFocusLoss: true,
   draggable: true,
-  pauseOnHover: true,
+  pauseOnHover: false,
   theme: "light",
 };
 ReactDOM.createRoot(document.getElementById("root")).render(

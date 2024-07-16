@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  getToken,
+  getCartState,
+  getCartQuantity,
+} from "../../../utils/localStorage.js";
 
 const Cart = () => {
+  const orderId = getCartState();
+  const token = getToken();
+  const quantity = getCartQuantity();
   return (
     <div className="dropdown dropdown-end  md:flex">
-      <Link to="/cart">
+      <Link to="/cart" className="relative">
         <button tabIndex="0" className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
@@ -23,11 +31,12 @@ const Cart = () => {
             </svg>
           </div>
         </button>
+        {token && orderId ? (
+          <h3 className="bg-red-500 rounded-full border-spacing-1 p-1 text-white text-[12px] text-center font-semibold absolute right-0 top-0 w-6 h-6 ">
+            {quantity}
+          </h3>
+        ) : null}
       </Link>
-      <div
-        tabIndex="0"
-        className="mt-5 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-      ></div>
     </div>
   );
 };

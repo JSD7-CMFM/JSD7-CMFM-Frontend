@@ -15,7 +15,6 @@ const ProductInfoPage = () => {
     try {
       setLoading(false);
       const response = await axiosInstance.get(`/products/${id}`);
-      console.log(response.data);
       setProducts(response.data);
       setLoading(true);
     } catch (error) {
@@ -33,9 +32,6 @@ const ProductInfoPage = () => {
       </div>
     );
   }
-
-  console.log(products);
-
   return (
     <section className="bg-[#8BADD3] pt-[90px]">
       <div className="md:flex flex-col md:flex-row items-center pt-4 md:justify-center">

@@ -3,7 +3,11 @@ import TopCart from "../features/cartpages/TopCart";
 import SelectCart from "../features/cartpages/SelectCart";
 import TotalCart from "../features/cartpages/TotalCart";
 import { getOrderById } from "../apis/orders.js";
-import { getCartState } from "../utils/localStorage.js";
+import {
+  getCartState,
+  getToken,
+  setCartQuantity,
+} from "../utils/localStorage.js";
 import { updateOrder } from "../apis/orders.js";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -14,9 +18,10 @@ const CartPage = () => {
   const [loading, setLoading] = useState(false);
   const orderId = getCartState();
   const navigate = useNavigate();
+  const token = getToken();
 
   const fetchCart = async () => {
-    if (orderId === "No_cart") {
+    if (orderId === "No_cart" || !token) {
       setLoading(true);
       return;
     }
@@ -26,9 +31,9 @@ const CartPage = () => {
       const products = response.data.cart_products;
       setCart(products);
       setLoading(true);
+      setCartQuantity(products.length);
     } catch (error) {
-      toast.error("Error fetching cart");
-      toast.error(error.response.data.message);
+      toast.error("fetching data error", error);
       setLoading(true);
     }
   };
@@ -36,7 +41,7 @@ const CartPage = () => {
   useEffect(() => {
     fetchCart();
   }, []);
-  console.log("Code: ", cart);
+
   if (!loading) {
     return (
       <div className="flex items-center justify-center h-screen">

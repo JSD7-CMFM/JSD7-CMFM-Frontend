@@ -14,9 +14,8 @@ const AccountPageContainer = () => {
 
   const handleSignout = () => {
     localStorage.clear();
-    toast.info("Signed Out Succesfully");
+    toast.info("Signed Out Successfully");
     navigate("/");
-    window.location.reload();
   };
   const showSection = (sectionId) => {
     setActiveSection(sectionId);

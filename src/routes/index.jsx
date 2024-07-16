@@ -20,16 +20,12 @@ import ScrollToTop from "../utils/scrollToTop.js";
 import RandomPage from "../pages/RandomPage.jsx";
 import AuthenticateUser from "../features/AuthUser/AuthUser.jsx";
 
-
-
 const Root = () => (
   <>
     <ScrollToTop />
     <Container />
-    <Outlet />
   </>
 );
-
 
 const router = createBrowserRouter([
   {
@@ -85,8 +81,8 @@ const router = createBrowserRouter([
         element: <AboutUs />,
       },
       {
-         path: "random",
-         element: <RandomPage />,
+        path: "random",
+        element: <RandomPage />,
       },
     ],
   },

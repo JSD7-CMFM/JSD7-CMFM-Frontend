@@ -69,19 +69,23 @@ const Random = () => {
       stock: product.quantity,
     };
     try {
+      if (!userId) {
+        toast.error("Please login first");
+        return;
+      }
       if (orderId === "No_cart") {
         const response = await createOrder({
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        toast.success("Order created successfully");
+        toast.success("Added to cart");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        toast.success("Order updated successfully");
+        toast.success("Added to cart");
       }
     } catch (error) {
       toast.error("Error adding product to cart");
@@ -90,36 +94,16 @@ const Random = () => {
       }
     }
   };
+  const generateImageUrls = () => {
+    const urls = [];
+    for (let i = 1; i <= 28; i++) {
+      urls.push(`/Random/Random${i}.jpg`);
+    }
+    return urls;
+  };
 
-  const imageUrls = [
-    "/Random/Random1.jpg",
-    "/Random/Random2.jpg",
-    "/Random/Random3.jpg",
-    "/Random/Random4.jpg",
-    "/Random/Random5.jpg",
-    "/Random/Random6.jpg",
-    "/Random/Random7.jpg",
-    "/Random/Random8.jpg",
-    "/Random/Random9.jpg",
-    "/Random/Random10.jpg",
-    "/Random/Random11.jpg",
-    "/Random/Random12.jpg",
-    "/Random/Random13.jpg",
-    "/Random/Random14.jpg",
-    "/Random/Random15.jpg",
-    "/Random/Random16.jpg",
-    "/Random/Random17.jpg",
-    "/Random/Random18.jpg",
-    "/Random/Random19.jpg",
-    "/Random/Random20.jpg",
-    "/Random/Random21.jpg",
-    "/Random/Random22.jpg",
-    "/Random/Random23.jpg",
-    "/Random/Random24.jpg",
-    "/Random/Random25.jpg",
-    "/Random/Random26.jpg",
-    "/Random/Random27.jpg",
-  ];
+  const imageUrls = generateImageUrls();
+
   const getRandomMeme = () => {
     const randomIndex = Math.floor(Math.random() * imageUrls.length);
     setRandomMeme(imageUrls[randomIndex]);
@@ -141,21 +125,28 @@ const Random = () => {
             <div className=" justify-center">
               <img
                 src="Dogcard.jpg"
-                className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black justify-center"
+                className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-slate-100 border-gray-400 shadow-2xl justify-center"
               />
               <h1 className="text-black text-[30px]">จุ่มเลยจิ</h1>
             </div>
           </button>
         ) : (
-          <div className="mt-4 ">
+          <div className="mt-4">
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
               <div className="flex justify-center">
-                <button onClick={handleClick} className="justify-center">
-                  <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
+                <button onClick={handleClick} className=" justify-center ">
+                  {!isAnimating ? (
+                    <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
+                  ) : (
+                    <div className="animate-pulse mt-4">หาของแปปนะจ๊ะ...</div>
+                  )}
                   <div>
                     <img
                       src={randomMeme}
-                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black shadow-2xl"
+                      style={{
+                        boxShadow: "0px 0px 70px 0px rgb(255,228,0)",
+                      }}
+                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 border-gray-400 bg-[url('/Yuki.')] bg-cover"
                     />
                   </div>
                 </button>
@@ -180,7 +171,7 @@ const Random = () => {
                   setIsFlipped(false);
                   getRandomMeme();
                 }}
-                className="p-3  text-black rounded-2xl border-black border bg-blue-200"
+                className="p-3 text-black rounded-2xl border-black border bg-blue-200"
               >
                 จุ่มต่อมั้ยจ๊ะ
               </button>
@@ -199,9 +190,6 @@ const Random = () => {
               </form>
             </div>
           </div>
-        )}
-        {isAnimating && (
-          <div className="animate-pulse mt-4">หาของแปปนะจ๊ะ...</div>
         )}
       </div>
     </div>

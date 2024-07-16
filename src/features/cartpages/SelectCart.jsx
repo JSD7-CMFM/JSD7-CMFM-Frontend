@@ -5,7 +5,7 @@ const SelectCart = ({ cart, UpdateAmount, loading, fetchCart }) => {
   return (
     <div>
       <section className="px-5 bg-white w-full">
-        <div className="bg-white flex pt-5">
+        <div className="bg-white flex justify-center pt-5">
           <div className="form-control">
             <div className="flex-col">
               <div>

@@ -17,20 +17,22 @@ const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
   const [quantity2, setQuantity2] = useState(1);
   const [open, setOpen] = useState(false);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!products) {
-      console.error("product is null");
+      toast.error("Product not found");
       setLoading(false);
       return;
     }
-
     try {
       const userId = getId();
+      if (!userId) {
+        toast.error("Please login first");
+        return;
+      }
       const newCartProduct = {
         product_id: products._id,
         amount: quantity2,
@@ -49,17 +51,16 @@ const ProductDetails = ({ products }) => {
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        toast.success("Order created successfully");
+        toast.success("Added to cart");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        toast.success("Order updated successfully");
+        toast.success("Added to cart");
       }
     } catch (error) {
-      toast.error("Error adding product to cart");
       if (error.response) {
         toast.error(error.response.data.message);
       }
@@ -67,7 +68,9 @@ const ProductDetails = ({ products }) => {
   };
 
   const incrementQuantity2 = () => {
-    setQuantity2((prevQuantity) => prevQuantity + 1);
+    if (quantity2 < products.quantity) {
+      setQuantity2((prevQuantity) => prevQuantity + 1);
+    }
   };
 
   const decrementQuantity2 = () => {
@@ -87,7 +90,7 @@ const ProductDetails = ({ products }) => {
   const totalPrice2 = (quantity2 * products.price).toFixed(2);
 
   return (
-    <div className="flex justify-center items-center md:w-[700px] md:h-auto md:m-4  bg-white py-5 mr--10 rounded-3xl border  border-gray-400 shadow-xl">
+    <div className="flex justify-center items-center md:w-[700px] md:h-[auto] md:m-4  bg-white py-5 mr--10 rounded-3xl border  border-gray-400 shadow-xl">
       <div className=" w-1/2 h-auto m-10  md:w-full">
         <div className=" text-3xl md:text-xl md:font-bold pb-3 ">
           <h1 className="text-[24px] font-semibold">{products.name}</h1>
@@ -95,34 +98,36 @@ const ProductDetails = ({ products }) => {
         <div className="pb-4">
           <h1 className="text-[20px]">{products.description}</h1>
         </div>
-
-        <div className="pb-2 text-[20px] font-medium justify-center">
-          {/* <h2>SINGLE</h2> */}
-        </div>
         <DetailItem
+          price={products.price}
           imgSrc={products.product_img}
           type={products.type}
           description={products.description}
           category={products.category}
         />
-        <div className="mt-6 mb-6 p-1 flex justify-between items-center w-full">
-          <div className="flex items-center">
-            <button
-              onClick={decrementQuantity2}
-              className="hover:shadow-xl rounded-full"
-            >
-              <FaMinusCircle
-                size="40"
-                style={{ color: "rgb(251, 100, 100) " }}
-              />
-            </button>
-            <span className="mx-4 text-[30px]">{quantity2}</span>
-            <button
-              onClick={incrementQuantity2}
-              className="hover:shadow-xl rounded-full"
-            >
-              <FaPlusCircle size="40" style={{ color: "rgb(77, 184, 88)" }} />
-            </button>
+        <div className="mt-6 mb-6 p-1 px-6 flex justify-between items-center w-full">
+          <div>
+            <div className="flex justify-center">
+              <button
+                onClick={decrementQuantity2}
+                className="hover:shadow-xl rounded-full"
+              >
+                <FaMinusCircle
+                  size="40"
+                  style={{ color: "rgb(251, 100, 100) " }}
+                />
+              </button>
+              <p className="mx-4 text-[30px]">{quantity2}</p>
+              <button
+                onClick={incrementQuantity2}
+                className="hover:shadow-xl rounded-full"
+              >
+                <FaPlusCircle size="40" style={{ color: "rgb(77, 184, 88)" }} />
+              </button>
+            </div>
+            <div className="text-[16px] pt-3">
+              Only {products.quantity} left in stock!
+            </div>
           </div>
           <div className="font-semibold text-[24px]">Total: ฿{totalPrice2}</div>
         </div>

@@ -125,6 +125,7 @@ function LoginForm() {
         </div>
         <div className="mt-5">
           <GoogleLogin
+          className="flex justify-center"
             clientId={clientId}
             buttonText="Sign in with Google"
             onSuccess={handleGoogleSuccess}

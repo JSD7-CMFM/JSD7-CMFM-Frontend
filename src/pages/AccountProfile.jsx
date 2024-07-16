@@ -62,7 +62,7 @@ const AccountPageContainer = () => {
                 onLogoutSuccess={handleSignout}
                 render={(renderProps) => (
                   <button
-                    className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
+                    className="text-left hover:underline hover:cursor-pointer"
                     onClick={renderProps.onClick}
                   >
                     Sign Out

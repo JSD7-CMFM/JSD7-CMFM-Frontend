@@ -65,7 +65,7 @@ const User = () => {
                 onLogoutSuccess={handleSignout}
                 render={(renderProps) => (
                   <button
-                    className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
+                    className="justify-center"
                     onClick={renderProps.onClick}
                   >
                     Sign Out

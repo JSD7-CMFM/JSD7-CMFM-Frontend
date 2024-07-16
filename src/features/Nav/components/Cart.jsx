@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  getToken,
-  getCartState,
-  getCartQuantity,
-} from "../../../utils/localStorage.js";
+import { getToken, getCartState } from "../../../utils/localStorage.js";
 import { useCart } from "../../../hooks/CartContext.jsx";
 
 const Cart = () => {

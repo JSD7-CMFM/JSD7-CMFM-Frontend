@@ -134,7 +134,10 @@ const Random = () => {
           <div className="mt-4">
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
               <div className="flex justify-center">
-                <button onClick={handleClick} className=" justify-center ">
+                <button
+                  onClick={!isAnimating ? handleClick : undefined}
+                  className=" justify-center "
+                >
                   {!isAnimating ? (
                     <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
                   ) : (

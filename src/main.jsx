@@ -18,6 +18,8 @@ const ToastOptions = {
 };
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <ToastContainer toastOptions={ToastOptions} />
     <App />
+    <ToastContainer />
   </React.StrictMode>
 );

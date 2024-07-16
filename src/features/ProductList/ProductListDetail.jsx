@@ -12,6 +12,7 @@ const ProductListDetail = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
+  const [filterStatus, setFilterStatus] = useState("All");
   const [filters, setFilters] = useState({
     search: "",
     page: 1,
@@ -22,6 +23,7 @@ const ProductListDetail = () => {
   const [pages, setPages] = useState();
 
   const handleTypeChange = (type) => {
+    setFilterStatus(type);
     setFilters((prevFilters) => ({
       ...prevFilters,
       type: type,
@@ -63,6 +65,22 @@ const ProductListDetail = () => {
     fetchData();
   }, [filters.page, filters.search, filters.type]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        limit: width >= 1536 ? 10 : 12,
+      }));
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   if (!loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -100,19 +118,25 @@ const ProductListDetail = () => {
         <div className="flex justify-center items-center absolute right-20 top-[120px]">
           <h1>Filter:</h1>
           <button
-            className="px-2 hover:opacity-40"
+            className={`px-2 hover:opacity-40 ${
+              filterStatus === "All" ? "bg-blue-600 text-white" : ""
+            }`}
             onClick={() => handleTypeChange("All")}
           >
             All
           </button>
           <button
-            className="px-2 border-x-2 hover:opacity-40"
+            className={`px-2 hover:opacity-40 border-x-2 ${
+              filterStatus === "Box" ? "bg-blue-600 text-white" : ""
+            }`}
             onClick={() => handleTypeChange("Box")}
           >
             Box
           </button>
           <button
-            className="px-2 hover:opacity-40"
+            className={`px-2 hover:opacity-40 ${
+              filterStatus === "Single" ? "bg-blue-600 text-white" : ""
+            }`}
             onClick={() => handleTypeChange("Single")}
           >
             Single
@@ -121,7 +145,11 @@ const ProductListDetail = () => {
       </div>
       <div className="grid grid-cols-1 2xl:grid-cols-5 xl:grid-col-4 lg:grid-cols-4 md:grid-cols-3 gap-10 p-4 mx-10">
         {products.map((product) => (
-          <Link key={product._id} to={`/productinfo/${product._id}`}>
+          <Link
+            key={product._id}
+            to={`/productinfo/${product._id}`}
+            className="relative"
+          >
             <div className="border border-gray-200 rounded-lg overflow-hidden relative group mb-5 pb-5 bg-white shadow-2xl w-full md:w-[320px] h-[440px]">
               <div className="relative group">
                 <img
@@ -149,6 +177,9 @@ const ProductListDetail = () => {
               <div className="bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase absolute right-2 bottom-0 mb-4 ml-4">
                 More Detail
               </div>
+            </div>
+            <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 uppercase">
+              ฿ {product.price}
             </div>
           </Link>
         ))}

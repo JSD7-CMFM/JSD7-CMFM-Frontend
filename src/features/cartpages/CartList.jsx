@@ -54,7 +54,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
 
   return (
     <div>
-      {cart.length === 0 && getCartState() === "No_cart" ? (
+      {cart.length === 0 || getCartState() === "No_cart" ? (
         <div className="pt-5 p-4 ">
           <div className="flex items-center">
             <h1 className="text-[20px] item center">

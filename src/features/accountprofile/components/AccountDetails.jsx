@@ -38,30 +38,30 @@ const AccountDetails = ({ setActiveSection, setUserGlobal }) => {
     <div id="acc-info" className="px-7">
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="mt-7 p-1 text justify-inline text-[18px] font-semibold w-[100px]">
+          <h2 className="mt-7 p-1 text justify-inline text-[18px] font-semibold w-[100px] h-[2rem]">
             Name :
           </h2>
-          <h2 className="mt-7 mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
+          <h2 className="mt-7 mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center h-[2rem]">
             {user.data.firstName} {user.data.lastName}
           </h2>
         </div>
       </div>
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">
+          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold h-[2rem]">
             Email :{" "}
           </h2>
-          <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
+          <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center h-[2rem]">
             {user.data.email}
           </h2>
         </div>
       </div>
       <div className="flex">
         <div className="flex w-full">
-          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold">
+          <h2 className="w-[100px] p-1 text justify-inline text-[18px] font-semibold h-[2rem]">
             Phone :
           </h2>
-          <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center">
+          <h2 className="mb-7 p-1 border-b-2 bg-slate-100 rounded-md  w-4/5 text-center h-[2rem]">
             {user.data.phoneNumber}
           </h2>
         </div>

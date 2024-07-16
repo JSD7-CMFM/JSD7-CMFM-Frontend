@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const ToastOptions = {
+const toastOptions = {
   position: "bottom-right",
   autoClose: 2000,
   hideProgressBar: false,
@@ -18,8 +18,7 @@ const ToastOptions = {
 };
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ToastContainer toastOptions={ToastOptions} />
     <App />
-    <ToastContainer />
+    <ToastContainer {...toastOptions} />
   </React.StrictMode>
 );

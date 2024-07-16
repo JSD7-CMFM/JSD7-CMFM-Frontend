@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import appAPI from "../../apis/products.js";
 import { Pagination, Box, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { toast } from "react-toastify";
 
 const ProductListDetail = () => {
   const [products, setProducts] = useState([]);
@@ -28,7 +29,7 @@ const ProductListDetail = () => {
         setPages(totalPage);
         setLoading(true);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        toast.error("Error fetching products:", error);
       }
     };
 

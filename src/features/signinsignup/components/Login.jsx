@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
-import { GoogleLogin } from '@react-oauth/google';
+import { toast } from "react-toastify";
+
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -40,11 +41,14 @@ function LoginForm() {
     try {
       const response = await usersAPI.Login(user);
       if (response && email === response.data.email) {
+        toast.success("Sign In Succesful!");
         navigate("/");
       } else {
+        toast.error("Invalid email or password.");
         setLoginError("Invalid email or password.");
       }
     } catch (error) {
+      toast.error("Invalid email or password.");
       setLoginError("An error occurred during login. Please try again.");
     }
     setDisable(false);

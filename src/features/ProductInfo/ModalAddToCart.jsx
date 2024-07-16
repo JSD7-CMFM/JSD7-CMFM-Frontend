@@ -9,8 +9,6 @@ import { getToken } from "../../utils/localStorage.js";
 
 const ModalAddToCart = ({ handleClose, open }) => {
   const Token = getToken();
-  console.log(Token);
-
   return (
     <Modal
       open={open}

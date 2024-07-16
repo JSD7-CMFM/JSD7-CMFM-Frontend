@@ -21,7 +21,6 @@ const googleLogin = async (data) => {
   try {
     // console.log(data);
     const response = await axiosInstance.post("/users/auth/google", data);
-    console.log(response)
     const { token, id, firstName, email, cart } = response.data;
 
     if (response.data && token) {

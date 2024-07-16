@@ -8,7 +8,7 @@ import {
   removeToken,
 } from "../../../utils/localStorage.js";
 import { toast } from "react-toastify";
-import { GoogleLogout } from "react-google-login";
+import { googleLogout } from "@react-oauth/google";
 import { gapi } from "gapi-script";
 
 const User = () => {
@@ -17,6 +17,7 @@ const User = () => {
 
   const navigate = useNavigate();
   const handleSignout = () => {
+    googleLogout();
     localStorage.clear();
     toast.info("Signed Out Successfully");
     navigate("/");
@@ -62,19 +63,10 @@ const User = () => {
               <Link to="/account" className="justify-center">
                 My Account
               </Link>
-              <GoogleLogout
-                icon={false}
-                clientId={clientId}
-                onLogoutSuccess={handleSignout}
-                render={(renderProps) => (
-                  <button
-                    className="justify-center"
-                    onClick={renderProps.onClick}
-                  >
-                    Sign Out
-                  </button>
-                )}
-              ></GoogleLogout>
+
+              <button className="justify-center" onClick={handleSignout}>
+                Sign Out
+              </button>
             </>
           ) : (
             <>

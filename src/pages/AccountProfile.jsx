@@ -5,7 +5,7 @@ import Addresses from "../features/accountprofile/components/Addresses";
 import Editdata from "../features/accountprofile/components/EditData.jsx";
 import { useNavigate } from "react-router-dom";
 import EditAddress from "../features/accountprofile/components/EditAddress.jsx";
-import { GoogleLogout } from "react-google-login";
+import { googleLogout } from "@react-oauth/google";
 import { toast } from "react-toastify";
 
 const AccountPageContainer = () => {
@@ -14,6 +14,7 @@ const AccountPageContainer = () => {
   const navigate = useNavigate();
 
   const handleSignout = () => {
+    googleLogout();
     localStorage.clear();
     toast.info("Signed Out Successfully");
     navigate("/");
@@ -57,19 +58,14 @@ const AccountPageContainer = () => {
               >
                 ADDRESSES
               </p>
-              <GoogleLogout
-                icon={false}
-                clientId={clientId}
-                onLogoutSuccess={handleSignout}
-                render={(renderProps) => (
-                  <button
-                    className="text-left hover:underline hover:cursor-pointer"
-                    onClick={renderProps.onClick}
-                  >
-                    Sign Out
-                  </button>
-                )}
-              ></GoogleLogout>
+
+              <button
+                className="text-left hover:underline hover:cursor-pointer"
+                onClick={handleSignout}
+              >
+                Sign Out
+              </button>
+
               {/* <p className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11">
                   SIGN OUT
                 </p> */}

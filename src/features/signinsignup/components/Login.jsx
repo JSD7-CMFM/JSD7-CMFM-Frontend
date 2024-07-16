@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 
 function LoginForm() {
@@ -54,11 +54,18 @@ function LoginForm() {
     setDisable(false);
   };
 
-  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-
+  // const handleGoogleSuccess = useGoogleLogin({
+  //   onSuccess: (response) => {
+  //     console.log(response);
+  //     // handleGoogleSuccess(response);
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     // handleGoogleFailure(error);
+  //   },
+  // })
   const handleGoogleSuccess = async (response) => {
-    const token = response.tokenId;
-    // console.log(token);
+    const token = response.credential;
     try {
       const result = await usersAPI.googleLogin({ token });
       console.log("Google login success:", result.data);
@@ -127,14 +134,18 @@ function LoginForm() {
           </Link>
         </div>
         <div className="mt-5 flex justify-center">
-          <GoogleLogin
-            clientId={clientId}
+          <GoogleLogin 
+          onSuccess={handleGoogleSuccess}
+          onFailure={handleGoogleFailure}
+          
+          />
+          {/* <GoogleLogin
             buttonText="Sign in with Google"
             onSuccess={handleGoogleSuccess}
             onFailure={handleGoogleFailure}
             cookiePolicy={"single_host_origin"}
             isSignedIn={true}
-          />
+          /> */}
         </div>
       </form>
     </div>

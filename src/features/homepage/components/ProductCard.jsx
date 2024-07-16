@@ -1,6 +1,5 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Link } from "react-router-dom";
 import { TbHorseToy } from "react-icons/tb";
 
 const images = [
@@ -13,8 +12,8 @@ const ProductCard = () => {
   return (
     <>
       <div className="relative pt-[120px] overflow-hidden">
-        <Link to="/productlist">
-          <div className="flex items-center">
+        <div to="/productlist" className="w-fit">
+          <div className="flex">
             <h1 className="pl-5 text-6xl font-bold text-[#F07287]">
               NEW ARRIVALS
             </h1>
@@ -24,7 +23,7 @@ const ProductCard = () => {
               className="animate-bounce ml-5"
             />
           </div>
-        </Link>
+        </div>
         <div className="w-full overflow-hidden">
           <div className="flex w-[200%] animate-rightToLeft">
             {images.map((src, index) => (

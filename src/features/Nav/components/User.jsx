@@ -9,6 +9,7 @@ import {
 } from "../../../utils/localStorage.js";
 import { toast } from "react-toastify";
 import { GoogleLogout } from "react-google-login";
+import { gapi } from "gapi-script";
 
 const User = () => {
   useEffect(() => {}, []);

@@ -126,9 +126,8 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
-        {/* <div className="mt-5">
+        <div className="mt-5 flex justify-center">
           <GoogleLogin
-          className="flex justify-center"
             clientId={clientId}
             buttonText="Sign in with Google"
             onSuccess={handleGoogleSuccess}
@@ -136,7 +135,7 @@ function LoginForm() {
             cookiePolicy={"single_host_origin"}
             isSignedIn={true}
           />
-        </div> */}
+        </div>
       </form>
     </div>
   );

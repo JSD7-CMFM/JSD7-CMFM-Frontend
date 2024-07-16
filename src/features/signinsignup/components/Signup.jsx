@@ -26,13 +26,13 @@ const SignupForm = () => {
   const handleFirstNameChange = (event) => {
     const value = event.target.value;
     setFirstName(value);
-    setIsFirstNameValid(/^[A-Za-z]*$/.test(value));
+    setIsFirstNameValid(/^[A-Za-z\u0E00-\u0E7F]*$/.test(value));
   };
 
   const handleLastNameChange = (event) => {
     const value = event.target.value;
     setLastName(value);
-    setIsLastNameValid(/^[A-Za-z]*$/.test(value));
+    setIsLastNameValid(/^[A-Za-z\u0E00-\u0E7F]*$/.test(value));
   };
 
   const handleEmailChange = (event) => {

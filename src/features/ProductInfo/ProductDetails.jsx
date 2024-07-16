@@ -1,17 +1,13 @@
 import { useState } from "react";
 import React from "react";
 import DetailItem from "./DetailItem";
-import { useParams } from "react-router-dom";
-import axiosInstance from "../../config/myAPIs"; // Ensure axiosInstance is imported
 import { getCartState, getId } from "../../utils/localStorage.js";
 import { createOrder, updateOrder } from "../../apis/orders.js";
-import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
-import { MdGames } from "react-icons/md";
 import { FaMinusCircle } from "react-icons/fa";
 import ModalAddToCart from "./ModalAddToCart.jsx";
 import { toast } from "react-toastify";
+import { useCart } from "../../hooks/CartContext.jsx";
 
 const ProductDetails = ({ products }) => {
   const [loading, setLoading] = useState(true);
@@ -19,6 +15,7 @@ const ProductDetails = ({ products }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { fetchCart } = useCart();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -60,6 +57,7 @@ const ProductDetails = ({ products }) => {
         );
         toast.success("Added to cart");
       }
+      fetchCart();
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);

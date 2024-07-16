@@ -17,6 +17,22 @@ const Login = async (user) => {
   }
 };
 
+const googleLogin = async (data) => {
+  try {
+    const response = await axiosInstance.post("/auth/google", data);
+
+    const { token, id, firstName, email, cart } = response.data;
+    if (response.data && token) {
+      setToken(token);
+      setInfo(id, firstName, email, cart);
+    }
+    return response;
+  } catch (error) {
+    console.error("Google login error:", error);
+    throw error;
+  }
+};
+
 const Register = async (data) => {
   try {
     const response = await axiosInstance.post("/users/register", data);
@@ -55,9 +71,6 @@ const banUser = async (id, currentStatus) => {
     headers: { Authorization: `Bearer ${getToken()}` },
   };
   const newStatus = currentStatus === "active" ? "banned" : "active";
-  // const response = await axiosInstance.patch(`/users/${id}`, { status: newStatus }, config)
-  // const { message } = response.data
-  // console.log("response: ", message);
   return await axiosInstance.patch(
     `/users/${id}`,
     { status: newStatus },
@@ -67,6 +80,7 @@ const banUser = async (id, currentStatus) => {
 
 export default {
   Login,
+  googleLogin,
   Register,
   getUser,
   getAllUsers,

@@ -3,7 +3,11 @@ import TopCart from "../features/cartpages/TopCart";
 import SelectCart from "../features/cartpages/SelectCart";
 import TotalCart from "../features/cartpages/TotalCart";
 import { getOrderById } from "../apis/orders.js";
-import { getCartState, getToken } from "../utils/localStorage.js";
+import {
+  getCartState,
+  getToken,
+  setCartQuantity,
+} from "../utils/localStorage.js";
 import { updateOrder } from "../apis/orders.js";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -27,6 +31,7 @@ const CartPage = () => {
       const products = response.data.cart_products;
       setCart(products);
       setLoading(true);
+      setCartQuantity(products.length);
     } catch (error) {
       toast.error("fetching data error", error);
       setLoading(true);

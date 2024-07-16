@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
 import { toast } from "react-toastify";
 
-
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -117,12 +116,12 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleFailure}
           />
-        </div>
+        </div> */}
       </form>
     </div>
   );

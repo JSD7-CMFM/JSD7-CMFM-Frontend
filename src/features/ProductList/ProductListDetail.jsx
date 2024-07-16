@@ -70,7 +70,7 @@ const ProductListDetail = () => {
       const width = window.innerWidth;
       setFilters((prevFilters) => ({
         ...prevFilters,
-        limit: width >= 1536 ? 10 : 12,
+        limit: width >= 1000 ? 10 : 12,
       }));
     };
 
@@ -106,7 +106,7 @@ const ProductListDetail = () => {
           <div>
             <button
               onClick={handleSearch}
-              className="border border-gray-400 bg-slate-400 rounded-lg px-4 py-2 hover:bg-blue-600 hover:text-white"
+              className="border border-gray-400 bg-[#FFF6D0] rounded-lg px-4 py-2 hover:bg-[#ffe469]"
             >
               Search
             </button>
@@ -119,7 +119,7 @@ const ProductListDetail = () => {
           <h1>Filter:</h1>
           <button
             className={`px-2 hover:opacity-40 ${
-              filterStatus === "All" ? "bg-blue-600 text-white" : ""
+              filterStatus === "All" ? "bg-slate-200 text-black" : ""
             }`}
             onClick={() => handleTypeChange("All")}
           >
@@ -127,7 +127,7 @@ const ProductListDetail = () => {
           </button>
           <button
             className={`px-2 hover:opacity-40 border-x-2 ${
-              filterStatus === "Box" ? "bg-blue-600 text-white" : ""
+              filterStatus === "Box" ? "bg-slate-200 text-black" : ""
             }`}
             onClick={() => handleTypeChange("Box")}
           >
@@ -135,7 +135,7 @@ const ProductListDetail = () => {
           </button>
           <button
             className={`px-2 hover:opacity-40 ${
-              filterStatus === "Single" ? "bg-blue-600 text-white" : ""
+              filterStatus === "Single" ? "bg-slate-200 text-black" : ""
             }`}
             onClick={() => handleTypeChange("Single")}
           >

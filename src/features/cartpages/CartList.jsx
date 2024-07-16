@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../../config/myAPIs";
 import { FaStar } from "react-icons/fa";
-import { getCartState } from "../../utils/localStorage.js";
+import { getCartState, setCartQuantity } from "../../utils/localStorage.js";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateOrder } from "../../apis/orders.js";
@@ -16,6 +15,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
       const updatedCart = cart.filter((product) => product.product_id === id);
       const response = await updateOrder(cartId, updatedCart, "delete");
       fetchCart();
+      setCartQuantity(updatedCart.length);
       if (response) {
         toast.success("Product deleted from cart");
       }
@@ -134,7 +134,7 @@ const CartList = ({ cart, UpdateAmount, loading, fetchCart }) => {
                           -
                         </button>
                         <input
-                          className="text-black text-center w-[50px]  bg-white"
+                          className="text-black text-center w-[50px] border-y-2 border-slate-500 bg-white"
                           type="text"
                           value={product.amount || ""}
                           onChange={(e) =>

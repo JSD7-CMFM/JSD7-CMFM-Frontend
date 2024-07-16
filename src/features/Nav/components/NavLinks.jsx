@@ -28,7 +28,7 @@ const NavLinks = () => {
       </li>
       {token ? (
         <li>
-          <Link to="AboutUs" className="btn btn-ghost text-xl">
+          <Link to="account" className="btn btn-ghost text-xl">
             MY ACCOUNT
           </Link>
         </li>

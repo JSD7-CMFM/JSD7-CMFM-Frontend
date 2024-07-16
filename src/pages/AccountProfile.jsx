@@ -5,6 +5,7 @@ import Addresses from "../features/accountprofile/components/Addresses";
 import Editdata from "../features/accountprofile/components/EditData.jsx";
 import { useNavigate } from "react-router-dom";
 import EditAddress from "../features/accountprofile/components/EditAddress.jsx";
+import { googleLogout } from "@react-oauth/google";
 import { toast } from "react-toastify";
 
 const AccountPageContainer = () => {
@@ -13,6 +14,7 @@ const AccountPageContainer = () => {
   const navigate = useNavigate();
 
   const handleSignout = () => {
+    googleLogout();
     localStorage.clear();
     toast.info("Signed Out Successfully");
     navigate("/");
@@ -20,6 +22,8 @@ const AccountPageContainer = () => {
   const showSection = (sectionId) => {
     setActiveSection(sectionId);
   };
+
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
   return (
     <section id="my-acc" className="bg-[#dbd1f4] px-3 pb-4 h-screen pt-[100px]">
@@ -54,12 +58,20 @@ const AccountPageContainer = () => {
               >
                 ADDRESSES
               </p>
-              <p
+
+              <button
+                className="text-left hover:underline hover:cursor-pointer"
                 onClick={handleSignout}
-                className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11"
               >
-                SIGN OUT
-              </p>
+                Sign Out
+              </button>
+
+              {/* <p className="mb-2 hover:underline hover:text-red-500 hover:cursor-pointer md:mt-11">
+                  SIGN OUT
+                </p> */}
+              {/* <GoogleLogout clientId={clientId} onLogoutSuccess={handleSignout}>
+                GOOGLE SIGN OUT
+              </GoogleLogout> */}
             </div>
           </div>
         </div>

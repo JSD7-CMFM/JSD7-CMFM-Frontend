@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import usersAPI from "../../../apis/users";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 
 function LoginForm() {
@@ -53,9 +54,25 @@ function LoginForm() {
     setDisable(false);
   };
 
+  // const handleGoogleSuccess = useGoogleLogin({
+  //   onSuccess: (response) => {
+  //     console.log(response);
+  //     // handleGoogleSuccess(response);
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     // handleGoogleFailure(error);
+  //   },
+  // })
   const handleGoogleSuccess = async (response) => {
-    console.log(response);
-    // Implement login with Google response
+    const token = response.credential;
+    try {
+      const result = await usersAPI.googleLogin({ token });
+      console.log("Google login success:", result.data);
+      navigate("/");
+    } catch (error) {
+      console.error("Google login failed:", error);
+    }
   };
 
   const handleGoogleFailure = (error) => {
@@ -116,12 +133,20 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
-        {/* <div className="mt-5">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleFailure}
+        <div className="mt-5 flex justify-center">
+          <GoogleLogin 
+          onSuccess={handleGoogleSuccess}
+          onFailure={handleGoogleFailure}
+          
           />
-        </div> */}
+          {/* <GoogleLogin
+            buttonText="Sign in with Google"
+            onSuccess={handleGoogleSuccess}
+            onFailure={handleGoogleFailure}
+            cookiePolicy={"single_host_origin"}
+            isSignedIn={true}
+          /> */}
+        </div>
       </form>
     </div>
   );

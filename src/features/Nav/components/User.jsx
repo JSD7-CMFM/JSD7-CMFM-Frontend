@@ -8,17 +8,22 @@ import {
   removeToken,
 } from "../../../utils/localStorage.js";
 import { toast } from "react-toastify";
+import { googleLogout } from "@react-oauth/google";
+import { gapi } from "gapi-script";
 
 const User = () => {
   useEffect(() => {}, []);
   const firstName = getFirstName();
 
   const navigate = useNavigate();
-  const onLogout = () => {
+  const handleSignout = () => {
+    googleLogout();
     localStorage.clear();
     toast.info("Signed Out Successfully");
     navigate("/");
   };
+
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
   return (
     <div className="dropdown dropdown-end">
@@ -58,9 +63,10 @@ const User = () => {
               <Link to="/account" className="justify-center">
                 My Account
               </Link>
-              <div className="justify-center" onClick={onLogout}>
-                Sign out
-              </div>
+
+              <button className="justify-center" onClick={handleSignout}>
+                Sign Out
+              </button>
             </>
           ) : (
             <>

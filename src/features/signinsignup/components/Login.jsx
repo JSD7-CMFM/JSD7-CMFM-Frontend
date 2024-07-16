@@ -53,6 +53,15 @@ function LoginForm() {
     setDisable(false);
   };
 
+  const handleGoogleSuccess = async (response) => {
+    console.log(response);
+    // Implement login with Google response
+  };
+
+  const handleGoogleFailure = (error) => {
+    console.error("Google login failed:", error);
+  };
+
   return (
     <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center h-screen ">
       <h2 className="text-center text-[42px] font-bold md:text-2xl uppercase ">
@@ -107,8 +116,15 @@ function LoginForm() {
             SIGN UP
           </Link>
         </div>
+        {/* <div className="mt-5">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleFailure}
+          />
+        </div> */}
       </form>
     </div>
   );
 }
+
 export default LoginForm;

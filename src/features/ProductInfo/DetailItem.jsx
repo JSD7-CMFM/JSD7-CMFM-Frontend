@@ -1,12 +1,12 @@
 import React from "react";
 
-const DetailItem = ({ imgSrc, type, description, category }) => {
+const DetailItem = ({ imgSrc, type, description, category, price }) => {
   if (!imgSrc) {
     return <div>Product not found</div>;
   }
 
   return (
-    <div className="flex pb-4 md:text-xl  p-2 rounded-2xl bg-[rgb(45,204,240)] bg-opacity-30 border-2 drop-shadow-lg">
+    <div className="w-full flex pb-4 md:text-xl  p-2 rounded-2xl bg-[rgb(45,204,240)] bg-opacity-30 border-2 drop-shadow-lg">
       <div className="w-50 md:w-32 rounded-2xl pl-4">
         <img
           className="w-full h-full object-cover rounded-2xl "
@@ -21,6 +21,11 @@ const DetailItem = ({ imgSrc, type, description, category }) => {
         </div>
         <div className="badge text-black mt-2 ml-2 md:p-3 text-[16px] font  bg-green-300">
           {category}
+        </div>
+        <div className="flex justify-between">
+          <div className="text-xl font-bold text-black md:text-[16px] mt-5 md:p-4 rounded-xl bg-slate-50">
+            ฿ {price} / box
+          </div>
         </div>
       </div>
     </div>

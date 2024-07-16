@@ -15,9 +15,9 @@ const User = () => {
 
   const navigate = useNavigate();
   const onLogout = () => {
-    removeToken();
-    toast.info("Signed Out Succesfully");
-    window.location.reload();
+    localStorage.clear();
+    toast.info("Signed Out Successfully");
+    navigate("/");
   };
 
   return (

@@ -20,15 +20,17 @@ import ScrollToTop from "../utils/scrollToTop.js";
 import RandomPage from "../pages/RandomPage.jsx";
 import AuthenticateUser from "../features/AuthUser/AuthUser.jsx";
 
+const Root = () => (
+  <>
+    <ScrollToTop />
+    <Container />
+  </>
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <ScrollToTop />
-        <Container />
-      </>
-    ),
+    element: <Root />,
     children: [
       {
         path: "/",
@@ -43,19 +45,19 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "forget",
+        path: "/forget",
         element: <ForgetPassword />,
       },
       {
-        path: "productinfo/:id",
+        path: "/productinfo/:id",
         element: <ProductInfoPage />,
       },
       {
-        path: "productList",
+        path: "/productList",
         element: <ProductListPage />,
       },
       {
-        path: "cart",
+        path: "/cart",
         element: <CartPage />,
       },
       {
@@ -75,7 +77,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "AboutUs",
+        path: "/AboutUs",
         element: <AboutUs />,
       },
       {

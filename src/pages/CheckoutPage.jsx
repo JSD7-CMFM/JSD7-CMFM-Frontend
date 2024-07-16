@@ -56,7 +56,11 @@ const CheckoutPage = () => {
   }, [orderId, userId]);
 
   if (!checkout || !user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <CircularProgress />
+      </div>
+    );
   }
 
   const onClickPayNow = async () => {
@@ -75,7 +79,7 @@ const CheckoutPage = () => {
       await sendMail(orderId);
       if (rememberAddress) {
         try {
-          const responseUser = await userApi.editUser(
+          const responseUser = await appUserAPI.editUser(
             userId,
             { address: address },
             "update_address"

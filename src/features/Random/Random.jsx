@@ -69,19 +69,23 @@ const Random = () => {
       stock: product.quantity,
     };
     try {
+      if (!userId) {
+        toast.error("Please login first");
+        return;
+      }
       if (orderId === "No_cart") {
         const response = await createOrder({
           user_id: userId,
           cart_products: [newCartProduct],
         });
-        toast.success("Order created successfully");
+        toast.success("Added to cart");
       } else {
         const response = await updateOrder(
           orderId,
           newCartProduct,
           "addProduct"
         );
-        toast.success("Order updated successfully");
+        toast.success("Added to cart");
       }
     } catch (error) {
       toast.error("Error adding product to cart");
@@ -92,7 +96,7 @@ const Random = () => {
   };
   const generateImageUrls = () => {
     const urls = [];
-    for (let i = 1; i <= 27; i++) {
+    for (let i = 1; i <= 28; i++) {
       urls.push(`/Random/Random${i}.jpg`);
     }
     return urls;
@@ -121,21 +125,28 @@ const Random = () => {
             <div className=" justify-center">
               <img
                 src="Dogcard.jpg"
-                className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black justify-center"
+                className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-slate-100 border-gray-400 shadow-2xl justify-center"
               />
               <h1 className="text-black text-[30px]">จุ่มเลยจิ</h1>
             </div>
           </button>
         ) : (
-          <div className="mt-4 ">
+          <div className="mt-4">
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
               <div className="flex justify-center">
-                <button onClick={handleClick} className="justify-center">
-                  <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
+                <button onClick={!isAnimating ? handleClick : undefined} className=" justify-center ">
+                  {!isAnimating ? (
+                    <div className="">พร้อมก็เปิดการ์ดสิจ๊ะ</div>
+                  ) : (
+                    <div className="animate-pulse mt-4">หาของแปปนะจ๊ะ...</div>
+                  )}
                   <div>
                     <img
                       src={randomMeme}
-                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 bg-white border-black shadow-2xl"
+                      style={{
+                        boxShadow: "0px 0px 70px 0px rgb(255,228,0)",
+                      }}
+                      className="w-[350px] h-[400px] rounded-xl border p-5 m-5 border-gray-400 bg-[url('/Yuki.')] bg-cover"
                     />
                   </div>
                 </button>
@@ -160,7 +171,7 @@ const Random = () => {
                   setIsFlipped(false);
                   getRandomMeme();
                 }}
-                className="p-3  text-black rounded-2xl border-black border bg-blue-200"
+                className="p-3 text-black rounded-2xl border-black border bg-blue-200"
               >
                 จุ่มต่อมั้ยจ๊ะ
               </button>
@@ -179,9 +190,6 @@ const Random = () => {
               </form>
             </div>
           </div>
-        )}
-        {isAnimating && (
-          <div className="animate-pulse mt-4">หาของแปปนะจ๊ะ...</div>
         )}
       </div>
     </div>

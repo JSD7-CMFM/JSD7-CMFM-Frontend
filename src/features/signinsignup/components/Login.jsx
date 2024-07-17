@@ -123,6 +123,11 @@ function LoginForm() {
           <button
             className="py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
             disabled={disable || !isEmailTouched || !isPasswordTouched}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           >
             LOGIN
           </button>
@@ -134,10 +139,9 @@ function LoginForm() {
           </Link>
         </div>
         <div className="mt-5 flex justify-center">
-          <GoogleLogin 
-          onSuccess={handleGoogleSuccess}
-          onFailure={handleGoogleFailure}
-          
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onFailure={handleGoogleFailure}
           />
           {/* <GoogleLogin
             buttonText="Sign in with Google"

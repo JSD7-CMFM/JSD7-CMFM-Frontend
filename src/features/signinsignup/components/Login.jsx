@@ -12,6 +12,7 @@ function LoginForm() {
   const [loginError, setLoginError] = useState("");
   const [isEmailTouched, setIsEmailTouched] = useState(false);
   const [isPasswordTouched, setIsPasswordTouched] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -41,7 +42,7 @@ function LoginForm() {
     try {
       const response = await usersAPI.Login(user);
       if (response && email === response.data.email) {
-        toast.success("Sign In Succesful!");
+        toast.success("Sign In Successful!");
         navigate("/");
       } else {
         toast.error("Invalid email or password.");
@@ -54,16 +55,6 @@ function LoginForm() {
     setDisable(false);
   };
 
-  // const handleGoogleSuccess = useGoogleLogin({
-  //   onSuccess: (response) => {
-  //     console.log(response);
-  //     // handleGoogleSuccess(response);
-  //   },
-  //   onError: (error) => {
-  //     console.log(error);
-  //     // handleGoogleFailure(error);
-  //   },
-  // })
   const handleGoogleSuccess = async (response) => {
     const token = response.credential;
     try {
@@ -80,8 +71,8 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center h-screen ">
-      <h2 className="text-center text-[42px] font-bold md:text-2xl uppercase ">
+    <div className="flex flex-col md:items-center bg-[#F0EB76] p-10 min-h-[500px] justify-center h-screen">
+      <h2 className="text-center text-[42px] font-bold md:text-2xl uppercase">
         Welcome Back
       </h2>
       <form
@@ -103,14 +94,23 @@ function LoginForm() {
             Please enter a valid email address
           </h4>
         )}
-        <input
-          type="password"
-          placeholder="Password*"
-          className="mt-5 p-1 pl-4 rounded border border-gray-300"
-          value={password}
-          onChange={handlePasswordChange}
-          autoComplete="current-password"
-        />
+        <div className="relative mt-5">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password*"
+            className="p-1 pl-4 rounded border w-full border-gray-300"
+            value={password}
+            onChange={handlePasswordChange}
+            autoComplete="current-password"
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-2 text-gray-600"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
         <a href="/forget" className="underline text-[12px] text-right pt-1">
           Forgot Password?
         </a>
@@ -123,11 +123,6 @@ function LoginForm() {
           <button
             className="py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
             disabled={disable || !isEmailTouched || !isPasswordTouched}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                handleSubmit();
-              }
-            }}
           >
             LOGIN
           </button>
@@ -143,13 +138,6 @@ function LoginForm() {
             onSuccess={handleGoogleSuccess}
             onFailure={handleGoogleFailure}
           />
-          {/* <GoogleLogin
-            buttonText="Sign in with Google"
-            onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-            isSignedIn={true}
-          /> */}
         </div>
       </form>
     </div>

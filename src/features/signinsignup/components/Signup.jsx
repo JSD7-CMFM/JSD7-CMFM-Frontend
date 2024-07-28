@@ -81,7 +81,6 @@ const SignupForm = () => {
       };
       try {
         const response = await usersAPI.Register(dataObject);
-        console.log("response signup", response);
         toast.success("Registration successful");
         navigate("/");
       } catch (error) {

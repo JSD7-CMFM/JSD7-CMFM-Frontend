@@ -1,23 +1,12 @@
-// import axiosInstance from "../config/myAPIs.js"
-
-// const allProducts = await axiosInstance.get("/products");
-// console.log(allProducts);
-
-// export default allProducts
-
-// fetchProducts.js
 import { getToken } from "../utils/localStorage.js";
 import axiosInstance from "../config/myAPIs.js";
-import axios from "axios";
 
 const fetchProducts2 = async () => {
   try {
     const response = await axiosInstance.get("/products");
-    console.log(response.data); // Assuming the API returns JSON data
-    return response.data; // Return the data if needed
+    return response.data;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    throw error; // Re-throw the error to handle it somewhere else
+    throw error;
   }
 };
 const fetchProducts = async (filters) => {
@@ -27,10 +16,9 @@ const fetchProducts = async (filters) => {
         ...filters,
       },
     });
-    return response; // Return the data if needed
+    return response;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    throw error; // Re-throw the error to handle it somewhere else
+    throw error;
   }
 };
 

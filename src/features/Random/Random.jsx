@@ -5,6 +5,7 @@ import { createOrder, updateOrder } from "../../apis/orders.js";
 import ModalRandomAddToCart from "./ModalRandomAddToCart.jsx";
 import ReactCardFlip from "react-card-flip";
 import { toast } from "react-toastify";
+import { useCart } from "../../hooks/CartContext.jsx";
 
 const Random = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -12,6 +13,7 @@ const Random = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [open, setOpen] = useState(false);
   const [randomMeme, setRandomMeme] = useState("");
+  const { fetchCart } = useCart();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -87,6 +89,7 @@ const Random = () => {
         );
         toast.success("Added to cart");
       }
+      fetchCart();
     } catch (error) {
       toast.error("Error adding product to cart");
       if (error.response) {

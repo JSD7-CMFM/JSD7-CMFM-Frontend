@@ -22,7 +22,7 @@ const updateOrder = async (orderId, data, source) => {
 
 const editOrder = async (id, data) => {
   const config = {
-    headers: { Source: "updateStatus" }
+    headers: { Source: "updateStatus" },
   };
   await axiosInstance.patch(`/orders/${id}`, data, config);
 };
@@ -40,14 +40,12 @@ const deleteOrder = async (orderId) => {
 const createOrder = async (data) => {
   try {
     const response = await axiosInstance.post(`/orders`, data);
-    console.log(response.data);
     const { cart } = response.data;
     if (cart && response.data) {
       setCartState(cart);
       return response;
     }
   } catch (error) {
-    console.error("Add to cart Error:", error);
     throw error;
   }
 };

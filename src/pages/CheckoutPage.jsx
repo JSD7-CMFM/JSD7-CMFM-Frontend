@@ -43,10 +43,10 @@ const CheckoutPage = () => {
         setUser(fetchedUser);
         setCheckout(products);
         setAddress({
-          address: fetchedUser.address?.address || "",
-          province: fetchedUser.address?.province || "",
-          country: fetchedUser.address?.country || "",
-          zipcode: fetchedUser.address?.zipcode || "",
+          address: fetchedUser.data.address?.address || "",
+          province: fetchedUser.data.address?.province || "",
+          country: fetchedUser.data.address?.country || "",
+          zipcode: fetchedUser.data.address?.zipcode || "",
         });
         setLoading(true);
       } catch (error) {
@@ -66,6 +66,15 @@ const CheckoutPage = () => {
   }
 
   const onClickPayNow = async () => {
+    if (
+      address.address === "" ||
+      address.province === "" ||
+      address.country === "" ||
+      address.zipcode === ""
+    ) {
+      toast.error("Please add address before checkout!");
+      return;
+    }
     try {
       const responseOrder = await updateOrder(orderId, address, "success");
       await Promise.all(

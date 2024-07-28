@@ -12,15 +12,12 @@ const EditAddress = ({ setActiveSection, user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const dataObject = { address: { address, province, country, zipcode } };
-    console.log(dataObject);
     try {
       const response = await users.editUser(
         user._id,
         dataObject,
         "update_address"
       );
-      console.log(response);
-
       if (response.data.message === "Update successful") {
         toast.success("Update Address successfully");
         navigate("/Account");

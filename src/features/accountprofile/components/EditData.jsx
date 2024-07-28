@@ -57,7 +57,6 @@ const Editdata = ({ setActiveSection, user }) => {
 
       try {
         const response = await users.editUser(user.data._id, dataObject);
-        console.log(response);
         if (response.data.message === "Update successful") {
           toast.success("Update successfully");
           navigate("/Account");

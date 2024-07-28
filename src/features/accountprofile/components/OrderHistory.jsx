@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { RiShoppingBag4Fill } from "react-icons/ri";
 
 const OrderHistory = ({ orderHistory }) => {
-  console.log(typeof orderHistory);
   return (
     <div id="acc-order" className="">
       {orderHistory && orderHistory.length > 0 ? (

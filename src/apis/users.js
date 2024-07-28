@@ -4,7 +4,6 @@ import { setToken, setInfo, getToken } from "../utils/localStorage.js";
 const Login = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login", user);
-
     const { token, id, firstName, email, cart } = response.data;
     if (response.data && token) {
       setToken(token);
@@ -12,14 +11,12 @@ const Login = async (user) => {
     }
     return response;
   } catch (error) {
-    console.error("Login error:", error);
-    throw error;
+    return error;
   }
 };
 
 const googleLogin = async (data) => {
   try {
-    // console.log(data);
     const response = await axiosInstance.post("/users/auth/google", data);
     const { token, id, firstName, email, cart } = response.data;
 
@@ -29,8 +26,7 @@ const googleLogin = async (data) => {
     }
     return response;
   } catch (error) {
-    console.error("Google login error:", error);
-    throw error;
+    return error;
   }
 };
 
@@ -44,8 +40,7 @@ const Register = async (data) => {
       return response;
     }
   } catch (error) {
-    console.error("Registration error:", error);
-    throw error;
+    return error;
   }
 };
 

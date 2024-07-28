@@ -81,7 +81,6 @@ const SignupForm = () => {
       };
       try {
         const response = await usersAPI.Register(dataObject);
-        console.log("response signup", response);
         toast.success("Registration successful");
         navigate("/");
       } catch (error) {
@@ -202,6 +201,11 @@ const SignupForm = () => {
           <button
             onClick={handleSubmit}
             className="py-[8px] px-6 bg-white hover:border-black rounded-lg border border-gray-300 mr-5"
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           >
             SIGN UP
           </button>

@@ -111,6 +111,11 @@ const ProductListDetail = () => {
             name="search"
             placeholder="search"
             onChange={(event) => setSearchText(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleSearch();
+              }
+            }}
           />
         </Box>
         <div className="flex justify-between items-center relative">

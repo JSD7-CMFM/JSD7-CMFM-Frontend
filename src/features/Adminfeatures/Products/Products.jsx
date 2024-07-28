@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useProduct from "../../../hooks/useProduct";
+import { toast } from "react-toastify";
 
 const Products = () => {
   const { products, addProduct, deleteProduct, editProduct } = useProduct();
@@ -64,10 +65,10 @@ const Products = () => {
 
     editProduct(editingProductId, productToSave)
       .then((response) => {
-        console.log("Product saved successfully:", response);
+        toast.success("Product saved successfully");
       })
       .catch((error) => {
-        console.error("Error saving product:", error);
+        toast.error(`Error saving product: ${error}`);
       });
 
     setEditingProductId(null);
@@ -141,10 +142,10 @@ const Products = () => {
     };
     addProduct(productToAdd)
       .then((response) => {
-        console.log("Product added successfully:", response);
+        toast.success("Product added successfully");
       })
       .catch((error) => {
-        console.error("Error adding product:", error);
+        toast.error(`Error adding product: ${error}`);
       });
     setNewProduct({
       productId: "",
@@ -162,7 +163,9 @@ const Products = () => {
     });
   };
 
-  const sortedProducts = products.slice().sort((a, b) => a.productId - b.productId);
+  const sortedProducts = products
+    .slice()
+    .sort((a, b) => a.productId - b.productId);
 
   return (
     <div className="p-10">
@@ -379,10 +382,9 @@ const Products = () => {
                       value={formData.type}
                       onChange={handleChange}
                       className="w-full border rounded px-2 py-1 text-white bg-gray-700"
-                      
                     >
                       <option value="Box">Box</option>
-                  <option value="Single">Single</option>
+                      <option value="Single">Single</option>
                     </select>
                   ) : (
                     product.type

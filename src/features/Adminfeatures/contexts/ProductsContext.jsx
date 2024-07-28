@@ -21,7 +21,7 @@ export default function ProductContextProvider({ children }) {
       const response = await productsAPI.addProduct(data);
       setProducts([...products, response.data]);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -30,7 +30,7 @@ export default function ProductContextProvider({ children }) {
       await productsAPI.deleteProduct(id);
       handleLoading();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -39,12 +39,14 @@ export default function ProductContextProvider({ children }) {
       await productsAPI.editProduct(id, data);
       handleLoading();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
   return (
-    <ProductContext.Provider value={{ products, addProduct, deleteProduct, editProduct }}>
+    <ProductContext.Provider
+      value={{ products, addProduct, deleteProduct, editProduct }}
+    >
       {children}
     </ProductContext.Provider>
   );

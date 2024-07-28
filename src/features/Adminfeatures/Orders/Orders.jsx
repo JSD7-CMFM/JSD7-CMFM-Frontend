@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useOrders from "../../../hooks/useOrders";
+import { toast } from "react-toastify";
 
 const Orders = () => {
   const { orders, setOrders, editOrder } = useOrders();
@@ -21,9 +22,9 @@ const Orders = () => {
       );
       setEditingOrderId(null);
       setStatus("");
-      console.log("Order saved successfully");
+      toast.success("Order saved successfully");
     } catch (error) {
-      console.error("Error saving order:", error);
+      toast.error(`Error saving order: ${error}`);
     }
   };
 
@@ -82,7 +83,8 @@ const Orders = () => {
                   )}
                 </td>
                 <td className="text-black py-2 px-4 border-b">
-                  {order.address.address}, {order.address.province}, {order.address.country}, {order.address.zipcode}
+                  {order.address.address}, {order.address.province},{" "}
+                  {order.address.country}, {order.address.zipcode}
                 </td>
                 <td className="py-2 px-4 border-b">
                   <div className="flex space-x-2">

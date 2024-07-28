@@ -20,15 +20,14 @@ export default function OrdersContextProvider({ children }) {
   }, []);
 
   const editOrder = async (id, data) => {
-    // console.log(id, data)
     try {
       await ordersAPI.editOrder(id, data);
       handleLoading();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
-  }; 
-  
+  };
+
   return (
     <OrderContext.Provider value={{ orders, setOrders, editOrder }}>
       {children}

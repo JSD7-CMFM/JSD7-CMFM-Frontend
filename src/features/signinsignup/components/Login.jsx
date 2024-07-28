@@ -59,15 +59,15 @@ function LoginForm() {
     const token = response.credential;
     try {
       const result = await usersAPI.googleLogin({ token });
-      console.log("Google login success:", result.data);
+      toast.success(`Google login failed: ${result.data}`);
       navigate("/");
     } catch (error) {
-      console.error("Google login failed:", error);
+      toast.error(`Google login failed: ${error}`);
     }
   };
 
   const handleGoogleFailure = (error) => {
-    console.error("Google login failed:", error);
+    toast.error(`Google login failed: ${error}`);
   };
 
   return (

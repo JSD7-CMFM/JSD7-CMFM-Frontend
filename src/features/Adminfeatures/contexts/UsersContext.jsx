@@ -11,19 +11,19 @@ export default function UsersContextProvider({ children }) {
       const response = await usersAPI.getAllUsers();
       setUsers(response.data.data);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
   useEffect(() => {
     handleLoading();
-  }, [])
+  }, []);
   const deleteUser = async (id) => {
     try {
       await usersAPI.deleteUser(id);
       handleLoading();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -32,7 +32,7 @@ export default function UsersContextProvider({ children }) {
       await usersAPI.banUser(id, currentStatus);
       handleLoading();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

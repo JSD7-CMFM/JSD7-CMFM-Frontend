@@ -55,7 +55,7 @@ const ModalRandomAddToCart = ({ handleClose, open }) => {
               <div className="flex justify-between mx-10">
                 <Link to="/random">
                   <button
-                    className="btn btn-s rounded-xl btn-outline hover:bg-green-400 py-2 itemcenter text-[18px] text-black bg-green-500 p-3 "
+                    className="h-fit btn btn-s rounded-xl btn-outline hover:bg-green-400 py-2 itemcenter text-[18px] text-black bg-green-500 p-3 "
                     onClick={handleClose}
                     sx={{
                       width: "45%",
@@ -70,7 +70,7 @@ const ModalRandomAddToCart = ({ handleClose, open }) => {
                 </Link>
                 <Link to="/cart">
                   <button
-                    className="btn btn-s rounded-xl btn-outline bg-orange-400 text-[18px] text-black hover:bg-orange-400 p-3 items-center py-2"
+                    className="h-fit btn btn-s rounded-xl btn-outline bg-orange-400 text-[18px] text-black hover:bg-orange-400 p-3 items-center py-2"
                     sx={{
                       width: "45%",
                       fontSize: "1.2rem",
